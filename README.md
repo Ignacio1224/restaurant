@@ -1,2 +1,2 @@
-# restaurant
+# Restaurant
 Obligatorio para DA
