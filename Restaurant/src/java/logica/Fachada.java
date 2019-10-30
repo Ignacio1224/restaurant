@@ -10,17 +10,16 @@ import java.util.ArrayList;
 public class Fachada {
 
     // Atrubutos
-    private Fachada instancia;
+    private static Fachada instancia;
     private SistemaUsuario sistemaUsuario;
 
     // Constructor
     private Fachada() {
         sistemaUsuario = new SistemaUsuario();
-        setMozosTodos(DatosPrueba.cargarMozos());
     }
 
     // Singleton
-    public Fachada getInstancia() {
+    public static Fachada getInstancia() {
         if (instancia == null) {
             instancia = new Fachada();
         }
@@ -34,6 +33,14 @@ public class Fachada {
 
     public boolean logoutMozo(Mozo m) {
         return sistemaUsuario.logoutMozo(m);
+    }
+
+    public Gestor loginGestor(String nombreUsuario, String contrasena) {
+        return sistemaUsuario.loginGestor(nombreUsuario, contrasena);
+    }
+
+    public boolean logoutGestor(Gestor g) {
+        return sistemaUsuario.logoutGestor(g);
     }
 
     public ArrayList<Mozo> getMozosTodos() {
@@ -54,6 +61,10 @@ public class Fachada {
 
     public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
         sistemaUsuario.setMozosTodos(mozosTodos);
+    }
+
+    public void setGestoresTodos(ArrayList<Gestor> gestoresTodos) {
+        sistemaUsuario.setGestoresTodos(gestoresTodos);
     }
 
 }

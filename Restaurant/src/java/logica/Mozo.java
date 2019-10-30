@@ -1,12 +1,14 @@
 package logica;
 
+import utilidades.CustomException;
+
 /**
  *
  * @author Ignacio
  */
 public class Mozo extends Usuario {
 
-    public Mozo(String nombreUsuario, String contrasena, String nombreCompleto) {
+    public Mozo(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
         super(nombreUsuario, contrasena, nombreCompleto);
     }
 

@@ -14,6 +14,14 @@ public class SistemaUsuario {
     private ArrayList<Gestor> gestoresTodos;
     private ArrayList<Gestor> gestoresLogueados;
 
+    public SistemaUsuario() {
+        mozosTodos = new ArrayList<>();
+        mozosLogueados = new ArrayList<>();
+        gestoresTodos = new ArrayList<>();
+        gestoresLogueados = new ArrayList<>();
+
+    }
+
     public Mozo loginMozo(String nombreUsuario, String contrasena) {
         for (Mozo m : mozosTodos) {
             Mozo mozo = m.login(nombreUsuario, contrasena);
@@ -33,20 +41,44 @@ public class SistemaUsuario {
             return false;
         }
     }
-
-    // Getters & Setters
-    public ArrayList<Mozo> getMozosTodos() {
-        return mozosTodos;
+    
+    public Gestor loginGestor(String nombreUsuario, String contrasena) {
+        for (Gestor g : gestoresTodos) {
+            Gestor gestor = g.login(nombreUsuario, contrasena);
+            if (gestor != null) {
+                gestoresLogueados.add(gestor);
+                return gestor;
+            }
+        }
+        return null;
     }
 
+    public boolean logoutGestor(Gestor g) {
+        try {
+            mozosLogueados.remove(g);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    // Getters & Setters
     public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
         this.mozosTodos = mozosTodos;
+    }
+    
+    public ArrayList<Mozo> getMozosTodos() {
+        return mozosTodos;
     }
 
     public ArrayList<Mozo> getMozosLogueados() {
         return mozosLogueados;
     }
 
+    public void setGestoresTodos(ArrayList<Gestor> gestoresTodos) {
+        this.gestoresTodos = gestoresTodos;
+    }
+    
     public ArrayList<Gestor> getGestoresTodos() {
         return gestoresTodos;
     }

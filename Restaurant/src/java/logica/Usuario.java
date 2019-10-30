@@ -49,7 +49,7 @@ public abstract class Usuario {
     // To String
     @Override
     public String toString() {
-        return "Usuario: " + nombreUsuario + ", Nombre Completo=" + nombreCompleto;
+        return "Usuario: " + nombreUsuario + ", Nombre completo: " + nombreCompleto;
     }
 
     // Equals
