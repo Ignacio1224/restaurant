@@ -14,7 +14,7 @@ public class Gestor extends Usuario {
 
     @Override
     public Gestor login(String nombreUsuario, String contrasena) {
-        if (this.nombreUsuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
+        if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
             return this;
         }
         return null;

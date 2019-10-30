@@ -1,6 +1,5 @@
 package logica;
 
-import java.util.Objects;
 import utilidades.CustomException;
 
 /**
@@ -10,28 +9,28 @@ import utilidades.CustomException;
 public abstract class Usuario {
 
     // Atributos
-    protected String nombreUsuario;
+    protected String nombreusuario;
     protected String contrasena;
     protected String nombreCompleto;
 
     // Constructor
     public Usuario(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
-        
+
         if (nombreUsuario.trim().isEmpty() || contrasena.trim().isEmpty() || nombreCompleto.trim().isEmpty()) {
             throw new CustomException("Usuario no válido");
         }
-        
-        this.nombreUsuario = nombreUsuario;
+
+        this.nombreusuario = nombreUsuario;
         this.contrasena = contrasena;
         this.nombreCompleto = nombreCompleto;
     }
 
     // Login
     public abstract Usuario login(String nombreUsuario, String contrasena);
-    
+
     // Getters & Setters
     public String getNombreUsuario() {
-        return nombreUsuario;
+        return nombreusuario;
     }
 
     public String getNombreCompleto() {
@@ -39,7 +38,7 @@ public abstract class Usuario {
     }
 
     public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+        this.nombreusuario = nombreUsuario;
     }
 
     public void setNombreCompleto(String nombreCompleto) {
@@ -49,26 +48,16 @@ public abstract class Usuario {
     // To String
     @Override
     public String toString() {
-        return "Usuario: " + nombreUsuario + ", Nombre completo: " + nombreCompleto;
+        return "Usuario: " + nombreusuario + ", Nombre completo: " + nombreCompleto;
     }
 
     // Equals
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.nombreUsuario, other.nombreUsuario)) {
-            return false;
-        }
-        return true;
+        Usuario other = (Usuario) obj;
+
+        return nombreusuario.equals(other.getNombreUsuario());
+
     }
 
 }
