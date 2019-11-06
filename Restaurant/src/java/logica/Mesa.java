@@ -8,12 +8,13 @@ import utilidades.CustomException;
  */
 public class Mesa {
 
-    // Atributos
+    /* Atributos */
     private int numero;
     private boolean abierta;
     private Mozo responsable;
+    private Servicio servicio;
 
-    // Constructores
+    /* Constructores */
     public Mesa(int numero, boolean abierta, Mozo responsable) {
         this.numero = numero;
         this.abierta = abierta;
@@ -42,7 +43,14 @@ public class Mesa {
         }
     }
 
-    // Getters & Setters
+    public void agrergarServicio() throws CustomException {
+        if (servicio != null) {
+            throw new CustomException("El servicio ya existe!");
+        }
+        this.servicio = new Servicio(this);
+    }
+
+    /* Getters & Setters */
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -63,12 +71,14 @@ public class Mesa {
         return responsable;
     }
 
+    public Servicio getServicio() {
+        return servicio;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Mesa other = (Mesa) obj;
         return numero == other.getNumero();
     }
 
-    
-    
 }
