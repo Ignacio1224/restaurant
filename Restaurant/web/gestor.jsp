@@ -7,7 +7,12 @@
 <%@page import="logica.Gestor"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Gestor usuario = (Gestor) request.getSession().getAttribute("Usuario");
+    Object usuarioEnSesion = request.getSession().getAttribute("Usuario");
+    if (usuarioEnSesion == null) {
+        response.sendRedirect("gestorLogin.jsp?message=Debes estar logueado!");
+        return;
+    }
+    Gestor usuario = (Gestor) usuarioEnSesion;
 %>
 <!DOCTYPE html>
 <html>

@@ -30,26 +30,40 @@ public class VistaLoginWeb implements VistaLogin {
         String accion = request.getParameter("inputAccion");
 
         this.request = request;
-
+        
+        Usuario user = null;
+        
         switch (accion) {
             case "loginMozo":
+                user = (Usuario) request.getSession().getAttribute("Usuario");
+                if (user != null) {
+                    accesoDenegadoMozo("Usted está logueado!");
+                    break;
+                }
                 controlador.loginMozo(username, password);
                 break;
                 
             case "logoutMozo":
                 Mozo mozo = (Mozo) request.getSession().getAttribute("Usuario");
                 controlador.logoutMozo(mozo);
-                request.getSession().removeAttribute("Usuario");
+                request.getSession().invalidate();
+                destino = "";
                 break;
 
             case "loginGestor":
+                user = (Usuario) request.getSession().getAttribute("Usuario");
+                if (user != null) {
+                    accesoDenegadoGestor("Usted está logueado!");
+                    break;
+                }
                 controlador.loginGestor(username, password);
                 break;
                 
             case "logoutGestor":
                 Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
                 controlador.logoutGestor(gestor);
-                request.getSession().removeAttribute("Usuario");
+                request.getSession().invalidate();
+                destino = "";
                 break;
         }
 

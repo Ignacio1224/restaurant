@@ -3,6 +3,7 @@ package datosPrueba;
 import java.util.ArrayList;
 import logica.Fachada;
 import logica.Gestor;
+import logica.Mesa;
 import logica.Mozo;
 import utilidades.CustomException;
 
@@ -24,7 +25,8 @@ public class DatosPrueba {
             mozos.add(mozoSantiago);
 
             Fachada.getInstancia().setMozosTodos(mozos);
-
+            cargarMesas(mozos);
+            
         } catch (CustomException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -42,6 +44,23 @@ public class DatosPrueba {
             gestores.add(gestorSantiago);
 
             Fachada.getInstancia().setGestoresTodos(gestores);
+
+        } catch (CustomException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
+    public static void cargarMesas(ArrayList<Mozo> mozos) {
+
+        try {
+
+            int i = 1;
+            for (Mozo m : mozos) {
+                for (int j = 0; j < 8; j++) {
+                    m.agregarMesaAsignada(new Mesa((i + j), false, m));
+                }
+                i++;
+            }
 
         } catch (CustomException ex) {
             System.out.println("Error: " + ex.getMessage());

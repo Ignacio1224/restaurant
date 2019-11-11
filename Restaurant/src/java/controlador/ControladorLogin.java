@@ -3,7 +3,6 @@ package controlador;
 import logica.Fachada;
 import logica.Gestor;
 import logica.Mozo;
-import logica.Usuario;
 
 /**
  *

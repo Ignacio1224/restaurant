@@ -32,14 +32,16 @@ public class Mesa {
             throw new CustomException("La mesa ya está abierta!");
         } else {
             abierta = true;
+            responsable.actualizarListadoMesas();
         }
     }
 
     public void cerrar() throws CustomException {
-        if (abierta) {
-            abierta = false;
-        } else {
+        if (!abierta) {
             throw new CustomException("La mesa ya está cerrada!");
+        } else {
+            abierta = false;
+            responsable.actualizarListadoMesas();
         }
     }
 
@@ -79,6 +81,11 @@ public class Mesa {
     public boolean equals(Object obj) {
         Mesa other = (Mesa) obj;
         return numero == other.getNumero();
+    }
+
+    @Override
+    public String toString() {
+        return "Mesa " + numero + (abierta ? " Abierta" : " Cerrada");
     }
 
 }

@@ -28,6 +28,19 @@ public class Mozo extends Usuario {
         transferenciasActivas = new ArrayList<>();
         transferenciasPendientes = new ArrayList<>();
     }
+    
+    public enum Eventos {
+        listaMesas
+    }
+    
+    private void avisar(Eventos evento) {
+        setChanged();
+        notifyObservers(evento);
+    }
+    
+    public void actualizarListadoMesas() {
+        avisar(Eventos.listaMesas);
+    }
 
     public void iniciarTransferencia(Mesa mesa, Mozo mozo) throws CustomException {
         if (!mesasAsignadas.contains(mesa)) {
@@ -68,6 +81,15 @@ public class Mozo extends Usuario {
             throw new CustomException("Mesa ya asignada!");
         }
         mesasAsignadas.add(mesa);
+    }
+    
+    public Mesa getMesaByNumero(int numero) {
+        for(Mesa m : mesasAsignadas) {
+            if (m.getNumero() == numero) {
+                return m;
+            }
+        }
+        return null;
     }
 
     @Override
