@@ -30,7 +30,8 @@ public class Mozo extends Usuario {
     }
     
     public enum Eventos {
-        listaMesas
+        listaMesas,
+        actualizarMesa
     }
     
     private void avisar(Eventos evento) {
@@ -91,7 +92,7 @@ public class Mozo extends Usuario {
         }
         return null;
     }
-
+    
     @Override
     public Mozo login(String nombreUsuario, String contrasena) {
         if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {

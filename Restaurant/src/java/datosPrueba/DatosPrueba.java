@@ -5,6 +5,7 @@ import logica.Fachada;
 import logica.Gestor;
 import logica.Mesa;
 import logica.Mozo;
+import logica.Producto;
 import utilidades.CustomException;
 
 /**
@@ -25,7 +26,6 @@ public class DatosPrueba {
             mozos.add(mozoSantiago);
 
             Fachada.getInstancia().setMozosTodos(mozos);
-            cargarMesas(mozos);
             
         } catch (CustomException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -50,20 +50,36 @@ public class DatosPrueba {
         }
     }
     
-    public static void cargarMesas(ArrayList<Mozo> mozos) {
-
+    public static void cargarMesas() {
+        ArrayList<Mozo> mozos = Fachada.getInstancia().getMozosTodos();
+        
         try {
 
-            int i = 1;
+            int i = 0;
             for (Mozo m : mozos) {
                 for (int j = 0; j < 8; j++) {
-                    m.agregarMesaAsignada(new Mesa((i + j), false, m));
+                    m.agregarMesaAsignada(new Mesa(++i, false, m));
                 }
-                i++;
             }
 
         } catch (CustomException ex) {
             System.out.println("Error: " + ex.getMessage());
         }
     }
+    
+    public static void cargarProductos() {
+        ArrayList<Producto> productos = new ArrayList<>();
+        
+        productos.add(new Producto("a1", "Pan", 46, 20f));
+        productos.add(new Producto("a2", "Papas fritas", 46, 20f));
+        productos.add(new Producto("a3", "Milanesa", 46, 20f));
+        productos.add(new Producto("a4", "Pure", 46, 20f));
+        productos.add(new Producto("a5", "Omelette", 46, 20f));
+        productos.add(new Producto("a6", "Helado", 46, 20f));
+        productos.add(new Producto("a7", "Vino", 46, 20f));
+        productos.add(new Producto("a8", "Agua", 46, 20f));
+        
+        Fachada.getInstancia().setProductos(productos);
+    }
+    
 }

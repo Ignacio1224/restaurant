@@ -1,18 +1,19 @@
-<%-- 
-    Document   : mozo
-    Created on : Oct 29, 2019, 10:09:59 PM
-    Author     : Ignacio Cabrera
---%>
-
 <%@page import="logica.Gestor"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    Object usuarioEnSesion = request.getSession().getAttribute("Usuario");
-    if (usuarioEnSesion == null) {
+    HttpSession sesion = request.getSession();
+    if (sesion == null) {
         response.sendRedirect("gestorLogin.jsp?message=Debes estar logueado!");
         return;
     }
-    Gestor usuario = (Gestor) usuarioEnSesion;
+
+    Gestor usuario = (Gestor) sesion.getAttribute("Usuario");
+
+    if (usuario == null) {
+        response.sendRedirect("gestorLogin.jsp?message=Debes estar logueado!");
+        return;
+    }
+    
 %>
 <!DOCTYPE html>
 <html>

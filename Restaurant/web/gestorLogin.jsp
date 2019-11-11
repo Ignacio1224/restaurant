@@ -1,9 +1,3 @@
-<%-- 
-    Document   : MozoLogin
-    Created on : Oct 29, 2019, 8:55:57 PM
-    Author     : Ignacio Cabrera
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String message = request.getParameter("message");
@@ -45,7 +39,7 @@
 
                         <input type="text" value="loginGestor" id="inputAccion" name="inputAccion" hidden="hidden" />
 
-                        <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                        <button type="submit" class="btn btn-primary mb-4">Entrar</button>
                     </form>
 
                 </div>

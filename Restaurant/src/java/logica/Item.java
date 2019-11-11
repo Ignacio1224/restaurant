@@ -1,8 +1,5 @@
 package logica;
 
-import java.util.Objects;
-import utilidades.CustomException;
-
 /**
  *
  * @author Ignacio Cabrera
@@ -13,21 +10,23 @@ public class Item {
     private Servicio servicio;
     private int cantidad;
     private String descripcion;
-    private float monto;
     private Producto producto;
 
     /* Constructor */
-    public Item(Servicio servicio, int cantidad, String descripcion, float monto, Producto producto) {
+    public Item(Servicio servicio, int cantidad, String descripcion, Producto producto) {
         this.servicio = servicio;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
-        this.monto = monto;
         this.producto = producto;
     }
 
     /* Comportamientos */
     public void avisarParaProcesar() {
 
+    }
+    
+    public float getMonto() {
+        return producto.getPrecio() * cantidad;
     }
 
     /* Getters & Setters */
@@ -51,14 +50,6 @@ public class Item {
         this.descripcion = descripcion;
     }
 
-    public float getMonto() {
-        return monto;
-    }
-
-    public void setMonto(float monto) {
-        this.monto = monto;
-    }
-
     public Producto getProducto() {
         return producto;
     }
@@ -69,5 +60,4 @@ public class Item {
         return servicio.equals(other.getServicio()) && producto.equals(other.getProducto());
     }
 
-    
 }

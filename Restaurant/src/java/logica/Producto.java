@@ -1,6 +1,5 @@
 package logica;
 
-import java.util.Objects;
 import utilidades.CustomException;
 
 /**
@@ -13,14 +12,16 @@ public class Producto {
     private String codigo;
     private String nombre;
     private int stock;
+    private float precio;
 
     /* Constructor */
-    public Producto(String codigo, String nombre, int stock) {
+    public Producto(String codigo, String nombre, int stock, float precio) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.stock = stock;
+        this.precio = precio;
     }
-    
+
     /* Comportamientos */
     public void disminuirStock(int cantidad) throws CustomException {
         if (cantidad > stock) {
@@ -54,12 +55,18 @@ public class Producto {
         this.stock = stock;
     }
 
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Producto other = (Producto) obj;
         return codigo.equals(other.getCodigo());
     }
-    
-        
-    
+
 }

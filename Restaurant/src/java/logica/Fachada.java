@@ -1,7 +1,7 @@
 package logica;
 
-import datosPrueba.DatosPrueba;
 import java.util.ArrayList;
+import utilidades.CustomException;
 
 /**
  *
@@ -12,10 +12,12 @@ public class Fachada {
     // Atrubutos
     private static Fachada instancia;
     private SistemaUsuario sistemaUsuario;
+    private SistemaProducto sistemaProdutcto;
 
     // Constructor
     private Fachada() {
         sistemaUsuario = new SistemaUsuario();
+        sistemaProdutcto = new SistemaProducto();
     }
 
     // Singleton
@@ -65,6 +67,22 @@ public class Fachada {
 
     public void setGestoresTodos(ArrayList<Gestor> gestoresTodos) {
         sistemaUsuario.setGestoresTodos(gestoresTodos);
+    }
+
+    public void agregarProducto(Producto producto) throws CustomException {
+        sistemaProdutcto.agregarProducto(producto);
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return sistemaProdutcto.getProductos();
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        sistemaProdutcto.setProductos(productos);
+    }
+
+    public Producto getProductoByCodigo(String code) {
+        return sistemaProdutcto.getProductoByCodigo(code);
     }
 
 }

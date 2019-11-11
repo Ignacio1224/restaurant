@@ -1,5 +1,6 @@
 package vistaWeb;
 
+import datosPrueba.DatosPrueba;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,11 @@ import logica.Mozo;
  */
 public class MozoServlet extends HttpServlet {
 
+    public MozoServlet() {
+        DatosPrueba.cargarMesas();
+        DatosPrueba.cargarProductos();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

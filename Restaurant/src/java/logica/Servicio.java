@@ -1,7 +1,6 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import utilidades.CustomException;
 
 /**
@@ -22,8 +21,7 @@ public class Servicio {
     }
 
     /* Comportamientos */
-    public void agregarItem(int cantidad, String descripcion, float monto, Producto producto) throws CustomException {
-        Item item = new Item(this, cantidad, descripcion, monto, producto);
+    public void agregarItem(Item item) throws CustomException {
         if (items.contains(item)) {
             throw new CustomException("El servicio ya posee el item!");
         }

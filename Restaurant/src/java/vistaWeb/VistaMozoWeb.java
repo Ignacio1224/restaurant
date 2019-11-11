@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Mesa;
 import logica.Mozo;
+import logica.Producto;
 import utilidades.ComponentsHTML;
 
 public class VistaMozoWeb implements VistaMozo {
@@ -44,6 +45,7 @@ public class VistaMozoWeb implements VistaMozo {
                 conectarSSE(request, response);
                 controlador.vistaLista();
                 break;
+                
             case "abrirMesa":
                 if (mesa == null) {
                     notificarError("Mesa no asignada");
@@ -58,6 +60,17 @@ public class VistaMozoWeb implements VistaMozo {
                     break;
                 }
                 controlador.cerrarMesa(mesa);
+                break;
+                
+            case "cargarProductos":
+                controlador.cargarProductos();
+                break;
+            
+            case "aniadirItemAServicio":
+                String codigoProducto = request.getParameter("codigoProducto");
+                int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
+                String descripcionItem = request.getParameter("descripcionItem");
+                controlador.aniadirItemAServicio(mesa,codigoProducto, cantidadProducto, descripcionItem);
                 break;
         }
 
@@ -91,7 +104,7 @@ public class VistaMozoWeb implements VistaMozo {
         String mesasString = "";
 
         for (Mesa m : mesas) {
-            mesasString += ComponentsHTML.ArmarMesaHTML(m);
+            mesasString += ComponentsHTML.armarMesa(m);
         }
 
         enviar("eventoCargarMesas", mesasString);
@@ -99,7 +112,7 @@ public class VistaMozoWeb implements VistaMozo {
 
     @Override
     public void mostrarMesa(Mesa mesa) {
-
+        ComponentsHTML.armarServicio(mesa);
     }
 
     @Override
@@ -110,6 +123,18 @@ public class VistaMozoWeb implements VistaMozo {
     @Override
     public void notificarError(String message) {
         enviar("eventoNotificarError", message);
+    }
+
+    @Override
+    public void mostrarProductos(ArrayList<Producto> productos) {
+        String productosString = "";
+
+        for (Producto p : productos) {
+            productosString += ComponentsHTML.armarProductos(p);
+        }
+        
+        enviar("eventoCargarProductos", productosString);
+        
     }
 
 }

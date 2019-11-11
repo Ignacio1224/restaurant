@@ -1,12 +1,13 @@
 package logica;
 
+import java.util.Observable;
 import utilidades.CustomException;
 
 /**
  *
  * @author Ignacio Cabrera
  */
-public class Mesa {
+public class Mesa extends Observable {
 
     /* Atributos */
     private int numero;
@@ -26,7 +27,17 @@ public class Mesa {
         this.abierta = false;
         this.responsable = responsable;
     }
+    
+    public enum Eventos {
+        actualizar
+    }
+    
+    private void avisar(Eventos evento) {
+        setChanged();
+        notifyObservers(evento);
+    }
 
+    /* Comportamiento */
     public void abrir() throws CustomException {
         if (abierta) {
             throw new CustomException("La mesa ya está abierta!");
@@ -45,11 +56,16 @@ public class Mesa {
         }
     }
 
-    public void agrergarServicio() throws CustomException {
-        if (servicio != null) {
-            throw new CustomException("El servicio ya existe!");
+    public Servicio agrergarUObtenerServicio(Servicio servicio) throws CustomException {
+        if (this.servicio == null && servicio == null) {
+            throw new CustomException("El servicio no puede ser nulo!");
         }
-        this.servicio = new Servicio(this);
+        
+        if (this.servicio == null) {
+            this.servicio = servicio;        
+        }
+        
+        return this.servicio;
     }
 
     /* Getters & Setters */

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : mozo
-    Created on : Oct 29, 2019, 10:09:59 PM
-    Author     : Ignacio Cabrera
---%>
-
 <%@page import="logica.Mesa"%>
 <%@page import="logica.Mozo"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -36,19 +30,17 @@
         <title>Inicio (Mozo)</title>
     </head>
     <body>
-        <div class="container">
-            <div class="row mt-3 mb-3">
-                <div class="col-lg">
-                    <h3>Bienvenido: <span class="font-italic" id="spanNombreUsuario"></span></h3>
-                </div>
-                <div class="col-lg-2">
-                    <form method="POST" action="login">
-                        <input type="text" value="logoutMozo" id="inputAccion" name="inputAccion" hidden="hidden" />
-                        <button type="submit" class="btn btn-primary p-2 pl-3 pr-3 font-italic">Log out</button>
-                    </form>
-                </div>
-            </div>
 
+        <div class="row bg-dark mb-4 pt-2 pb-2 text-light">
+            <h3 class="col-6 offset-1">Bienvenido: <span class="font-italic" id="spanNombreUsuario"></span></h3>
+
+            <form method="POST" action="login" class="col-1 offset-4">
+                <input type="text" value="logoutMozo" id="inputAccion" name="inputAccion" hidden="hidden" />
+                <button type="submit" class="btn btn-primary font-italic">Salir</button>
+            </form>
+        </div>
+
+        <div class="container">
             <!-- Mesas -->
             <div class="row mt-5" id="divMesas">
 
@@ -67,7 +59,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
                     </div>
@@ -85,13 +77,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                     <div class="modal-footer">
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </body>
 </html>
