@@ -39,4 +39,14 @@ public class SistemaProducto {
         this.productos = productos;
     }
 
+    ArrayList<Producto> getProductosConStock() {
+        ArrayList<Producto> ps = new ArrayList<>();
+        for (Producto p : productos) {
+            if (p.getStock() > 0) {
+                ps.add(p);
+            }
+        }
+        return ps;
+    }
+
 }

@@ -18,9 +18,16 @@ public class ComponentsHTML {
                 + "            <p class=\"mt-2 font-weight-bold\">Mesa Nº " + mesa.getNumero() + "</p>\n";
 
         if (mesa.isAbierta()) {
-            s += "            <div id=\"servicioMesa" + mesa.getNumero() + "\">";
+            s += "             <button class=\"btn btn-link\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseMesa" + mesa.getNumero() + "\" aria-expanded=\"false\" aria-controls=\"collapseMesa" + mesa.getNumero() + "\">\n"
+                    + "                 Total gastado: $" + mesa.getServicio().calcularTotal() + "\n"
+                    + "             </button>";
+//                    + "<p class=\"mt-2 font-weight-bold\">Total gastado: $" + mesa.getServicio().calcularTotal() + "</p>\n";
+            s += "             <div class=\"collapse\" id=\"collapseMesa" + mesa.getNumero() + "\">\n"
+                    + "                 <div class=\"card card-body\">\n";
             s += armarServicio(mesa.getServicio());
-            s += "            </div>";
+
+            s += "                 </div>\n"
+                    + "                </div>";
         }
 
         s += ""
@@ -36,13 +43,20 @@ public class ComponentsHTML {
     }
 
     public static String armarServicio(Servicio servicio) {
+        
+        if (servicio.getItems().isEmpty()) {
+            return "<p>Sin items.</p>";
+        }
+        
         String serviciosStr = "";
         for (Item i : servicio.getItems()) {
             serviciosStr += "<div class=\"card card-body mb-2\">"
+                    //                    TODO: Mostrar estado de procesado del item
                     + "<p>Producto: " + i.getProducto().getNombre() + "</p>"
                     + "<p>Cantidad: " + i.getCantidad() + "</p>"
-                    + "<p>Precio: " + i.getProducto().getPrecio() + "</p>"
-                    + "<p>Descripción: " + i.getDescripcion()+ "</p>"
+                    + "<p>Precio unitario: " + i.getProducto().getPrecio() + "</p>"
+                    + "<p>Precio total: " + i.getMonto() + "</p>"
+                    + "<p>Descripción: " + i.getDescripcion() + "</p>"
                     + "</div>";
         }
         return serviciosStr;

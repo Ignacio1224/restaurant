@@ -32,7 +32,8 @@ function abrirMesa(numero) {
 }
 
 function cerrarMesa(numero) {
-    $.get(`mozo?accion=cerrarMesa&mesa=${numero}`);
+    const cliente = $('#txt-cliente').val();
+    $.get(`mozo?accion=cerrarMesa&mesa=${numero}&cliente=${cliente}`);
     $("#modalMesa").modal("hide");
 }
 
@@ -61,13 +62,13 @@ function cargarModalMesa(numeroMesa, estado) {
                 <p>Añadir al servicio:</p>
                 <div class="form-group">
                     <label for="select-products" class="col-form-label">Producto: *</label>
-                    <select class="custom-select" id="select-products" required>
+                    <select class="custom-select" id="select-products">
                         <option value="" selected>------</option>
                     </select>
                 </div>
                 <div class="form-group">
                   <label for="txt-cantidad" class="col-form-label">Cantidad: *</label>
-                  <input type="number" min=0 class="form-control" id="txt-cantidad" required></input>
+                  <input type="number" min=0 class="form-control" id="txt-cantidad"></input>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="col-form-label">Descripción:</label>
@@ -79,7 +80,14 @@ function cargarModalMesa(numeroMesa, estado) {
         `);
 
         $("#modalMesa .modal-footer").html(`
-            <button type="button" class="btn btn-warning" onclick="cerrarMesa(${numeroMesa})">Cerrar mesa</button>
+            <div class="row col-12">
+                <div class="col-8">
+                    <input type="text" class="form-control" id="txt-cliente" placeholder="Id cliente"></input>
+                </div>
+                <div class="col-1 offset-1">
+                    <button type="button" class="btn btn-warning" onclick="cerrarMesa(${numeroMesa})">Cerrar mesa</button>
+                </div>
+            </div>
         `);
 
         $.get("mozo?accion=cargarProductos");

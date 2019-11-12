@@ -76,6 +76,10 @@ public class Fachada {
     public ArrayList<Producto> getProductos() {
         return sistemaProdutcto.getProductos();
     }
+    
+    public ArrayList<Producto> getProductosConStock() {
+        return sistemaProdutcto.getProductosConStock();
+    }
 
     public void setProductos(ArrayList<Producto> productos) {
         sistemaProdutcto.setProductos(productos);
