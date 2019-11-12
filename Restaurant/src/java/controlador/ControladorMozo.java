@@ -26,15 +26,10 @@ public class ControladorMozo implements Observer {
         vista.cargarMesas(mesasDelMozo);
     }
     
-    private void cargarMesa(Mesa mesa) {
-        vista.mostrarMesa(mesa);
-    }
-    
     public void abrirMesa(Mesa mesa) {
         if (mesasDelMozo.contains(mesa)) {
             try {
                 mesa.abrir();
-                cargarMesas();
             } catch (CustomException ex) {
                 vista.notificarError(ex.getMessage());
             }
@@ -56,7 +51,6 @@ public class ControladorMozo implements Observer {
         if (mesasDelMozo.contains(mesa)) {
             try {
                 mesa.cerrar();
-                cargarMesas();
             } catch (CustomException ex) {
                 vista.notificarError(ex.getMessage());
             }
@@ -70,9 +64,6 @@ public class ControladorMozo implements Observer {
         if(evento.equals(Mozo.Eventos.listaMesas)){
             cargarMesas();
         }
-        if(evento.equals(Mesa.Eventos.actualizar)){
-            cargarMesa((Mesa) origen);
-        }
     }
 
     public void cargarProductos() {
@@ -81,9 +72,8 @@ public class ControladorMozo implements Observer {
 
     public void aniadirItemAServicio(Mesa mesa, String codigoProducto, int cantidadProducto, String descripcionItem) {
         try {
-            Servicio servicio = mesa.agrergarUObtenerServicio(new Servicio(mesa));
+            Servicio servicio = mesa.getServicio();
             servicio.agregarItem(new Item(servicio, cantidadProducto, descripcionItem, Fachada.getInstancia().getProductoByCodigo(codigoProducto)));
-            cargarMesa(mesa);
         } catch (CustomException ex) {
             vista.notificarError(ex.getMessage());
         }

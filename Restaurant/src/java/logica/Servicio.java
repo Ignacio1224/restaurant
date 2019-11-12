@@ -22,10 +22,24 @@ public class Servicio {
 
     /* Comportamientos */
     public void agregarItem(Item item) throws CustomException {
-        if (items.contains(item)) {
-            throw new CustomException("El servicio ya posee el item!");
+                
+        if (item.getCantidad() > item.getProducto().getStock()) {
+            throw new CustomException("No hay stock!");
         }
+        
+        item.getProducto().disminuirStock(item.getCantidad());
         items.add(item);
+        
+        mesaCorrespondiente.getResponsable().actualizarListadoMesas();
+    }
+    
+    private Item getItem(Item item) {
+        for (Item i : items) {
+            if (i.equals(item)) {
+                return i;
+            }
+        }
+        return null;
     }
 
     public float calcularTotal() {

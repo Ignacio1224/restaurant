@@ -43,6 +43,7 @@ public class Mesa extends Observable {
             throw new CustomException("La mesa ya está abierta!");
         } else {
             abierta = true;
+            servicio = new Servicio(this);
             responsable.actualizarListadoMesas();
         }
     }
@@ -52,20 +53,9 @@ public class Mesa extends Observable {
             throw new CustomException("La mesa ya está cerrada!");
         } else {
             abierta = false;
+            servicio = null;
             responsable.actualizarListadoMesas();
         }
-    }
-
-    public Servicio agrergarUObtenerServicio(Servicio servicio) throws CustomException {
-        if (this.servicio == null && servicio == null) {
-            throw new CustomException("El servicio no puede ser nulo!");
-        }
-        
-        if (this.servicio == null) {
-            this.servicio = servicio;        
-        }
-        
-        return this.servicio;
     }
 
     /* Getters & Setters */

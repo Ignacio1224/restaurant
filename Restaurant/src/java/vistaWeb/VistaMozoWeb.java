@@ -32,7 +32,7 @@ public class VistaMozoWeb implements VistaMozo {
         String mesaString = request.getParameter("mesa");
 
         Mesa mesa = null;
-        
+
         if (mesaString != null) {
             int numeroMesa = Integer.parseInt(mesaString);
             mesa = mozo.getMesaByNumero(numeroMesa);
@@ -45,7 +45,7 @@ public class VistaMozoWeb implements VistaMozo {
                 conectarSSE(request, response);
                 controlador.vistaLista();
                 break;
-                
+
             case "abrirMesa":
                 if (mesa == null) {
                     notificarError("Mesa no asignada");
@@ -53,7 +53,7 @@ public class VistaMozoWeb implements VistaMozo {
                 }
                 controlador.abrirMesa(mesa);
                 break;
-                
+
             case "cerrarMesa":
                 if (mesa == null) {
                     notificarError("Mesa no asignada");
@@ -61,16 +61,18 @@ public class VistaMozoWeb implements VistaMozo {
                 }
                 controlador.cerrarMesa(mesa);
                 break;
-                
+
             case "cargarProductos":
                 controlador.cargarProductos();
                 break;
-            
+
             case "aniadirItemAServicio":
                 String codigoProducto = request.getParameter("codigoProducto");
                 int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
                 String descripcionItem = request.getParameter("descripcionItem");
-                controlador.aniadirItemAServicio(mesa,codigoProducto, cantidadProducto, descripcionItem);
+                
+                controlador.aniadirItemAServicio(mesa, codigoProducto, cantidadProducto, descripcionItem);
+                
                 break;
         }
 
@@ -111,11 +113,6 @@ public class VistaMozoWeb implements VistaMozo {
     }
 
     @Override
-    public void mostrarMesa(Mesa mesa) {
-        ComponentsHTML.armarServicio(mesa);
-    }
-
-    @Override
     public void mostrarNombreUsuario(String nombreCompleto) {
         enviar("eventoNombreUsuario", nombreCompleto);
     }
@@ -132,9 +129,9 @@ public class VistaMozoWeb implements VistaMozo {
         for (Producto p : productos) {
             productosString += ComponentsHTML.armarProductos(p);
         }
-        
+
         enviar("eventoCargarProductos", productosString);
-        
+
     }
 
 }
