@@ -1,13 +1,12 @@
 package logica;
 
-import java.util.Observable;
 import utilidades.CustomException;
 
 /**
  *
  * @author Ignacio Cabrera
  */
-public class Mesa extends Observable {
+public class Mesa {
 
     /* Atributos */
     private int numero;
@@ -28,14 +27,6 @@ public class Mesa extends Observable {
         this.responsable = responsable;
     }
     
-    public enum Eventos {
-        actualizar
-    }
-    
-    private void avisar(Eventos evento) {
-        setChanged();
-        notifyObservers(evento);
-    }
 
     /* Comportamiento */
     public void abrir() throws CustomException {
@@ -44,7 +35,6 @@ public class Mesa extends Observable {
         } else {
             abierta = true;
             servicio = new Servicio(this);
-            responsable.actualizarListadoMesas();
         }
     }
 
@@ -54,7 +44,6 @@ public class Mesa extends Observable {
         } else {
             abierta = false;
             servicio = null;
-            responsable.actualizarListadoMesas();
         }
     }
 

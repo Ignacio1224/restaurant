@@ -1,8 +1,6 @@
 package controlador;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 import logica.Fachada;
 import logica.Item;
 import logica.Mesa;
@@ -10,42 +8,32 @@ import logica.Mozo;
 import logica.Servicio;
 import utilidades.CustomException;
 
-public class ControladorMozo implements Observer {
-    
+public class ControladorMozo {
+
     private VistaMozo vista;
     private Mozo usuario;
     private ArrayList<Mesa> mesasDelMozo;
-    
+
     public ControladorMozo(VistaMozo vista, Mozo usuario) {
         this.vista = vista;
         this.usuario = usuario;
         mesasDelMozo = usuario.getMesasAsignadas();
     }
-     
-     @Override
-    public void update(Observable origen, Object evento) {
-        if(evento.equals(Mozo.Eventos.listaMesas)){
-            cargarMesas();
-        }
-    }
-    
+
     public void vistaLista() {
-        usuario.addObserver(this);
-        for (Mesa m : mesasDelMozo) {
-            m.addObserver(this);
-        }
         cargarMesas();
         vista.mostrarNombreUsuario(usuario.getNombreCompleto());
     }
-    
+
     private void cargarMesas() {
         vista.cargarMesas(mesasDelMozo);
     }
-    
+
     public void abrirMesa(Mesa mesa) {
         if (mesasDelMozo.contains(mesa)) {
             try {
                 mesa.abrir();
+                cargarMesas();
             } catch (CustomException ex) {
                 vista.notificarError(ex.getMessage());
             }
@@ -58,6 +46,7 @@ public class ControladorMozo implements Observer {
         if (mesasDelMozo.contains(mesa)) {
             try {
                 mesa.cerrar();
+                cargarMesas();
             } catch (CustomException ex) {
                 vista.notificarError(ex.getMessage());
             }
@@ -65,8 +54,7 @@ public class ControladorMozo implements Observer {
             vista.notificarError("El mozo no contiene a la mesa!");
         }
     }
-    
-    
+
     public void cargarProductos() {
         vista.mostrarProductos(Fachada.getInstancia().getProductosConStock());
     }
@@ -75,9 +63,10 @@ public class ControladorMozo implements Observer {
         try {
             Servicio servicio = mesa.getServicio();
             servicio.agregarItem(new Item(servicio, cantidadProducto, descripcionItem, Fachada.getInstancia().getProductoByCodigo(codigoProducto)));
+            cargarMesas();
         } catch (CustomException ex) {
             vista.notificarError(ex.getMessage());
         }
     }
-    
+
 }

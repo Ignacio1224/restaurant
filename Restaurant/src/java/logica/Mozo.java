@@ -29,11 +29,6 @@ public class Mozo extends Usuario {
         transferenciasPendientes = new ArrayList<>();
     }
     
-    public enum Eventos {
-        listaMesas,
-        actualizarMesa
-    }
-    
     @Override
     public Mozo login(String nombreUsuario, String contrasena) {
         if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
@@ -41,18 +36,6 @@ public class Mozo extends Usuario {
         }
         return null;
     }
-    
-    private void avisar(Eventos evento) {
-        setChanged();
-        notifyObservers(evento);
-    }
-    
-    
-    /*Mesa methods*/
-    public void actualizarListadoMesas() {
-        avisar(Eventos.listaMesas);
-    }
-    
     
     public void agregarMesaAsignada(Mesa mesa) throws CustomException {
         if (mesasAsignadas.contains(mesa)) {

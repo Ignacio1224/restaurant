@@ -30,7 +30,6 @@ public class Servicio {
         item.getProducto().disminuirStock(item.getCantidad());
         items.add(item);
         
-        mesaCorrespondiente.getResponsable().actualizarListadoMesas();
     }
     
     private Item getItem(Item item) {
