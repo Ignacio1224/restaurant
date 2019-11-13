@@ -69,7 +69,8 @@ public class VistaMozoWeb implements VistaMozo {
                 if (!idCliente.isEmpty()) {
                     c = Fachada.getInstancia().getClienteById(Integer.parseInt(idCliente));
                     if (c == null) {
-                        notificarError("Mozo no encontrado!");
+                        notificarError("Cliente no encontrado!");
+                        break;
                     }
                 }
 
