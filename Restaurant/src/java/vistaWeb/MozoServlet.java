@@ -17,6 +17,7 @@ public class MozoServlet extends HttpServlet {
     public MozoServlet() {
         DatosPrueba.cargarMesas();
         DatosPrueba.cargarProductos();
+        DatosPrueba.cargarClientes();
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

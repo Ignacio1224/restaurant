@@ -11,6 +11,12 @@ public abstract class Beneficio {
     /* Atributos */
     protected String descripcion;
     
+    /* Constructor */
+
+    public Beneficio(String descripcion) {
+        this.descripcion = descripcion;
+    }    
+    
     /* Comportamientos */
     public abstract float calcularMonto(Servicio servicio);
     

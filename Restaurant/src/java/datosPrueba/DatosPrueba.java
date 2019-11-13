@@ -1,11 +1,16 @@
 package datosPrueba;
 
 import java.util.ArrayList;
+import logica.Cliente;
 import logica.Fachada;
 import logica.Gestor;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
+import logica.beneficio.Beneficio;
+import logica.beneficio.Comun;
+import logica.beneficio.DeLaCasa;
+import logica.beneficio.Preferencial;
 import utilidades.CustomException;
 
 /**
@@ -77,9 +82,29 @@ public class DatosPrueba {
         productos.add(new Producto("a5", "Omelette", 46, 20f));
         productos.add(new Producto("a6", "Helado", 46, 20f));
         productos.add(new Producto("a7", "Vino", 46, 20f));
-        productos.add(new Producto("a8", "Agua", 46, 20f));
+        productos.add(new Producto("agua", "Agua", 46, 20f));
+        productos.add(new Producto("cafe", "Cafe", 46, 20f));
         
         Fachada.getInstancia().setProductos(productos);
+    }
+    
+    public static void cargarClientes() {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        
+        Beneficio deLaCasa = new DeLaCasa("DeLaCasa");
+        Beneficio preferencial = new Preferencial("Preferencial");
+        Beneficio comun = new Comun("Comun");
+        
+        clientes.add(new Cliente(1, "c1@gmail.con", "Cliente de la casa"));
+        clientes.add(new Cliente(2, "c2@gmail.con", "Cliente preferencial"));
+        clientes.add(new Cliente(3, "c3@gmail.con", "Cliente comun"));
+
+        clientes.get(0).setBeneficio(deLaCasa);
+        clientes.get(1).setBeneficio(preferencial);
+        clientes.get(2).setBeneficio(comun);
+        
+        Fachada.getInstancia().setClientes(clientes);
+        
     }
     
 }
