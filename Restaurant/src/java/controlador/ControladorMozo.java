@@ -21,6 +21,22 @@ public class ControladorMozo implements Observer {
         this.usuario = usuario;
         mesasDelMozo = usuario.getMesasAsignadas();
     }
+     
+     @Override
+    public void update(Observable origen, Object evento) {
+        if(evento.equals(Mozo.Eventos.listaMesas)){
+            cargarMesas();
+        }
+    }
+    
+    public void vistaLista() {
+        usuario.addObserver(this);
+        for (Mesa m : mesasDelMozo) {
+            m.addObserver(this);
+        }
+        cargarMesas();
+        vista.mostrarNombreUsuario(usuario.getNombreCompleto());
+    }
     
     private void cargarMesas() {
         vista.cargarMesas(mesasDelMozo);
@@ -37,15 +53,6 @@ public class ControladorMozo implements Observer {
             vista.notificarError("El mozo no contiene a la mesa!");
         }
     }
-    
-    public void vistaLista() {
-        usuario.addObserver(this);
-        for (Mesa m : mesasDelMozo) {
-            m.addObserver(this);
-        }
-        cargarMesas();
-        vista.mostrarNombreUsuario(usuario.getNombreCompleto());
-    }
 
     public void cerrarMesa(Mesa mesa) {
         if (mesasDelMozo.contains(mesa)) {
@@ -58,14 +65,8 @@ public class ControladorMozo implements Observer {
             vista.notificarError("El mozo no contiene a la mesa!");
         }
     }
-
-    @Override
-    public void update(Observable origen, Object evento) {
-        if(evento.equals(Mozo.Eventos.listaMesas)){
-            cargarMesas();
-        }
-    }
-
+    
+    
     public void cargarProductos() {
         vista.mostrarProductos(Fachada.getInstancia().getProductosConStock());
     }

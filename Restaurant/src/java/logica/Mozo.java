@@ -34,49 +34,26 @@ public class Mozo extends Usuario {
         actualizarMesa
     }
     
+    @Override
+    public Mozo login(String nombreUsuario, String contrasena) {
+        if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
+            return this;
+        }
+        return null;
+    }
+    
     private void avisar(Eventos evento) {
         setChanged();
         notifyObservers(evento);
     }
     
+    
+    /*Mesa methods*/
     public void actualizarListadoMesas() {
         avisar(Eventos.listaMesas);
     }
-
-    public void iniciarTransferencia(Mesa mesa, Mozo mozo) throws CustomException {
-        if (!mesasAsignadas.contains(mesa)) {
-            throw new CustomException("Mesa no disponible!");
-        }
-
-        Transferencia transferencia = new Transferencia(this, mozo, mesa);
-        transferenciasActivas.add(transferencia);
-    }
-
-    public void agregarTransferenciaPendiente(Transferencia transferencia) throws CustomException {
-        if (transferenciasPendientes.contains(transferencia)) {
-            throw new CustomException("Transferencia ya solicitada!");
-        }
-        transferenciasPendientes.add(transferencia);
-        // TODO: Notificar this (Evento al observador de este mozo)
-    }
-
-    public void aceptarTransferencia(Transferencia transferencia, boolean aceptar) throws CustomException {
-        if (!transferenciasPendientes.contains(transferencia)) {
-            throw new CustomException("Transferencia no disponible!");
-        }
-        transferencia.terminar(aceptar);
-    }
-
-    public void eliminarTransferencia(Transferencia transferencia, boolean aceptada) {
-        transferenciasActivas.remove(transferencia);
-        if (aceptada) {
-            mesasAsignadas.remove(transferencia.getMesa());
-            // TODO: Notificar (transferencia aceptada)
-        } else {
-            // TODO: Notificar (transferencia rechazada)
-        }
-    }
-
+    
+    
     public void agregarMesaAsignada(Mesa mesa) throws CustomException {
         if (mesasAsignadas.contains(mesa)) {
             throw new CustomException("Mesa ya asignada!");
@@ -92,13 +69,41 @@ public class Mozo extends Usuario {
         }
         return null;
     }
+
     
-    @Override
-    public Mozo login(String nombreUsuario, String contrasena) {
-        if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
-            return this;
+    /*Transferencia methods*/
+    public void agregarTransferenciaPendiente(Transferencia transferencia) throws CustomException {
+        if (transferenciasPendientes.contains(transferencia)) {
+            throw new CustomException("Transferencia ya solicitada!");
         }
-        return null;
+        transferenciasPendientes.add(transferencia);
+        // TODO: Notificar this (Evento al observador de este mozo)
+    }
+
+    public void aceptarTransferencia(Transferencia transferencia, boolean aceptar) throws CustomException {
+        if (!transferenciasPendientes.contains(transferencia)) {
+            throw new CustomException("Transferencia no disponible!");
+        }
+        transferencia.terminar(aceptar);
+    }
+    
+    public void iniciarTransferencia(Mesa mesa, Mozo mozo) throws CustomException {
+        if (!mesasAsignadas.contains(mesa)) {
+            throw new CustomException("Mesa no disponible!");
+        }
+
+        Transferencia transferencia = new Transferencia(this, mozo, mesa);
+        transferenciasActivas.add(transferencia);
+    }
+
+    public void eliminarTransferencia(Transferencia transferencia, boolean aceptada) {
+        transferenciasActivas.remove(transferencia);
+        if (aceptada) {
+            mesasAsignadas.remove(transferencia.getMesa());
+            // TODO: Notificar (transferencia aceptada)
+        } else {
+            // TODO: Notificar (transferencia rechazada)
+        }
     }
 
     /* Getters & Setters */

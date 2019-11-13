@@ -1,6 +1,5 @@
-package logica;
-
-import logica.beneficio.Beneficio;
+package logica.beneficio;
+import logica.Servicio;
 
 /**
  *
