@@ -61,5 +61,22 @@ public class ComponentsHTML {
         }
         return serviciosStr;
     }
+    
+    public static String armarCuenta(Servicio servicio) {
+        
+        if (servicio.getCliente() == null) {
+            return "<p>Monto total: " + servicio.calcularTotal() + "</p>";
+        }
+        
+        String s = ""
+                + "<p>Cliente: " + servicio.getCliente().getNombre() + "</p>"
+                + "<p>Monto total: " + servicio.calcularTotal() + "</p>"
+                + "<p>Beneficio: " + servicio.getCliente().getBeneficio().getDescripcion() + "</p>"
+//                TODO: Revisar logica de calcular monto con beneficio
+                + "<p>Monto a pagar: " + servicio.getCliente().getBeneficio().calcularMonto(servicio) + "</p>"
+                + "";
+        
+        return s;
+    }
 
 }

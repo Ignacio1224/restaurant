@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.Cliente;
+import logica.Fachada;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
+import logica.Servicio;
 import utilidades.ComponentsHTML;
 
 public class VistaMozoWeb implements VistaMozo {
@@ -59,7 +62,26 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                controlador.cerrarMesa(mesa);
+
+                String idCliente = request.getParameter("idCliente");
+                Cliente c = null;
+
+                if (!idCliente.isEmpty()) {
+                    c = Fachada.getInstancia().getClienteById(Integer.parseInt(idCliente));
+                    if (c == null) {
+                        notificarError("Mozo no encontrado!");
+                    }
+                }
+
+                controlador.cerrarMesa(mesa, c);
+                break;
+
+            case "confirmarCierre":
+                if (mesa == null) {
+                    notificarError("Mesa no asignada");
+                    break;
+                }
+                controlador.confirmarCierre(mesa);
                 break;
 
             case "cargarProductos":
@@ -70,9 +92,9 @@ public class VistaMozoWeb implements VistaMozo {
                 String codigoProducto = request.getParameter("codigoProducto");
                 int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
                 String descripcionItem = request.getParameter("descripcionItem");
-                
+
                 controlador.aniadirItemAServicio(mesa, codigoProducto, cantidadProducto, descripcionItem);
-                
+
                 break;
         }
 
@@ -132,6 +154,11 @@ public class VistaMozoWeb implements VistaMozo {
 
         enviar("eventoCargarProductos", productosString);
 
+    }
+
+    @Override
+    public void mostrarCuenta(Servicio s) {
+        enviar("eventoMostrarCuenta", ComponentsHTML.armarCuenta(s));
     }
 
 }

@@ -1,17 +1,27 @@
 package logica;
 
+import logica.beneficio.Beneficio;
+
 public class Cliente {
 
     /* Atributos */
     private int id;
     private String email;
     private String nombre;
+    private Beneficio beneficio;
 
     /* Constructor */
     public Cliente(int id, String email, String nombre) {
         this.id = id;
         this.email = email;
         this.nombre = nombre;
+    }
+
+    public Cliente(int id, String email, String nombre, Beneficio beneficio) {
+        this.id = id;
+        this.email = email;
+        this.nombre = nombre;
+        this.beneficio = beneficio;
     }
 
     /* Getters & Setters */
@@ -37,6 +47,14 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Beneficio getBeneficio() {
+        return beneficio;
+    }
+
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
     }
 
 }

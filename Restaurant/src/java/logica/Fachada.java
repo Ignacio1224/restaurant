@@ -13,11 +13,13 @@ public class Fachada {
     private static Fachada instancia;
     private SistemaUsuario sistemaUsuario;
     private SistemaProducto sistemaProdutcto;
+    private SistemaCliente sistemaCliente;
 
     // Constructor
     private Fachada() {
         sistemaUsuario = new SistemaUsuario();
         sistemaProdutcto = new SistemaProducto();
+        sistemaCliente = new SistemaCliente();
     }
 
     // Singleton
@@ -76,7 +78,7 @@ public class Fachada {
     public ArrayList<Producto> getProductos() {
         return sistemaProdutcto.getProductos();
     }
-    
+
     public ArrayList<Producto> getProductosConStock() {
         return sistemaProdutcto.getProductosConStock();
     }
@@ -87,6 +89,22 @@ public class Fachada {
 
     public Producto getProductoByCodigo(String code) {
         return sistemaProdutcto.getProductoByCodigo(code);
+    }
+
+    public void agregarCliente(Cliente cliente) throws CustomException {
+        sistemaCliente.agregarCliente(cliente);
+    }
+
+    public Cliente getClienteById(int id) {
+        return sistemaCliente.getClienteById(id);
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return sistemaCliente.getClientes();
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        sistemaCliente.setClientes(clientes);
     }
 
 }

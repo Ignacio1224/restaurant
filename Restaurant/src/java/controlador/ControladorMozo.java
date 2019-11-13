@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import logica.Cliente;
 import logica.Fachada;
 import logica.Item;
 import logica.Mesa;
@@ -29,6 +30,10 @@ public class ControladorMozo {
         vista.cargarMesas(mesasDelMozo);
     }
 
+    private void mostrarCuenta(Servicio s) {
+        vista.mostrarCuenta(s);
+    }
+
     public void abrirMesa(Mesa mesa) {
         if (mesasDelMozo.contains(mesa)) {
             try {
@@ -42,16 +47,21 @@ public class ControladorMozo {
         }
     }
 
-    public void cerrarMesa(Mesa mesa) {
+    public void cerrarMesa(Mesa mesa, Cliente c) {
         if (mesasDelMozo.contains(mesa)) {
-            try {
-                mesa.cerrar();
-                cargarMesas();
-            } catch (CustomException ex) {
-                vista.notificarError(ex.getMessage());
-            }
+            mesa.getServicio().setCliente(c);
+            mostrarCuenta(mesa.getServicio());
         } else {
             vista.notificarError("El mozo no contiene a la mesa!");
+        }
+    }
+    
+    public void confirmarCierre(Mesa mesa) {
+        try {
+            mesa.cerrar();
+            cargarMesas();
+        } catch (CustomException ex) {
+            vista.notificarError(ex.getMessage());
         }
     }
 

@@ -17,11 +17,17 @@ $(document).ready(() => {
         $("#select-products").append(data);
     }, false);
 
-
     eventosSSE.addEventListener("eventoNotificarError", function ( {data}) {
         const divError = `<div class="alert alert-danger" role="alert">${data}</div>`;
         const footer = `<button type="button" class="btn btn-danger" data-dismiss="modal">Entendido</button>`;
         cargarModal("Ooooops!", divError, footer);
+    }, false);
+
+    eventosSSE.addEventListener("eventoMostrarCuenta", function ( {data}) {
+        const body = data;
+
+        $('#modal .modal-body').html(body);
+        $('#modal').modal('show');
     }, false);
 
 });
@@ -33,8 +39,18 @@ function abrirMesa(numero) {
 
 function cerrarMesa(numero) {
     const cliente = $('#txt-cliente').val();
-    $.get(`mozo?accion=cerrarMesa&mesa=${numero}&cliente=${cliente}`);
+    const footer = `<button type="button" class="btn btn-warning" onclick=confirmarCierre(${numero})>Confirmar</button>`;
+    
+    $.get(`mozo?accion=cerrarMesa&mesa=${numero}&idCliente=${cliente}`);
+    
     $("#modalMesa").modal("hide");
+    $('#modalLongTitle').html(`Mesa Nº ${numero}`);
+    $('#modal .modal-footer').html(footer);
+}
+
+function confirmarCierre(numero) {
+    $.get(`mozo?accion=confirmarCierre&mesa=${numero}`);
+    $("#modal").modal("hide");
 }
 
 function enviarItem() {

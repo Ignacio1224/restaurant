@@ -1,0 +1,42 @@
+package logica;
+
+import java.util.ArrayList;
+import utilidades.CustomException;
+
+public class SistemaCliente {
+
+    /* Atributos */
+    private ArrayList<Cliente> clientes;
+
+    /* Constructor */
+    public SistemaCliente() {
+        clientes = new ArrayList<>();
+    }
+    
+    /* Comportamiento */
+    public void agregarCliente(Cliente cliente) throws CustomException {
+        if (clientes.contains(cliente)) {
+            throw new CustomException("Producto ya registrado");
+        }
+        clientes.add(cliente);
+    }
+    
+    public Cliente getClienteById(int id) {
+        for (Cliente c : clientes) {
+            if (c.getId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
+    
+    /* Getters & Setters */
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+    
+}

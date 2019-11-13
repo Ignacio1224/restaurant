@@ -3,6 +3,7 @@ package controlador;
 import java.util.ArrayList;
 import logica.Mesa;
 import logica.Producto;
+import logica.Servicio;
 
 public interface VistaMozo {
     
@@ -13,5 +14,7 @@ public interface VistaMozo {
     public void mostrarProductos(ArrayList<Producto> productos);
     
     public void notificarError(String message);
+
+    public void mostrarCuenta(Servicio s);
     
 }
