@@ -3,6 +3,7 @@ package controlador;
 import logica.Fachada;
 import logica.Gestor;
 import logica.Mozo;
+import utilidades.CustomException;
 
 /**
  *
@@ -27,7 +28,13 @@ public class ControladorLogin {
     }
 
     public void logoutMozo(Mozo user) {
-        Fachada.getInstancia().logoutMozo(user);
+        try {
+            Fachada.getInstancia().logoutMozo(user);
+            vista.desloguear();
+
+        } catch (CustomException ex) {
+            vista.notificarError(ex.getMessage());
+        }
     }
 
     public void loginGestor(String userS, String passwordS) {

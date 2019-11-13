@@ -35,8 +35,8 @@ public class Fachada {
         return sistemaUsuario.loginMozo(nombreUsuario, contrasena);
     }
 
-    public boolean logoutMozo(Mozo m) {
-        return sistemaUsuario.logoutMozo(m);
+    public void logoutMozo(Mozo m) throws CustomException {
+        sistemaUsuario.logoutMozo(m);
     }
 
     public Gestor loginGestor(String nombreUsuario, String contrasena) {

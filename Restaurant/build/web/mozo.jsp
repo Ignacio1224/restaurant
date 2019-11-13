@@ -38,6 +38,9 @@
                 <input type="text" value="logoutMozo" id="inputAccion" name="inputAccion" hidden="hidden" />
                 <button type="submit" class="btn btn-primary font-italic">Salir</button>
             </form>
+<!--            <div class="col-1 offset-4">
+                <button type="button" class="btn btn-primary font-italic" onclick="salir()">Salir</button>
+            </div>-->
         </div>
 
         <div class="container">

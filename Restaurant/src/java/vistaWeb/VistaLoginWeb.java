@@ -3,6 +3,7 @@ package vistaWeb;
 import controlador.ControladorLogin;
 import controlador.VistaLogin;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,20 +20,24 @@ public class VistaLoginWeb implements VistaLogin {
     private ControladorLogin controlador;
     private String destino;
     private HttpServletRequest request;
+    private PrintWriter out;
 
     public VistaLoginWeb() {
         controlador = new ControladorLogin(this);
     }
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        out = response.getWriter();
+
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
         String accion = request.getParameter("inputAccion");
 
         this.request = request;
-        
+
         Usuario user = null;
-        
+
         switch (accion) {
             case "loginMozo":
                 user = (Usuario) request.getSession().getAttribute("Usuario");
@@ -42,12 +47,10 @@ public class VistaLoginWeb implements VistaLogin {
                 }
                 controlador.loginMozo(username, password);
                 break;
-                
+
             case "logoutMozo":
                 Mozo mozo = (Mozo) request.getSession().getAttribute("Usuario");
                 controlador.logoutMozo(mozo);
-                request.getSession().invalidate();
-                destino = "";
                 break;
 
             case "loginGestor":
@@ -58,7 +61,7 @@ public class VistaLoginWeb implements VistaLogin {
                 }
                 controlador.loginGestor(username, password);
                 break;
-                
+
             case "logoutGestor":
                 Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
                 controlador.logoutGestor(gestor);
@@ -95,6 +98,17 @@ public class VistaLoginWeb implements VistaLogin {
         destino = "gestor.jsp";
         HttpSession sesion = request.getSession(true);
         sesion.setAttribute("Usuario", usuario);
+    }
+
+    @Override
+    public void notificarError(String message) {
+        out.write(message);
+    }
+
+    @Override
+    public void desloguear() {
+        request.getSession().invalidate();
+        destino = "";
     }
 
 }

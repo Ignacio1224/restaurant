@@ -73,7 +73,7 @@ public class ComponentsHTML {
                 + "<p>Monto total: " + servicio.calcularTotal() + "</p>"
                 + "<p>Beneficio: " + servicio.getCliente().getBeneficio().getDescripcion() + "</p>"
 //                TODO: Revisar logica de calcular monto con beneficio
-                + "<p>Monto a pagar: " + servicio.getCliente().getBeneficio().calcularMonto(servicio) + "</p>"
+                + "<p>Monto a pagar: " + servicio.getCliente().calcularBeneficio(servicio) + "</p>"
                 + "";
         
         return s;

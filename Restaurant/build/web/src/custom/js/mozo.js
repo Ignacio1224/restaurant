@@ -18,9 +18,7 @@ $(document).ready(() => {
     }, false);
 
     eventosSSE.addEventListener("eventoNotificarError", function ( {data}) {
-        const divError = `<div class="alert alert-danger" role="alert">${data}</div>`;
-        const footer = `<button type="button" class="btn btn-danger" data-dismiss="modal">Entendido</button>`;
-        cargarModal("Ooooops!", divError, footer);
+        mostrarError(data);
     }, false);
 
     eventosSSE.addEventListener("eventoMostrarCuenta", function ( {data}) {
@@ -32,6 +30,13 @@ $(document).ready(() => {
 
 });
 
+
+//function salir() {
+//    $.ajax({url: `login?inputAccion=logoutMozo`}).fail((error) => {
+//        mostrarError(error);
+//    });
+//}
+
 function abrirMesa(numero) {
     $.get(`mozo?accion=abrirMesa&mesa=${numero}`);
     $("#modalMesa").modal("hide");
@@ -40,9 +45,9 @@ function abrirMesa(numero) {
 function cerrarMesa(numero) {
     const cliente = $('#txt-cliente').val();
     const footer = `<button type="button" class="btn btn-warning" onclick=confirmarCierre(${numero})>Confirmar</button>`;
-    
+
     $.get(`mozo?accion=cerrarMesa&mesa=${numero}&idCliente=${cliente}`);
-    
+
     $("#modalMesa").modal("hide");
     $('#modalLongTitle').html(`Mesa Nº ${numero}`);
     $('#modal .modal-footer').html(footer);
@@ -111,6 +116,12 @@ function cargarModalMesa(numeroMesa, estado) {
     }
 
     $("#modalMesa").modal("show");
+}
+
+function mostrarError(message) {
+    const divError = `<div class="alert alert-danger" role="alert">${message}</div>`;
+    const footer = `<button type="button" class="btn btn-danger" data-dismiss="modal">Entendido</button>`;
+    cargarModal("Ooooops!", divError, footer);
 }
 
 function cargarModal(titulo, body, footer) {

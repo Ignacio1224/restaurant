@@ -88,6 +88,19 @@ public class Mozo extends Usuario {
             // TODO: Notificar (transferencia rechazada)
         }
     }
+    
+    public ArrayList<Mesa> getMesasAbiertas() {
+        ArrayList<Mesa> abiertas = new ArrayList<>();
+        
+        for(Mesa m : mesasAsignadas) {
+            if (m.isAbierta()) {
+                abiertas.add(m);
+            }
+        }
+        
+        return abiertas;
+    }
+    
 
     /* Getters & Setters */
     public ArrayList<Mesa> getMesasAsignadas() {

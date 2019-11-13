@@ -13,4 +13,8 @@ public interface VistaLogin {
 
     public void accesoPermitidoGestor(Gestor usuario);
 
+    public void notificarError(String message);
+
+    public void desloguear();
+
 }

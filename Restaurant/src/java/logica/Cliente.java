@@ -24,6 +24,10 @@ public class Cliente {
         this.beneficio = beneficio;
     }
 
+    public float calcularBeneficio(Servicio servicio) {
+        return beneficio.calcularMonto(servicio);
+    }
+    
     /* Getters & Setters */
     public int getId() {
         return id;

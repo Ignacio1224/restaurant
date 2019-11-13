@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import utilidades.CustomException;
 
 /**
  *
@@ -33,15 +34,23 @@ public class SistemaUsuario {
         return null;
     }
 
-    public boolean logoutMozo(Mozo m) {
-        try {
-            mozosLogueados.remove(m);
-            return true;
-        } catch (Exception e) {
-            return false;
+    public void logoutMozo(Mozo m) throws CustomException {
+        if (m == null) {
+            throw new CustomException("No hay mozo!");
         }
+
+        if (!m.getMesasAbiertas().isEmpty()) {
+            throw new CustomException("Tienes mesas abiertas!");
+        }
+
+        if (!mozosLogueados.contains(m)) {
+            throw new CustomException("No está logueado!");
+        }
+
+        mozosLogueados.remove(m);
+
     }
-    
+
     public Gestor loginGestor(String nombreUsuario, String contrasena) {
         for (Gestor g : gestoresTodos) {
             Gestor gestor = g.login(nombreUsuario, contrasena);
@@ -66,7 +75,7 @@ public class SistemaUsuario {
     public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
         this.mozosTodos = mozosTodos;
     }
-    
+
     public ArrayList<Mozo> getMozosTodos() {
         return mozosTodos;
     }
@@ -78,7 +87,7 @@ public class SistemaUsuario {
     public void setGestoresTodos(ArrayList<Gestor> gestoresTodos) {
         this.gestoresTodos = gestoresTodos;
     }
-    
+
     public ArrayList<Gestor> getGestoresTodos() {
         return gestoresTodos;
     }
