@@ -32,16 +32,6 @@ public class Servicio {
         
     }
     
-    private Item getItem(Item item) {
-//        for (Item i : items) {
-//            if (i.equals(item)) {
-//                return i;
-//            }
-//        }
-        if(items.contains(item)) return item;
-        else return null;
-    }
-
     public float calcularTotal() {
         float montoTotal = 0;
 
@@ -71,6 +61,9 @@ public class Servicio {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+        if (this.cliente != null) {
+            this.cliente.setServicio(this);
+        }
     }
 
     @Override

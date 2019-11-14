@@ -9,6 +9,7 @@ public class Cliente {
     private String email;
     private String nombre;
     private Beneficio beneficio;
+    private Servicio servicio;
 
     /* Constructor */
     public Cliente(int id, String email, String nombre) {
@@ -24,10 +25,10 @@ public class Cliente {
         this.beneficio = beneficio;
     }
 
-    public float calcularBeneficio(Servicio servicio) {
+    public float calcularBeneficio() {
         return beneficio.calcularMonto(servicio);
     }
-    
+
     /* Getters & Setters */
     public int getId() {
         return id;
@@ -59,6 +60,14 @@ public class Cliente {
 
     public void setBeneficio(Beneficio beneficio) {
         this.beneficio = beneficio;
+    }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
     }
 
 }

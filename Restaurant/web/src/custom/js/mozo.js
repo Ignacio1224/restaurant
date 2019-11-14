@@ -170,7 +170,7 @@ function cargarModalMesa(numeroMesa, estado) {
         `);
 
         $("#modalMesa .modal-footer").html(`
-            <div class="row col-12">
+            <div class="row">
                 <div class="col-8">
                     <input type="text" class="form-control" id="txt-cliente" placeholder="Id cliente"></input>
                 </div>
@@ -185,6 +185,7 @@ function cargarModalMesa(numeroMesa, estado) {
     }
 
     $("#modalMesa .modal-footer").append(`
+            
             <button type="button" class="btn btn-primary" onclick="iniciarTransferencia(${numeroMesa})">Transferir mesa</button>
         `);
 
