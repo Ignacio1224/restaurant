@@ -17,34 +17,40 @@ public class VistaUProcesadoraWeb implements VistaUProcesadora {
 
     private ControladorUProcesadora controlador;
     private String destino;
-    private HttpServletRequest request;
     private PrintWriter out;
-    
-    public VistaUProcesadoraWeb(Gestor g){
-       this.controlador = new ControladorUProcesadora(this, g);
+
+    /*Constructor*/
+    public VistaUProcesadoraWeb(Gestor g) {
+        this.controlador = new ControladorUProcesadora(this, g);
     }
 
-     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    /**/
+    @Override
+    public void cargarUProcesadoras() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-        Mozo mozo = (Mozo) request.getSession().getAttribute("Usuario");
+    @Override
+    public void mostrarNombreUsuario(String nombreUsuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
+    @Override
+    public void mostrarUProcesadoras() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
         String accion = request.getParameter("accion");
-        String mesaString = request.getParameter("mesa");
-
-        Mesa mesa = null;
-
-        if (mesaString != null) {
-            int numeroMesa = Integer.parseInt(mesaString);
-            mesa = mozo.getMesaByNumero(numeroMesa);
-        }
-
-        this.request = request;
 
         switch (accion) {
-            case "conectarSSE":
+            case ("conectarSSE"): {
                 conectarSSE(request, response);
                 controlador.vistaLista();
                 break;
+            }
         }
 
         if (destino != null) {
@@ -71,34 +77,5 @@ public class VistaUProcesadoraWeb implements VistaUProcesadora {
             System.out.println("Error");
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    @Override
-    public void cargarUProcesadoras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mostrarNombreUsuario(String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mostrarUProcesadoras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
 
 }
