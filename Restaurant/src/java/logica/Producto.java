@@ -13,13 +13,15 @@ public class Producto {
     private String nombre;
     private int stock;
     private float precio;
+    private UnidadProcesadora uProcesadora;
 
     /* Constructor */
-    public Producto(String codigo, String nombre, int stock, float precio) {
+    public Producto(String codigo, String nombre, int stock, float precio, UnidadProcesadora uProcesadora) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.stock = stock;
         this.precio = precio;
+        this.uProcesadora = uProcesadora;
     }
 
     /* Comportamientos */

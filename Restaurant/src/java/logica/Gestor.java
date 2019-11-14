@@ -1,5 +1,6 @@
 package logica;
 
+import java.util.ArrayList;
 import utilidades.CustomException;
 
 /**
@@ -8,8 +9,12 @@ import utilidades.CustomException;
  */
 public class Gestor extends Usuario {
 
+    private UnidadProcesadora uProcesadora;
+    private ArrayList<Item> itemsParaProcesar;
+
     public Gestor(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
         super(nombreUsuario, contrasena, nombreCompleto);
+        this.itemsParaProcesar = new ArrayList();
     }
 
     @Override
@@ -20,4 +25,11 @@ public class Gestor extends Usuario {
         return null;
     }
 
+    public void setUnidadProcesadora(UnidadProcesadora up) {
+        this.uProcesadora = up;
+    }
+
+    public void tomarItem(Item i) {
+        this.itemsParaProcesar.add(i);
+    }
 }

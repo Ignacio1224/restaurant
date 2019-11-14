@@ -33,12 +33,13 @@ public class Servicio {
     }
     
     private Item getItem(Item item) {
-        for (Item i : items) {
-            if (i.equals(item)) {
-                return i;
-            }
-        }
-        return null;
+//        for (Item i : items) {
+//            if (i.equals(item)) {
+//                return i;
+//            }
+//        }
+        if(items.contains(item)) return item;
+        else return null;
     }
 
     public float calcularTotal() {

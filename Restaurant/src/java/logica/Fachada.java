@@ -14,12 +14,14 @@ public class Fachada {
     private SistemaUsuario sistemaUsuario;
     private SistemaProducto sistemaProdutcto;
     private SistemaCliente sistemaCliente;
+    private SistemaUnidadProcesadora sistemaUnidadProcesadora;
 
     // Constructor
     private Fachada() {
         sistemaUsuario = new SistemaUsuario();
         sistemaProdutcto = new SistemaProducto();
         sistemaCliente = new SistemaCliente();
+        sistemaUnidadProcesadora = new SistemaUnidadProcesadora();
     }
 
     // Singleton
@@ -63,6 +65,14 @@ public class Fachada {
         return sistemaUsuario.getGestoresLogueados();
     }
 
+    public ArrayList<UnidadProcesadora> getUnidadesProcesadoras(){
+        return sistemaUnidadProcesadora.getUnidadesProcesadoras();
+    }
+    
+    public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras){
+        sistemaUnidadProcesadora.setUnidadesProcesadoras(uProcesadoras);
+    }
+    
     public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
         sistemaUsuario.setMozosTodos(mozosTodos);
     }

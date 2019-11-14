@@ -11,6 +11,7 @@ public class Item {
     private int cantidad;
     private String descripcion;
     private Producto producto;
+    
 
     /* Constructor */
     public Item(Servicio servicio, int cantidad, String descripcion, Producto producto) {

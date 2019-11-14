@@ -7,6 +7,7 @@ import logica.Gestor;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
+import logica.UnidadProcesadora;
 import logica.beneficio.Beneficio;
 import logica.beneficio.Comun;
 import logica.beneficio.DeLaCasa;
@@ -72,20 +73,34 @@ public class DatosPrueba {
         }
     }
     
+    public static void cargarUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras){
+        Fachada.getInstancia().setUnidadesProcesadoras(uProcesadoras);
+    }
+    
     public static void cargarProductos() {
+        ArrayList<UnidadProcesadora> uProcesadoras = new ArrayList();
         ArrayList<Producto> productos = new ArrayList<>();
         
-        productos.add(new Producto("a1", "Pan", 46, 20f));
-        productos.add(new Producto("a2", "Papas fritas", 46, 20f));
-        productos.add(new Producto("a3", "Milanesa", 46, 20f));
-        productos.add(new Producto("a4", "Pure", 46, 20f));
-        productos.add(new Producto("a5", "Omelette", 46, 20f));
-        productos.add(new Producto("a6", "Helado", 46, 20f));
-        productos.add(new Producto("a7", "Vino", 46, 20f));
-        productos.add(new Producto("agua", "Agua", 46, 20f));
-        productos.add(new Producto("cafe", "Cafe", 46, 20f));
+        UnidadProcesadora bar = new UnidadProcesadora("bar");
+        UnidadProcesadora postres = new UnidadProcesadora("postres");
+        UnidadProcesadora bebidas = new UnidadProcesadora("bebidas");
+        
+        uProcesadoras.add(bar);
+        uProcesadoras.add(postres);
+        uProcesadoras.add(bebidas);
+        
+        productos.add(new Producto("a1", "Pan", 46, 20f, bar));
+        productos.add(new Producto("a2", "Papas fritas", 46, 20f, bar));
+        productos.add(new Producto("a3", "Milanesa", 46, 20f, bar));
+        productos.add(new Producto("a4", "Pure", 46, 20f, bar));
+        productos.add(new Producto("a5", "Omelette", 46, 20f, bar));
+        productos.add(new Producto("a6", "Helado", 46, 20f, postres));
+        productos.add(new Producto("a7", "Vino", 46, 20f, bebidas));
+        productos.add(new Producto("agua", "Agua", 46, 20f, bebidas));
+        productos.add(new Producto("cafe", "Cafe", 46, 20f, bar));
         
         Fachada.getInstancia().setProductos(productos);
+        cargarUnidadesProcesadoras(uProcesadoras);
     }
     
     public static void cargarClientes() {
