@@ -32,7 +32,7 @@
             <h3 class="col-6 offset-1">Bienvenido: <span class="font-italic" id="spanNombreUsuario"></span></h3>
 
             <form method="POST" action="login" class="col-1 offset-4">
-                <input type="text" value="logoutMozo" id="inputAccion" name="inputAccion" hidden="hidden" />
+                <input type="text" value="logoutGestor" id="inputAccion" name="inputAccion" hidden="hidden" />
                 <button type="submit" class="btn btn-primary font-italic">Salir</button>
             </form>
         </div>

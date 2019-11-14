@@ -64,7 +64,7 @@ public class SistemaUsuario {
 
     public boolean logoutGestor(Gestor g) {
         try {
-            mozosLogueados.remove(g);
+            gestoresLogueados.remove(g);
             return true;
         } catch (Exception e) {
             return false;
