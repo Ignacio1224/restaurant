@@ -65,10 +65,23 @@ public class Producto {
         this.precio = precio;
     }
 
+    public UnidadProcesadora getuProcesadora() {
+        return uProcesadora;
+    }
+
+    public void setuProcesadora(UnidadProcesadora uProcesadora) {
+        this.uProcesadora = uProcesadora;
+    }
+
     @Override
     public boolean equals(Object obj) {
         Producto other = (Producto) obj;
         return codigo.equals(other.getCodigo());
+    }
+
+    @Override
+    public String toString() {
+        return "Producto: " + nombre + " (" + codigo + ") $" + precio + " (" + uProcesadora.getNombre() + ")";
     }
 
 }

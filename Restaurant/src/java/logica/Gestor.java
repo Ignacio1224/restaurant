@@ -31,5 +31,6 @@ public class Gestor extends Usuario {
 
     public void tomarItem(Item i) {
         this.itemsParaProcesar.add(i);
+//        TODO: sacar el item de la lista (itemsPendientes) de la uProcesadora
     }
 }

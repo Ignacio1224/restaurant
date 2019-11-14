@@ -41,6 +41,26 @@ public class Fachada {
         sistemaUsuario.logoutMozo(m);
     }
 
+    public ArrayList<Mozo> getMozosTodos() {
+        return sistemaUsuario.getMozosTodos();
+    }
+
+    public ArrayList<Mozo> getMozosLogueados() {
+        return sistemaUsuario.getMozosLogueados();
+    }
+
+    public Mozo getMozosByUsername(String username) {
+        return sistemaUsuario.getMozoByUsername(username);
+    }
+
+    public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
+        sistemaUsuario.setMozosTodos(mozosTodos);
+    }
+
+    public Mesa getMesaByNumero(int numero) {
+        return sistemaUsuario.getMesaByNumero(numero);
+    }
+
     public Gestor loginGestor(String nombreUsuario, String contrasena) {
         return sistemaUsuario.loginGestor(nombreUsuario, contrasena);
     }
@@ -49,40 +69,12 @@ public class Fachada {
         return sistemaUsuario.logoutGestor(g);
     }
 
-    public ArrayList<Mozo> getMozosTodos() {
-        return sistemaUsuario.getMozosTodos();
-    }
-
-    public ArrayList<Mozo> getMozosLogueados() {
-        return sistemaUsuario.getMozosLogueados();
-    }
-    
-    public Mozo getMozosByUsername(String username) {
-        return sistemaUsuario.getMozoByUsername(username);
-    }
-
-    public Mesa getMesaByNumero(int numero) {
-        return sistemaUsuario.getMesaByNumero(numero);
-    }
-
     public ArrayList<Gestor> getGestoresTodos() {
         return sistemaUsuario.getGestoresTodos();
     }
 
     public ArrayList<Gestor> getGestoresLogueados() {
         return sistemaUsuario.getGestoresLogueados();
-    }
-
-    public ArrayList<UnidadProcesadora> getUnidadesProcesadoras(){
-        return sistemaUnidadProcesadora.getUnidadesProcesadoras();
-    }
-    
-    public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras){
-        sistemaUnidadProcesadora.setUnidadesProcesadoras(uProcesadoras);
-    }
-    
-    public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
-        sistemaUsuario.setMozosTodos(mozosTodos);
     }
 
     public void setGestoresTodos(ArrayList<Gestor> gestoresTodos) {
@@ -123,6 +115,14 @@ public class Fachada {
 
     public void setClientes(ArrayList<Cliente> clientes) {
         sistemaCliente.setClientes(clientes);
+    }
+
+    public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
+        return sistemaUnidadProcesadora.getUnidadesProcesadoras();
+    }
+
+    public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras) {
+        sistemaUnidadProcesadora.setUnidadesProcesadoras(uProcesadoras);
     }
 
 }
