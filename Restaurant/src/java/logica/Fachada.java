@@ -56,6 +56,14 @@ public class Fachada {
     public ArrayList<Mozo> getMozosLogueados() {
         return sistemaUsuario.getMozosLogueados();
     }
+    
+    public Mozo getMozosByUsername(String username) {
+        return sistemaUsuario.getMozoByUsername(username);
+    }
+
+    public Mesa getMesaByNumero(int numero) {
+        return sistemaUsuario.getMesaByNumero(numero);
+    }
 
     public ArrayList<Gestor> getGestoresTodos() {
         return sistemaUsuario.getGestoresTodos();

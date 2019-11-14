@@ -1,3 +1,5 @@
+let numeroMesaG;
+
 $(document).ready(() => {
     const eventosSSE = new EventSource("mozo?accion=conectarSSE");
 
@@ -21,11 +23,37 @@ $(document).ready(() => {
         mostrarError(data);
     }, false);
 
+    eventosSSE.addEventListener("eventoNumeroMesa", function ( {data}) {
+        numeroMesaG = parseInt(data);
+    }, false);
+
     eventosSSE.addEventListener("eventoMostrarCuenta", function ( {data}) {
         const body = data;
 
         $('#modal .modal-body').html(body);
-        $('#modal').modal('show');
+        $('#modal').modal({backdrop: 'static', keyboard: false, show: true});
+    }, false);
+    
+    eventosSSE.addEventListener("eventoResultadoTransferencia", function ( {data}) {
+        const title = 'Resultado de la transferencia';
+        const body = data;
+        const footer = '<button type="button" class="btn btn-warning" data-dismiss="modal">Entendido</button>';
+        cargarModal(title, body, footer);
+    }, false);
+
+    eventosSSE.addEventListener("eventoMozosLogueados", function ( {data}) {
+        $("#selectMozosLogueados").append(data);
+        $('#modal').modal({backdrop: 'static', keyboard: false, show: true});
+    }, false);
+
+    eventosSSE.addEventListener("eventoRecepcionTransferencia", function ( {data}) {
+
+        const titulo = `Tienes una transferencia pendiente...`;
+        const body = data;
+        const footer = `<button type="button" class="btn btn-success" onclick="confirmarTransferencia(${numeroMesaG}, true)">Confirmar</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmarTransferencia(${numeroMesaG}, false)">Rechazar</button>`;
+
+        cargarModal(titulo, body, footer, false);
     }, false);
 
 });
@@ -36,6 +64,15 @@ $(document).ready(() => {
 //        mostrarError(error);
 //    });
 //}
+
+function confirmarTransferencia(numeroMesa, confirmada) {
+    $("#modal").modal("hide");
+    
+    $('#modal').on('hidden.bs.modal', function (e) {
+        $.get(`mozo?accion=confirmarTransferencia&mesa=${numeroMesa}&confirmada=${confirmada}`);
+        $(this).unbind(e);
+    });
+}
 
 function abrirMesa(numero) {
     $.get(`mozo?accion=abrirMesa&mesa=${numero}`);
@@ -68,6 +105,38 @@ function enviarItem() {
     $.get(`mozo?accion=aniadirItemAServicio&codigoProducto=${producto}&cantidadProducto=${cantidad}&descripcionItem=${descripcion}&mesa=${mesa}`);
 
     $("#modalMesa").modal("hide");
+}
+
+function iniciarTransferencia(numeroMesa) {
+    $("#modalMesa").modal("hide");
+
+    const titulo = `Transferir mesa Nº ${numeroMesa}`;
+    const body = `
+        <div class="form-group">
+            <label for="selectMozosLogueados">Mozos logueados</label>
+            <select class="form-control" id="selectMozosLogueados">
+                <option value="" selected>------</option>
+            </select>
+        </div>`;
+
+    const footer = `<button type="button" class="btn btn-success" onclick="transferir(${numeroMesa})">Transferir</button>`;
+
+    $("#modalLongTitle").html(titulo);
+    $("#modal .modal-body").html(body);
+    $("#modal .modal-footer").html(footer);
+
+    $.get("mozo?accion=getMozosLogueados");
+
+}
+
+function transferir(numeroMesa) {
+    $("#modal").modal("hide");
+
+    const mozo = $("#selectMozosLogueados").val();
+    $('#modal').on('hidden.bs.modal', function (e) {
+        $.get(`mozo?accion=transferirMesa&mesa=${numeroMesa}&mozo=${mozo}`);
+        $(this).unbind(e);
+    });
 }
 
 function cargarModalMesa(numeroMesa, estado) {
@@ -115,7 +184,11 @@ function cargarModalMesa(numeroMesa, estado) {
 
     }
 
-    $("#modalMesa").modal("show");
+    $("#modalMesa .modal-footer").append(`
+            <button type="button" class="btn btn-primary" onclick="iniciarTransferencia(${numeroMesa})">Transferir mesa</button>
+        `);
+
+    $('#modalMesa').modal({backdrop: 'static', keyboard: false, show: true});
 }
 
 function mostrarError(message) {
@@ -124,11 +197,17 @@ function mostrarError(message) {
     cargarModal("Ooooops!", divError, footer);
 }
 
-function cargarModal(titulo, body, footer) {
+function cargarModal(titulo, body, footer, enableClose = true) {
     $("#modalLongTitle").html(titulo);
 
     $("#modal .modal-body").html(body);
     $("#modal .modal-footer").html(footer);
 
-    $("#modal").modal("show");
+    if (!enableClose) {
+        $("#btn-close-modal").attr("disabled", true);
+    } else {
+        $("#btn-close-modal").attr("disabled", false);
+    }
+
+    $('#modal').modal({backdrop: 'static', keyboard: false, show: true});
 }

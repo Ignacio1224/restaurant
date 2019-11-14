@@ -71,6 +71,25 @@ public class SistemaUsuario {
         }
     }
 
+    public Mozo getMozoByUsername(String username) {
+        for (Mozo m : mozosTodos) {
+            if (m.getNombreUsuario().equals(username)) {
+                return m;
+            }
+        }
+        return null;
+    }
+
+    public Mesa getMesaByNumero(int numero) {
+        for (Mozo m : mozosTodos) {
+            Mesa me = m.getMesaByNumero(numero);
+            if (me != null) {
+                return me;
+            }
+        }
+        return null;
+    }
+
     // Getters & Setters
     public void setMozosTodos(ArrayList<Mozo> mozosTodos) {
         this.mozosTodos = mozosTodos;

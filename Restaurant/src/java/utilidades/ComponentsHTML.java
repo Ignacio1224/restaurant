@@ -2,8 +2,10 @@ package utilidades;
 
 import logica.Item;
 import logica.Mesa;
+import logica.Mozo;
 import logica.Producto;
 import logica.Servicio;
+import logica.Transferencia;
 
 public class ComponentsHTML {
 
@@ -77,6 +79,26 @@ public class ComponentsHTML {
                 + "";
         
         return s;
+    }
+    
+    public static String armarMozo(Mozo mozo) {
+        return "<option value=\"" + mozo.getNombreUsuario() + "\">" + mozo.getNombreCompleto() + "</option>";
+    }
+    
+    public static String armarTransferencia(Transferencia t) {
+        return ""
+                + "<div class=\"card card-body\">"
+                + "    <p>Mesa Nº: " + t.getMesa().getNumero() + "</p>"
+                + "    <p>Estado: " + (t.getMesa().isAbierta() ? "abierta" : "cerrada") + "</p>"
+                + "    <p>Mozo emisor: " + t.getMesa().getResponsable().getNombreCompleto() + "</p>"
+                + "</div>";
+    }
+
+    public static String armarResultadoTransferencia(boolean resultado) {
+        if (resultado) {
+            return "<div class=\"alert alert-success\" role=\"alert\">Transferencia aceptada</div>";
+        }
+        return "<div class=\"alert alert-danger\" role=\"alert\">Transferencia rechazada</div>";
     }
 
 }

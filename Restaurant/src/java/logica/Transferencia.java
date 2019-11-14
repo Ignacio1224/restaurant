@@ -17,7 +17,6 @@ public final class Transferencia {
         this.emisor = emisor;
         this.receptor = receptor;
         this.mesa = mesa;
-        notificarReceptor();
     }
 
     public void notificarReceptor() throws CustomException {

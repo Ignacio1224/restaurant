@@ -14,6 +14,7 @@ import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
 import logica.Servicio;
+import logica.Transferencia;
 import utilidades.ComponentsHTML;
 
 public class VistaMozoWeb implements VistaMozo {
@@ -38,7 +39,7 @@ public class VistaMozoWeb implements VistaMozo {
 
         if (mesaString != null) {
             int numeroMesa = Integer.parseInt(mesaString);
-            mesa = mozo.getMesaByNumero(numeroMesa);
+            mesa = Fachada.getInstancia().getMesaByNumero(numeroMesa);
         }
 
         this.request = request;
@@ -54,6 +55,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
+                
                 controlador.abrirMesa(mesa);
                 break;
 
@@ -62,7 +64,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-
+                
                 String idCliente = request.getParameter("idCliente");
                 Cliente c = null;
 
@@ -82,6 +84,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
+                
                 controlador.confirmarCierre(mesa);
                 break;
 
@@ -89,7 +92,37 @@ public class VistaMozoWeb implements VistaMozo {
                 controlador.cargarProductos();
                 break;
 
+            case "getMozosLogueados":
+                controlador.cargarMozosLogueados(mozo);
+                break;
+                
+            case "confirmarTransferencia":
+                Boolean aceptada = Boolean.parseBoolean(request.getParameter("confirmada"));
+                
+                controlador.terminarTransferencia(mozo, mesa, aceptada);
+                break;
+
+            case "transferirMesa":
+                if (mesa == null) {
+                    notificarError("Mesa no asignada");
+                    break;
+                }
+                
+                Mozo mozoDestino = Fachada.getInstancia().getMozosByUsername(request.getParameter("mozo"));
+                if (mozoDestino == null) {
+                    notificarError("Mozo no encontrado");
+                    break;
+                }
+                
+                controlador.iniciarTransferencia(mozo, mozoDestino, mesa);
+                break;
+
             case "aniadirItemAServicio":
+                if (mesa == null) {
+                    notificarError("Mesa no asignada");
+                    break;
+                }
+                
                 String codigoProducto = request.getParameter("codigoProducto");
                 int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
                 String descripcionItem = request.getParameter("descripcionItem");
@@ -123,7 +156,7 @@ public class VistaMozoWeb implements VistaMozo {
             System.out.println("Error");
         }
     }
-
+    
     @Override
     public void cargarMesas(ArrayList<Mesa> mesas) {
         String mesasString = "";
@@ -160,6 +193,29 @@ public class VistaMozoWeb implements VistaMozo {
     @Override
     public void mostrarCuenta(Servicio s) {
         enviar("eventoMostrarCuenta", ComponentsHTML.armarCuenta(s));
+    }
+
+    @Override
+    public void mostrarMozosLogueados(ArrayList<Mozo> mozosWOSelf) {
+
+        String mozos = "";
+        for (Mozo m : mozosWOSelf) {
+            mozos += ComponentsHTML.armarMozo(m);
+        }
+
+        enviar("eventoMozosLogueados", mozos);
+
+    }
+
+    @Override
+    public void avisarNuevaTransferencia(Transferencia transferencia) {
+        enviar("eventoNumeroMesa", transferencia.getMesa().getNumero() + "");
+        enviar("eventoRecepcionTransferencia", ComponentsHTML.armarTransferencia(transferencia));
+    }
+
+    @Override
+    public void notificarResultadoTransferencia(boolean resultado) {
+        enviar("eventoResultadoTransferencia", ComponentsHTML.armarResultadoTransferencia(resultado));
     }
 
 }

@@ -2,8 +2,10 @@ package controlador;
 
 import java.util.ArrayList;
 import logica.Mesa;
+import logica.Mozo;
 import logica.Producto;
 import logica.Servicio;
+import logica.Transferencia;
 
 public interface VistaMozo {
     
@@ -16,5 +18,11 @@ public interface VistaMozo {
     public void notificarError(String message);
 
     public void mostrarCuenta(Servicio s);
+
+    public void mostrarMozosLogueados(ArrayList<Mozo> mozosWOSelf);
+
+    public void avisarNuevaTransferencia(Transferencia transferencia);
+
+    public void notificarResultadoTransferencia(boolean resultado);
     
 }
