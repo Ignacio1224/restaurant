@@ -61,13 +61,19 @@ public class SistemaUsuario {
         return null;
     }
 
-    public boolean logoutGestor(Gestor g) {
-        try {
-            gestoresLogueados.remove(g);
-            return true;
-        } catch (Exception e) {
-            return false;
+    public void logoutGestor(Gestor g) throws CustomException {
+        if (g == null) {
+            throw new CustomException("No hay gestor!");
         }
+
+        if (!gestoresLogueados.contains(g)) {
+            throw new CustomException("No está logueado!");
+        }
+        
+        g.logout();
+        
+        gestoresLogueados.remove(g);
+
     }
 
     public Mozo getMozoByUsername(String username) {

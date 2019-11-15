@@ -43,7 +43,13 @@ public class ControladorLogin {
     }
 
     public void logoutGestor(Gestor gestor) {
-        Fachada.getInstancia().logoutGestor(gestor);
+        try {
+            
+            Fachada.getInstancia().logoutGestor(gestor);
+            vista.desloguear();
+        } catch (CustomException ex) {
+            vista.notificarError(ex.getMessage());
+        }
     }
 
 }

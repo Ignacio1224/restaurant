@@ -18,4 +18,13 @@ public class SistemaUnidadProcesadora {
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras) {
         this.unidadesProcesadoras = uProcesadoras;
     }
+
+    public UnidadProcesadora getUnidadProcesadoraByName(String name) {
+        for (UnidadProcesadora u : unidadesProcesadoras) {
+            if (u.getNombre().equals(name)) {
+                return u;
+            }
+        }
+        return null;
+    }
 }

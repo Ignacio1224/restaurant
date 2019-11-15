@@ -65,8 +65,8 @@ public class Fachada {
         return sistemaUsuario.loginGestor(nombreUsuario, contrasena);
     }
 
-    public boolean logoutGestor(Gestor g) {
-        return sistemaUsuario.logoutGestor(g);
+    public void logoutGestor(Gestor g) throws CustomException {
+        sistemaUsuario.logoutGestor(g);
     }
 
     public ArrayList<Gestor> getGestoresTodos() {
@@ -123,6 +123,10 @@ public class Fachada {
 
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras) {
         sistemaUnidadProcesadora.setUnidadesProcesadoras(uProcesadoras);
+    }
+    
+    public UnidadProcesadora getUnidadProcesadoraByName(String name) {
+        return sistemaUnidadProcesadora.getUnidadProcesadoraByName(name);
     }
 
 }

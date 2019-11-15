@@ -1,11 +1,13 @@
 package utilidades;
 
+import java.util.ArrayList;
 import logica.Item;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
 import logica.Servicio;
 import logica.Transferencia;
+import logica.UnidadProcesadora;
 
 public class ComponentsHTML {
 
@@ -99,6 +101,14 @@ public class ComponentsHTML {
             return "<div class=\"alert alert-success\" role=\"alert\">Transferencia aceptada</div>";
         }
         return "<div class=\"alert alert-danger\" role=\"alert\">Transferencia rechazada</div>";
+    }
+
+    public static String armarUnidadesProcesadoras(ArrayList<UnidadProcesadora> unidadesProcesadoras) {
+        String s = "";
+        for (UnidadProcesadora u : unidadesProcesadoras) {
+            s += "<option value=\"" + u.getNombre() + "\">" + u.getNombre() + "</option>";
+        }
+        return s;
     }
 
 }

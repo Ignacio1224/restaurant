@@ -12,6 +12,10 @@
         <servlet-name>MozoServlet</servlet-name>
         <servlet-class>vistaWeb.MozoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SeleccionarUnidadProcesadoraServlet</servlet-name>
+        <servlet-class>vistaWeb.SeleccionarUnidadProcesadoraServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MozoLoginServlet</servlet-name>
         <url-pattern>/mozologin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>MozoServlet</servlet-name>
         <url-pattern>/mozo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeleccionarUnidadProcesadoraServlet</servlet-name>
+        <url-pattern>/seleccionarUnidadProcesadora</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

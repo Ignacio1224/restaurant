@@ -37,12 +37,13 @@ public class UnidadProcesadora extends Observable {
 
     public void addGestor(Gestor gestor) throws CustomException {
 
-        if (this.gestores.contains(gestor)) {
+        if (gestores.contains(gestor)) {
             throw new CustomException("El gestor ya está ingresado!");
         }
 
-        this.gestores.add(gestor);
-
+        gestor.setUnidadProcesadora(this);
+        gestores.add(gestor);
+        
     }
 
     public void removeGestor(Gestor gestor) throws CustomException {

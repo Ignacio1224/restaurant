@@ -61,8 +61,6 @@ public class VistaLoginWeb implements VistaLogin {
             case "logoutGestor":
                 Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
                 controlador.logoutGestor(gestor);
-                request.getSession().invalidate();
-                destino = "";
                 break;
         }
 
@@ -91,7 +89,7 @@ public class VistaLoginWeb implements VistaLogin {
 
     @Override
     public void accesoPermitidoGestor(Gestor usuario) {
-        destino = "gestor.jsp";
+        destino = "seleccionarUnidadProcesadora.jsp";
         HttpSession sesion = request.getSession(true);
         sesion.setAttribute("Usuario", usuario);
     }

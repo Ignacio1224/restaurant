@@ -6,7 +6,7 @@ import utilidades.CustomException;
 public class Gestor extends Usuario {
 
     //<editor-fold desc="Atributos">
-    private UnidadProcesadora uProcesadora;
+    private UnidadProcesadora unidadProcesadora;
     private ArrayList<Item> itemsParaProcesar;
 
     public enum Eventos {
@@ -37,13 +37,13 @@ public class Gestor extends Usuario {
     }
 
     public void tomarItem(Item item) throws CustomException {
-        if (!uProcesadora.getItemsPendientes().contains(item)) {
+        if (!unidadProcesadora.getItemsPendientes().contains(item)) {
             throw new CustomException("El item no está ingresado!");
         }
 
         item.setGestor(this);
         itemsParaProcesar.add(item);
-        uProcesadora.itemTomado(item);
+        unidadProcesadora.itemTomado(item);
         avisar(Eventos.itemTomado);
     }
 
@@ -57,15 +57,24 @@ public class Gestor extends Usuario {
         avisar(Eventos.itemFinalizado);
 
     }
-    //</editor-fold>
 
-    //<editor-fold desc="Getters & Setters">
-    public UnidadProcesadora getuProcesadora() {
-        return uProcesadora;
+    public void logout() throws CustomException {
+        if (!itemsParaProcesar.isEmpty()) {
+            throw new CustomException("El gestor tiene pedidos tomados!");
+        }
+
+        unidadProcesadora.removeGestor(this);
+
     }
 
-    public void setuProcesadora(UnidadProcesadora uProcesadora) {
-        this.uProcesadora = uProcesadora;
+    //</editor-fold>
+    //<editor-fold desc="Getters & Setters">
+    public UnidadProcesadora getUnidadProcesadora() {
+        return unidadProcesadora;
+    }
+
+    public void setUnidadProcesadora(UnidadProcesadora unidadProcesadora) {
+        this.unidadProcesadora = unidadProcesadora;
     }
 
     public ArrayList<Item> getItemsParaProcesar() {

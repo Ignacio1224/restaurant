@@ -1,43 +1,28 @@
 package vistaWeb;
 
-import controlador.ControladorUProcesadora;
-import controlador.VistaUProcesadora;
+import controlador.ControladorGestor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logica.Cliente;
-import logica.Fachada;
 import logica.Gestor;
-import logica.Mesa;
-import logica.Mozo;
+import controlador.VistaGestor;
 
-public class VistaUProcesadoraWeb implements VistaUProcesadora {
+public class VistaGestorWeb implements VistaGestor {
 
-    private ControladorUProcesadora controlador;
+    private ControladorGestor controlador;
     private String destino;
     private PrintWriter out;
 
     /*Constructor*/
-    public VistaUProcesadoraWeb(Gestor g) {
-        this.controlador = new ControladorUProcesadora(this, g);
-    }
-
-    /**/
-    @Override
-    public void cargarUProcesadoras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public VistaGestorWeb(Gestor gestor) {
+        this.controlador = new ControladorGestor(this, gestor);
     }
 
     @Override
     public void mostrarNombreUsuario(String nombreUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mostrarUProcesadoras() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        enviar("eventoMostrarNombreUsuario", nombreUsuario);
     }
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -76,6 +61,11 @@ public class VistaUProcesadoraWeb implements VistaUProcesadora {
         if (out.checkError()) {
             System.out.println("Error");
         }
+    }
+
+    @Override
+    public void mostrarNombreUnidadProcesadora(String nombre) {
+        enviar("eventoNombreUnidadProcesadora", nombre);
     }
 
 }
