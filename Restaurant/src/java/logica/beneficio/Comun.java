@@ -2,10 +2,6 @@ package logica.beneficio;
 import logica.Item;
 import logica.Servicio;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class Comun extends Beneficio {
 
     public Comun(String descripcion) {

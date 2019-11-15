@@ -2,10 +2,6 @@ package logica;
 
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public final class Transferencia {
 
     /* Atributos */
@@ -25,6 +21,7 @@ public final class Transferencia {
 
     public void terminar(boolean aceptada) throws CustomException {
         emisor.eliminarTransferencia(this, aceptada);
+        receptor.eliminarTransferenciaPendiente(this);
         if (aceptada) {
             receptor.agregarMesaAsignada(mesa);
         }

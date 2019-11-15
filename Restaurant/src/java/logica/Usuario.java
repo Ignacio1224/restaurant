@@ -3,10 +3,6 @@ package logica;
 import java.util.Observable;
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio
- */
 public abstract class Usuario extends Observable {
 
     // Atributos

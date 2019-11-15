@@ -2,10 +2,6 @@ package logica.beneficio;
 
 import logica.Servicio;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public abstract class Beneficio {
     
     /* Atributos */

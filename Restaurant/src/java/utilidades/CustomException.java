@@ -1,9 +1,5 @@
 package utilidades;
 
-/**
- *
- * @author Ignacio
- */
 public class CustomException extends Exception {
     private String message;
 

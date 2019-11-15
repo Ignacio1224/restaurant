@@ -2,10 +2,6 @@ package logica;
 
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class Producto {
 
     /* Atributos */

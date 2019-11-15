@@ -8,15 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Mozo;
 
-/**
- *
- * @author Ignacio
- */
 public class MozoServlet extends HttpServlet {
 
     public MozoServlet() {
-        DatosPrueba.cargarMesas();
-        DatosPrueba.cargarProductos();
         DatosPrueba.cargarClientes();
     }
     

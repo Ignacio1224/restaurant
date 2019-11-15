@@ -1,9 +1,5 @@
 package logica;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class Item {
 
     /* Atributos */

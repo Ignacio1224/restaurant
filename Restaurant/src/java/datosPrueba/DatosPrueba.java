@@ -14,10 +14,6 @@ import logica.beneficio.DeLaCasa;
 import logica.beneficio.Preferencial;
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class DatosPrueba {
 
     public static void cargarMozos() {

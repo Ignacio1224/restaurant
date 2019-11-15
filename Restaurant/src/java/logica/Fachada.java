@@ -3,10 +3,6 @@ package logica;
 import java.util.ArrayList;
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio
- */
 public class Fachada {
 
     // Atrubutos

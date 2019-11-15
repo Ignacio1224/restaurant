@@ -2,10 +2,6 @@ package logica.beneficio;
 
 import logica.Servicio;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class DeLaCasa extends Beneficio {
 
     public DeLaCasa(String descripcion) {

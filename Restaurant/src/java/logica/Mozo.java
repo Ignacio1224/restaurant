@@ -3,10 +3,6 @@ package logica;
 import java.util.ArrayList;
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class Mozo extends Usuario {
 
     /* Atributos */
@@ -79,17 +75,17 @@ public class Mozo extends Usuario {
         transferencia.terminar(aceptar);
     }
 
-    public void iniciarTransferencia(Mesa mesa, Mozo mozo) throws CustomException {
+    public void iniciarTransferencia(Mesa mesa, Mozo mozoDestino) throws CustomException {
         if (!mesasAsignadas.contains(mesa)) {
             throw new CustomException("Mesa no disponible!");
         }
 
-        Transferencia transferencia = new Transferencia(this, mozo, mesa);
+        Transferencia transferencia = new Transferencia(this, mozoDestino, mesa);
         transferenciasActivas.add(transferencia);
         transferencia.notificarReceptor();
     }
 
-    public void eliminarTransferencia(Transferencia transferencia, boolean aceptada) {
+    public void eliminarTransferencia(Transferencia transferencia, boolean aceptada) throws CustomException {
         transferenciasActivas.remove(transferencia);
         if (aceptada) {
             mesasAsignadas.remove(transferencia.getMesa());
@@ -97,6 +93,14 @@ public class Mozo extends Usuario {
         } else {
             avisar(Eventos.transferenciaRechazada);
         }
+    }
+
+    public void eliminarTransferenciaPendiente(Transferencia t) throws CustomException {
+
+        if (!transferenciasPendientes.contains(t)) {
+            throw new CustomException("No posee la transferencia");
+        }
+        transferenciasPendientes.remove(t);
     }
 
     public ArrayList<Mesa> getMesasAbiertas() {
@@ -118,7 +122,7 @@ public class Mozo extends Usuario {
                 return t;
             }
         }
-        
+
         return null;
     }
 

@@ -5,10 +5,6 @@
  */
 package controlador;
 
-/**
- *
- * @author Dell
- */
 public interface VistaUProcesadora {
     
     public void cargarUProcesadoras();

@@ -11,10 +11,6 @@ import logica.Gestor;
 import logica.Mozo;
 import logica.Usuario;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class VistaLoginWeb implements VistaLogin {
 
     private ControladorLogin controlador;

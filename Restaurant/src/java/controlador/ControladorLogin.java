@@ -5,10 +5,6 @@ import logica.Gestor;
 import logica.Mozo;
 import utilidades.CustomException;
 
-/**
- *
- * @author Ignacio Cabrera
- */
 public class ControladorLogin {
 
     private VistaLogin vista;
