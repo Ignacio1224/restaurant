@@ -23,6 +23,7 @@ public final class Transferencia {
         emisor.eliminarTransferencia(this, aceptada);
         receptor.eliminarTransferenciaPendiente(this);
         if (aceptada) {
+            mesa.setResponsable(receptor);
             receptor.agregarMesaAsignada(mesa);
         }
     }

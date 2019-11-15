@@ -55,7 +55,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                
+
                 controlador.abrirMesa(mesa);
                 break;
 
@@ -64,7 +64,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                
+
                 String idCliente = request.getParameter("idCliente");
                 Cliente c = null;
 
@@ -84,7 +84,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                
+
                 controlador.confirmarCierre(mesa);
                 break;
 
@@ -95,10 +95,10 @@ public class VistaMozoWeb implements VistaMozo {
             case "getMozosLogueados":
                 controlador.cargarMozosLogueados(mozo);
                 break;
-                
+
             case "confirmarTransferencia":
                 Boolean aceptada = Boolean.parseBoolean(request.getParameter("confirmada"));
-                
+
                 controlador.terminarTransferencia(mozo, mesa, aceptada);
                 break;
 
@@ -107,15 +107,14 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                
+
                 Mozo mozoDestino = Fachada.getInstancia().getMozosByUsername(request.getParameter("mozo"));
-                System.out.println(mozoDestino.toString());
-                
+
                 if (mozoDestino == null) {
                     notificarError("Mozo no encontrado");
                     break;
                 }
-                
+
                 controlador.iniciarTransferencia(mozo, mozoDestino, mesa);
                 break;
 
@@ -124,7 +123,7 @@ public class VistaMozoWeb implements VistaMozo {
                     notificarError("Mesa no asignada");
                     break;
                 }
-                
+
                 String codigoProducto = request.getParameter("codigoProducto");
                 int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
                 String descripcionItem = request.getParameter("descripcionItem");
@@ -158,7 +157,7 @@ public class VistaMozoWeb implements VistaMozo {
             System.out.println("Error");
         }
     }
-    
+
     @Override
     public void cargarMesas(ArrayList<Mesa> mesas) {
         String mesasString = "";

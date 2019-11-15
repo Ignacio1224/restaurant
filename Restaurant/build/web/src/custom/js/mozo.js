@@ -119,7 +119,8 @@ function iniciarTransferencia(numeroMesa) {
             </select>
         </div>`;
 
-    const footer = `<button type="button" class="btn btn-success" onclick="transferir(${numeroMesa})">Transferir</button>`;
+    const footer = `<button type="button" class="btn btn-success" onclick="transferir(${numeroMesa})">Transferir</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>`;
 
     $("#modalLongTitle").html(titulo);
     $("#modal .modal-body").html(body);
