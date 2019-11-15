@@ -1,6 +1,7 @@
-package logica;
+package logica.Sistemas;
 
 import java.util.ArrayList;
+import logica.Producto;
 import utilidades.CustomException;
 
 public class SistemaProducto {
@@ -39,7 +40,7 @@ public class SistemaProducto {
         this.productos = productos;
     }
 
-    ArrayList<Producto> getProductosConStock() {
+    public ArrayList<Producto> getProductosConStock() {
         ArrayList<Producto> ps = new ArrayList<>();
         for (Producto p : productos) {
             if (p.getStock() > 0) {

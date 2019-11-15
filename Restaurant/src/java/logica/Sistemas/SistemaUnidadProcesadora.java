@@ -1,6 +1,7 @@
-package logica;
+package logica.Sistemas;
 
 import java.util.ArrayList;
+import logica.UnidadProcesadora;
 
 public class SistemaUnidadProcesadora {
 

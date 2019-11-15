@@ -1,6 +1,9 @@
-package logica;
+package logica.Sistemas;
 
 import java.util.ArrayList;
+import logica.Gestor;
+import logica.Mesa;
+import logica.Mozo;
 import utilidades.CustomException;
 
 public class SistemaUsuario {
