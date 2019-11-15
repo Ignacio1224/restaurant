@@ -108,7 +108,7 @@ public class VistaMozoWeb implements VistaMozo {
                     break;
                 }
 
-                Mozo mozoDestino = Fachada.getInstancia().getMozosByUsername(request.getParameter("mozo"));
+                Mozo mozoDestino = Fachada.getInstancia().getMozoByUsername(request.getParameter("mozo"));
 
                 if (mozoDestino == null) {
                     notificarError("Mozo no encontrado");

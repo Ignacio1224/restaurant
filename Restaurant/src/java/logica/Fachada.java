@@ -45,7 +45,7 @@ public class Fachada {
         return sistemaUsuario.getMozosLogueados();
     }
 
-    public Mozo getMozosByUsername(String username) {
+    public Mozo getMozoByUsername(String username) {
         return sistemaUsuario.getMozoByUsername(username);
     }
 

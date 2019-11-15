@@ -60,12 +60,13 @@ public class Mozo extends Usuario {
     }
 
     /*Transferencia methods*/
+    // Solo para Receptor
     public void agregarTransferenciaPendiente(Transferencia transferencia) throws CustomException {
         if (transferenciasPendientes.contains(transferencia)) {
             throw new CustomException("Transferencia ya solicitada!");
         }
         transferenciasPendientes.add(transferencia);
-        transferencia.getReceptor().avisar(Eventos.nuevaTransferencia);
+        avisar(Eventos.nuevaTransferencia);
     }
 
     public void aceptarTransferencia(Transferencia transferencia, boolean aceptar) throws CustomException {
@@ -75,6 +76,7 @@ public class Mozo extends Usuario {
         transferencia.terminar(aceptar);
     }
 
+    // Solo para Emisor
     public void iniciarTransferencia(Mesa mesa, Mozo mozoDestino) throws CustomException {
         if (!mesasAsignadas.contains(mesa)) {
             throw new CustomException("Mesa no disponible!");

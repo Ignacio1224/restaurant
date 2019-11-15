@@ -59,7 +59,7 @@ public class ControladorMozo implements Observer {
             vista.notificarError("El mozo no contiene a la mesa!");
         }
     }
-    
+
     public void confirmarCierre(Mesa mesa) {
         try {
             mesa.cerrar();
@@ -86,13 +86,13 @@ public class ControladorMozo implements Observer {
     public void cargarMozosLogueados(Mozo m) {
         ArrayList<Mozo> mozosWOSelf = new ArrayList<>();
         ArrayList<Mozo> mozosTodos = Fachada.getInstancia().getMozosLogueados();
-        
-        for(Mozo mozo : mozosTodos) {
+
+        for (Mozo mozo : mozosTodos) {
             if (!mozo.equals(m)) {
                 mozosWOSelf.add(mozo);
             }
         }
-        
+
         vista.mostrarMozosLogueados(mozosWOSelf);
     }
 
@@ -108,14 +108,14 @@ public class ControladorMozo implements Observer {
     public void update(Observable origen, Object evento) {
         if (evento.equals(Mozo.Eventos.nuevaTransferencia)) {
             ArrayList<Transferencia> transferencias = ((Mozo) origen).getTransferenciasPendientes();
-            vista.avisarNuevaTransferencia(transferencias.get(transferencias.size()-1));
+            vista.avisarNuevaTransferencia(transferencias.get(transferencias.size() - 1));
         }
-        
+
         if (evento.equals(Mozo.Eventos.transferenciaAceptada)) {
             vista.cargarMesas(mesasDelMozo);
             vista.notificarResultadoTransferencia(true);
         }
-        
+
         if (evento.equals(Mozo.Eventos.transferenciaRechazada)) {
             vista.notificarResultadoTransferencia(false);
         }
@@ -123,20 +123,15 @@ public class ControladorMozo implements Observer {
 
     public void terminarTransferencia(Mozo mozo, Mesa mesa, boolean aceptada) {
         try {
-            
-            Mozo mozoOrigen = mozo.getTransferenciaPendienteByMesa(mesa).getEmisor();
-            
-            if (mozoOrigen == null) {
-                vista.notificarError("A ocurrido un error!");
-                return;
-            }
-            
+
+            Mozo mozoOrigen = mesa.getResponsable();
+
             mozo.aceptarTransferencia(new Transferencia(mozoOrigen, mozo, mesa), aceptada);
-            
+
             if (aceptada) {
                 vista.cargarMesas(mesasDelMozo);
             }
-            
+
         } catch (CustomException ex) {
             vista.notificarError(ex.getMessage());
         }
