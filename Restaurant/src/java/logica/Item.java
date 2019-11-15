@@ -2,31 +2,52 @@ package logica;
 
 public class Item {
 
-    /* Atributos */
+    //<editor-fold desc="Atributos">
     private Servicio servicio;
     private int cantidad;
     private String descripcion;
     private Producto producto;
-    
+    private Gestor gestor;
 
-    /* Constructor */
+    public enum Estados {
+        Pendiente,
+        Procesando,
+        Finalizado
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Constructor">
     public Item(Servicio servicio, int cantidad, String descripcion, Producto producto) {
         this.servicio = servicio;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
         this.producto = producto;
     }
+    //</editor-fold>
 
-    /* Comportamientos */
+    //<editor-fold desc="Comportamientos">
     public void avisarParaProcesar() {
-
+        producto.getuProcesadora().agregarItem(this);
     }
-    
+
     public float getMonto() {
         return producto.getPrecio() * cantidad;
     }
 
-    /* Getters & Setters */
+    public Estados getEstado() {
+        if (gestor == null) {
+            return Estados.Pendiente;
+        }
+        
+        if (gestor.getItemsParaProcesar().contains(this)) {
+            return Estados.Procesando;
+        }
+        
+        return Estados.Finalizado;
+    }
+
+    //</editor-fold>
+    //<editor-fold desc="Getters & Setters">
     public Servicio getServicio() {
         return servicio;
     }
@@ -51,10 +72,13 @@ public class Item {
         return producto;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        Item other = (Item) obj;
-        return servicio.equals(other.getServicio()) && producto.equals(other.getProducto());
+    public Gestor getGestor() {
+        return gestor;
     }
+
+    public void setGestor(Gestor gestor) {
+        this.gestor = gestor;
+    }
+    //</editor-fold>
 
 }

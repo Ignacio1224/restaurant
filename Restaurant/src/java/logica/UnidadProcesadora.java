@@ -1,62 +1,65 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import utilidades.CustomException;
 
-public class UnidadProcesadora {
+public class UnidadProcesadora extends Observable {
 
+    //<editor-fold desc="Atributos">
     private String nombre;
     private ArrayList<Item> itemsPendientes;
     private ArrayList<Gestor> gestores;
 
+    public enum Eventos {
+        itemPendiente
+    };
+    //</editor-fold>
+
+    //<editor-fold desc="Constructor">
     public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
         this.itemsPendientes = new ArrayList();
         this.gestores = new ArrayList();
     }
+    //</editor-fold>
 
-    public boolean agregarItem(Item i) {
-//        TODO: Uso de excepciones (CustomException), la función no será mas bool (Algo asi como que si el item está en la lista de pendientes que tire excepción, sino no pasa nada)
-        if (!itemsPendientes.contains(i)) {
-            itemsPendientes.add(i);
-            return true;
+    //<editor-fold desc="Comportamientos">
+    private void avisar(Eventos evento) {
+        setChanged();
+        notifyObservers(evento);
+    }
+
+    public void agregarItem(Item item) {
+        itemsPendientes.add(item);
+        avisar(Eventos.itemPendiente);
+    }
+
+    public void addGestor(Gestor gestor) throws CustomException {
+
+        if (this.gestores.contains(gestor)) {
+            throw new CustomException("El gestor ya está ingresado!");
         }
-        return false;
+
+        this.gestores.add(gestor);
+
     }
 
-    public boolean addGestor(Gestor g) {
-//        TODO: Lo mismo que el metodo anterior, uso de excepciones 
-        if (!this.gestores.contains(g)) {
-            this.gestores.add(g);
-            return true;
+    public void removeGestor(Gestor gestor) throws CustomException {
+
+        if (!gestores.contains(gestor)) {
+            throw new CustomException("El gestor no está ingresado!");
         }
-        return false;
+
+        gestores.remove(gestor);
     }
 
-    public boolean removeGestor(Gestor g) {
-//        TODO: Uso de excepciones
-        if (this.gestores.contains(g)) {
-            this.gestores.remove(g);
-            return true;
-        }
-        return false;
+    public void itemTomado(Item item) {
+        itemsPendientes.remove(item);
     }
 
-    public boolean asignarGestor(Item i, Gestor g) {
-//        TODO: Uso de Excepciones
-        if (this.itemsPendientes.contains(i) && this.gestores.contains(g)) {
-            g.tomarItem(i);
-            this.itemsPendientes.remove(i);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean finalizar(Item i) {
-//        TODO: Uso de excepciones
-        return false;
-    }
-
-    /* Getters & Setters */
+    //</editor-fold>
+    //<editor-fold desc="Getters & Setters">
     public String getNombre() {
         return nombre;
     }
@@ -80,5 +83,6 @@ public class UnidadProcesadora {
     public void setGestores(ArrayList<Gestor> gestores) {
         this.gestores = gestores;
     }
+    //</editor-fold>
 
 }
