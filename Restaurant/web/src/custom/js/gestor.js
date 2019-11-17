@@ -1,7 +1,5 @@
-let numeroMesaG;
-
 $(document).ready(() => {
-    
+
     const eventosSSE = new EventSource("gestor?accion=conectarSSE");
 
     eventosSSE.onerror = function (evento) {
@@ -24,8 +22,8 @@ $(document).ready(() => {
     function tomarPedido(indexItem) {
         $.get(`gestor?accion=tomarPedido&indexItem=${indexItem}`);
     }
-    
-    function finalizarPedido(indexItem){
+
+    function finalizarPedido(indexItem) {
         $.get(`gestor?accion=finalizarPedido&indexItem=${indexItem}`);
     }
 

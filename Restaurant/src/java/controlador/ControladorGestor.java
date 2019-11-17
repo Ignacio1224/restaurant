@@ -1,9 +1,7 @@
 package controlador;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-import logica.Fachada;
 import logica.Gestor;
 import logica.Item;
 import logica.UnidadProcesadora;
@@ -17,10 +15,8 @@ public class ControladorGestor implements Observer {
     public ControladorGestor(VistaGestor vista, Gestor usuario) {
         this.vista = vista;
         this.usuario = usuario;
-        vistaLista();
     }
 
-    
     public void vistaLista() {
         vista.mostrarNombreUsuario(usuario.getNombreCompleto());
         vista.mostrarNombreUnidadProcesadora(usuario.getUnidadProcesadora().getNombre());
@@ -28,21 +24,30 @@ public class ControladorGestor implements Observer {
         vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
     }
 
+    public void tomarPedido(String indexItemS) {
+        try {
 
-    public void tomarPedido(int indexItem) throws CustomException {
-        Item item = usuario.getUnidadProcesadora().getItemsPendientes().get(indexItem);
-        usuario.tomarItem(item);
-        vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
+            int indexItem = Integer.parseInt(indexItemS);
+            Item item = usuario.getUnidadProcesadora().getItemsPendientes().get(indexItem);
+            usuario.tomarItem(item);
+
+            vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
+        } catch (CustomException ex) {
+
+        }
     }
 
-   
-    public void finalizarPedido(int indexItem) throws CustomException {
-        Item item = usuario.getItemsParaProcesar().get(indexItem);
-        usuario.finalizar(item);
-        vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
+    public void finalizarPedido(String indexItemS) {
+        try {
+            int indexItem = Integer.parseInt(indexItemS);
+            Item item = usuario.getItemsParaProcesar().get(indexItem);
+            usuario.finalizar(item);
+            vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
+        } catch (CustomException ex) {
+            
+        }
     }
-    
-    
+
     @Override
     public void update(Observable origen, Object evento) {
         if (evento.equals(UnidadProcesadora.Eventos.recargarPanelItemsPendientes)) {

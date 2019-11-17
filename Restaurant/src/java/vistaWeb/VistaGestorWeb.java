@@ -10,7 +10,6 @@ import logica.Gestor;
 import controlador.VistaGestor;
 import java.util.ArrayList;
 import logica.Item;
-import utilidades.CustomException;
 
 public class VistaGestorWeb implements VistaGestor {
 
@@ -20,25 +19,26 @@ public class VistaGestorWeb implements VistaGestor {
 
     /*Constructor*/
     public VistaGestorWeb(Gestor gestor) {
-        this.controlador = new ControladorGestor(this, gestor);
+        controlador = new ControladorGestor(this, gestor);
     }
 
-    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, CustomException {
-        
+    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
         String accion = request.getParameter("accion");
 
         switch (accion) {
-            case ("conectarSSE"): {
+            case "conectarSSE": {
                 conectarSSE(request, response);
                 controlador.vistaLista();
                 break;
             }
-            case ("tomarPedido"): {
-                controlador.tomarPedido(Integer.parseInt(request.getParameter("indexItem")));
+            case "tomarPedido": {
+                controlador.tomarPedido(request.getParameter("indexItem"));
                 break;
             }
-            case ("finalizarPedido"):{
-                controlador.finalizarPedido(Integer.parseInt(request.getParameter("indexItem")));
+            case "finalizarPedido": {
+                controlador.finalizarPedido(request.getParameter("indexItem"));
                 break;
             }
         }
@@ -48,14 +48,12 @@ public class VistaGestorWeb implements VistaGestor {
         }
 
     }
-    
-    
+
     @Override
     public void mostrarNombreUsuario(String nombreUsuario) {
         enviar("eventoMostrarNombreUsuario", nombreUsuario);
     }
-    
-    
+
     private void conectarSSE(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true);
         AsyncContext contexto = request.startAsync();
