@@ -1,6 +1,7 @@
 let numeroMesaG;
 
 $(document).ready(() => {
+    
     const eventosSSE = new EventSource("gestor?accion=conectarSSE");
 
     eventosSSE.onerror = function (evento) {

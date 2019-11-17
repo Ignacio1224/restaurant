@@ -24,8 +24,7 @@ public class VistaGestorWeb implements VistaGestor {
     }
 
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, CustomException {
-
-        //Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
+        
         String accion = request.getParameter("accion");
 
         switch (accion) {

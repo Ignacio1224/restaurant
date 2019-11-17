@@ -17,6 +17,7 @@ public class ControladorGestor implements Observer {
     public ControladorGestor(VistaGestor vista, Gestor usuario) {
         this.vista = vista;
         this.usuario = usuario;
+        vistaLista();
     }
 
     
@@ -24,7 +25,7 @@ public class ControladorGestor implements Observer {
         vista.mostrarNombreUsuario(usuario.getNombreCompleto());
         vista.mostrarNombreUnidadProcesadora(usuario.getUnidadProcesadora().getNombre());
         vista.cargarPedidosPendientes(usuario.getUnidadProcesadora().getItemsPendientes());
-        //vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
+        vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
     }
 
 
