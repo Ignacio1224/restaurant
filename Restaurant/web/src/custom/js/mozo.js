@@ -58,13 +58,6 @@ $(document).ready(() => {
 
 });
 
-
-//function salir() {
-//    $.ajax({url: `login?inputAccion=logoutMozo`}).fail((error) => {
-//        mostrarError(error);
-//    });
-//}
-
 function confirmarTransferencia(numeroMesa, confirmada) {
     $("#modal").modal("hide");
     

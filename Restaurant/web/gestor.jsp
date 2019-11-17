@@ -29,9 +29,10 @@
 <body>
 
     <div class="row bg-dark mb-4 pt-2 pb-2 text-light">
-        <h3 class="col-6 offset-1">Bienvenido:
-            <span class="font-italic" id="spanNombreUsuario"></span>
-            <span class="font-italic ml-4" id="spanNombreUnidadProcesadora">Unidad procesadora: </span></h3>
+        <h3 class="col-6 offset-1">
+            <span class="font-italic ml-4" id="spanNombreUnidadProcesadora">Unidad: </span> /
+            Usuario: <span class="font-italic" id="spanNombreUsuario"></span>
+        </h3>
 
         <form method="POST" action="login" class="col-1 offset-4">
             <input type="text" value="logoutGestor" id="inputAccion" name="inputAccion" hidden="hidden" />
@@ -40,52 +41,77 @@
     </div>
 
     <div class="container">
-        <!-- Mesas -->
-        <div class="row mt-5" id="divMesas">
+        <!-- Panels -->
+        <div class="row mt-5 panel-group">
 
+            <div class="panel col-6 border-dark" name="pedidosPendientes">
+                <div class="panel-heading"><h3>Pedidos pendientes</h3></div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Mesa</th>
+                            <th scope="col">Mozo</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pedidosPendientes">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel col-6 border-dark">
+                <div class="panel-heading"><h3>Pedidos tomados</h3></div>
+                <ul class="list-group" id="pedidosTomados">
+
+                </ul>
+            </div>
         </div>
 
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalMesa" tabindex="-1" role="dialog" aria-labelledby="modalMesaTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h5 class="modal-title" id="modalMesaLongTitle"></h5>
-
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLongTitle"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
+    <!--    <div class="modal fade" id="modalTomarPedido" tabindex="-1" role="dialog" aria-labelledby="modalTomarPedido" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+    
+                        <h5 class="modal-title" id="modalMesaLongTitle"></h5>
+    
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+    
+                    </div>
+                    <div class="modal-body">
+    
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>-->
+
+    <!--    <div class="modal fade" id="modalFinalizarPedido" tabindex="-1" role="dialog" aria-labelledby="modalFinalizarPedido" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLongTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+    
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>-->
 
 </body>
 </html>

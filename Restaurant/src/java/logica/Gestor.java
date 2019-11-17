@@ -8,11 +8,6 @@ public class Gestor extends Usuario {
     //<editor-fold desc="Atributos">
     private UnidadProcesadora unidadProcesadora;
     private ArrayList<Item> itemsParaProcesar;
-
-    public enum Eventos {
-        itemTomado,
-        itemFinalizado
-    };
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
@@ -23,11 +18,6 @@ public class Gestor extends Usuario {
     //</editor-fold>
 
     //<editor-fold desc="Comportamientos">
-    private void avisar(Eventos evento) {
-        setChanged();
-        notifyObservers(evento);
-    }
-
     @Override
     public Gestor login(String nombreUsuario, String contrasena) {
         if (this.nombreusuario.equals(nombreUsuario) && this.contrasena.equals(contrasena)) {
@@ -44,7 +34,6 @@ public class Gestor extends Usuario {
         item.setGestor(this);
         itemsParaProcesar.add(item);
         unidadProcesadora.itemTomado(item);
-        avisar(Eventos.itemTomado);
     }
 
     public void finalizar(Item item) throws CustomException {
@@ -52,10 +41,7 @@ public class Gestor extends Usuario {
         if (!itemsParaProcesar.contains(item)) {
             throw new CustomException("El item no está ingresado!");
         }
-
         itemsParaProcesar.remove(item);
-        avisar(Eventos.itemFinalizado);
-
     }
 
     public void logout() throws CustomException {

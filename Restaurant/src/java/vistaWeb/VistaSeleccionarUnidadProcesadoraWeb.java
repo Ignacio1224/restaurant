@@ -17,8 +17,6 @@ public class VistaSeleccionarUnidadProcesadoraWeb implements VistaSeleccionarUni
 
     private ControladorSeleccionarUnidadProcesadora controlador;
     private String destino;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
     private PrintWriter out;
 
     public VistaSeleccionarUnidadProcesadoraWeb(Gestor g) {
@@ -26,8 +24,6 @@ public class VistaSeleccionarUnidadProcesadoraWeb implements VistaSeleccionarUni
     }
 
     void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        this.request = request;
-        this.response = response;
 
         String accion = request.getParameter("accion");
 

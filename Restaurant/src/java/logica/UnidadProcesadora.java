@@ -12,7 +12,7 @@ public class UnidadProcesadora extends Observable {
     private ArrayList<Gestor> gestores;
 
     public enum Eventos {
-        itemPendiente
+        recargarPanelItemsPendientes
     };
     //</editor-fold>
 
@@ -32,7 +32,7 @@ public class UnidadProcesadora extends Observable {
 
     public void agregarItem(Item item) {
         itemsPendientes.add(item);
-        avisar(Eventos.itemPendiente);
+        avisar(Eventos.recargarPanelItemsPendientes);
     }
 
     public void addGestor(Gestor gestor) throws CustomException {
@@ -55,8 +55,9 @@ public class UnidadProcesadora extends Observable {
         gestores.remove(gestor);
     }
 
-    public void itemTomado(Item item) {
+    protected void itemTomado(Item item) {
         itemsPendientes.remove(item);
+        avisar(Eventos.recargarPanelItemsPendientes);
     }
 
     //</editor-fold>

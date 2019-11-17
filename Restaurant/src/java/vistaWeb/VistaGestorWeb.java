@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Gestor;
 import controlador.VistaGestor;
+import java.util.ArrayList;
+import logica.Item;
+import utilidades.CustomException;
 
 public class VistaGestorWeb implements VistaGestor {
 
@@ -20,20 +23,23 @@ public class VistaGestorWeb implements VistaGestor {
         this.controlador = new ControladorGestor(this, gestor);
     }
 
-    @Override
-    public void mostrarNombreUsuario(String nombreUsuario) {
-        enviar("eventoMostrarNombreUsuario", nombreUsuario);
-    }
+    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, CustomException {
 
-    public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
+        //Gestor gestor = (Gestor) request.getSession().getAttribute("Usuario");
         String accion = request.getParameter("accion");
 
         switch (accion) {
             case ("conectarSSE"): {
                 conectarSSE(request, response);
                 controlador.vistaLista();
+                break;
+            }
+            case ("tomarPedido"): {
+                controlador.tomarPedido(Integer.parseInt(request.getParameter("indexItem")));
+                break;
+            }
+            case ("finalizarPedido"):{
+                controlador.finalizarPedido(Integer.parseInt(request.getParameter("indexItem")));
                 break;
             }
         }
@@ -43,7 +49,14 @@ public class VistaGestorWeb implements VistaGestor {
         }
 
     }
-
+    
+    
+    @Override
+    public void mostrarNombreUsuario(String nombreUsuario) {
+        enviar("eventoMostrarNombreUsuario", nombreUsuario);
+    }
+    
+    
     private void conectarSSE(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true);
         AsyncContext contexto = request.startAsync();
@@ -66,6 +79,16 @@ public class VistaGestorWeb implements VistaGestor {
     @Override
     public void mostrarNombreUnidadProcesadora(String nombre) {
         enviar("eventoNombreUnidadProcesadora", nombre);
+    }
+
+    @Override
+    public void cargarPedidosPendientes(ArrayList<Item> itemsPendientes) {
+        enviar("eventoCargarPedidosPendientes", utilidades.ComponentsHTML.armarPedidosPendientes(itemsPendientes));
+    }
+
+    @Override
+    public void cargarPedidosTomados(ArrayList<Item> itemsParaProcesar) {
+        enviar("eventoCargarPedidosTomados", utilidades.ComponentsHTML.armarPedidosTomados(itemsParaProcesar));
     }
 
 }

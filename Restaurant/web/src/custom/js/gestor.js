@@ -10,11 +10,22 @@ $(document).ready(() => {
     eventosSSE.addEventListener("eventoMostrarNombreUsuario", function ( {data}) {
         $("#spanNombreUsuario").html(data);
     }, false);
-    
-    
+
+
     eventosSSE.addEventListener("eventoNombreUnidadProcesadora", function ( {data}) {
         $("#spanNombreUnidadProcesadora").append(data);
     }, false);
 
+    eventosSSE.addEventListener("eventoCargarPedidosPendientes", function ( {data}) {
+        $("#pedidosPendientes").append(data);
+    }, false);
+
+    function tomarPedido(indexItem) {
+        $.get(`gestor?accion=tomarPedido&indexItem=${indexItem}`);
+    }
+    
+    function finalizarPedido(indexItem){
+        $.get(`gestor?accion=finalizarPedido&indexItem=${indexItem}`);
+    }
 
 });
