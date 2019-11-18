@@ -95,8 +95,13 @@ public class VistaLoginWeb implements VistaLogin {
     }
 
     @Override
-    public void notificarError(String message) {
-        out.write(message);
+    public void notificarErrorMozo(String message) {
+        destino = "mozo.jsp?message=" + message;
+    }
+    
+    @Override
+    public void notificarErrorGestor(String message) {
+        destino = "gestor.jsp?message=" + message;
     }
 
     @Override

@@ -29,7 +29,7 @@ public class ControladorLogin {
             vista.desloguear();
 
         } catch (CustomException ex) {
-            vista.notificarError(ex.getMessage());
+            vista.notificarErrorMozo(ex.getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class ControladorLogin {
             Fachada.getInstancia().logoutGestor(gestor);
             vista.desloguear();
         } catch (CustomException ex) {
-            vista.notificarError(ex.getMessage());
+            vista.notificarErrorGestor(ex.getMessage());
         }
     }
 

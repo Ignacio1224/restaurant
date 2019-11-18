@@ -15,6 +15,8 @@
         return;
     }
 
+    String message = request.getParameter("message");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -38,9 +40,9 @@
                 <input type="text" value="logoutMozo" id="inputAccion" name="inputAccion" hidden="hidden" />
                 <button type="submit" class="btn btn-primary font-italic">Salir</button>
             </form>
-<!--            <div class="col-1 offset-4">
-                <button type="button" class="btn btn-primary font-italic" onclick="salir()">Salir</button>
-            </div>-->
+            <!--            <div class="col-1 offset-4">
+                            <button type="button" class="btn btn-primary font-italic" onclick="salir()">Salir</button>
+                        </div>-->
         </div>
 
         <div class="container">
@@ -56,13 +58,13 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        
+
                         <h5 class="modal-title" id="modalMesaLongTitle"></h5>
-                        
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    
+
                     </div>
                     <div class="modal-body">
 
@@ -90,6 +92,14 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(() => {
+            <% if (message != null) {%>
+                mostrarError("<%=message%>");
+            <% }%>
+            });
+        </script>
 
     </body>
 </html>

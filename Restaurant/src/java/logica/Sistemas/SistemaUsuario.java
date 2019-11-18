@@ -70,6 +70,10 @@ public class SistemaUsuario {
             throw new CustomException("No está logueado!");
         }
         
+        if (!g.getItemsParaProcesar().isEmpty()) {
+            throw new CustomException("Tienes items procesando!");
+        }
+        
         g.logout();
         
         gestoresLogueados.remove(g);
