@@ -40,36 +40,53 @@
         </form>
     </div>
 
-    <div class="container">
+    <div class="container-fluid row">
         <!-- Panels -->
-        <div class="row mt-5 panel-group">
+        <div class="col-12 row mt-5">
 
-            <div class="panel col-6 border-dark">
-                <div class="panel-heading"><h3>Pedidos pendientes</h3></div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Mesa</th>
-                            <th scope="col">Mozo</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="pedidosPendientes">
-                        
-                    </tbody>
-                </table>
+            <div class="card col-6">
+                <div class="card-heading">
+                    <h3>Pedidos pendientes</h3>
+                </div>
+
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Mesa</th>
+                                <th scope="col">Mozo</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pedidosPendientes">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="panel col-6 border-dark">
-                <div class="panel-heading"><h3>Pedidos tomados</h3></div>
-                <table class="table">
-                    <tbody id="pedidosTomados">
-                        
-                    </tbody>
-                </table>
+            <div class="card col-6">
+                <div class="card-heading"><h3>Pedidos tomados</h3></div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Mesa</th>
+                                <th scope="col">Mozo</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pedidosTomados">
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

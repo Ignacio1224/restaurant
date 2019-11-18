@@ -55,6 +55,15 @@ $(document).ready(() => {
 
         cargarModal(titulo, body, footer, false);
     }, false);
+    
+    eventosSSE.addEventListener("eventoItemFinalizado", function ( {data}) {
+        
+        const title = `Pedido finalizado!`;
+        const body = `<div class="alert alert-success">${data}</div>`;
+        const footer = `<button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>`;
+        
+        cargarModal(title, body, footer);
+    }, false);
 
 });
 

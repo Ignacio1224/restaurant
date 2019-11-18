@@ -10,6 +10,7 @@ import logica.Gestor;
 import controlador.VistaGestor;
 import java.util.ArrayList;
 import logica.Item;
+import utilidades.ComponentsHTML;
 
 public class VistaGestorWeb implements VistaGestor {
 
@@ -80,12 +81,12 @@ public class VistaGestorWeb implements VistaGestor {
 
     @Override
     public void cargarPedidosPendientes(ArrayList<Item> itemsPendientes) {
-        enviar("eventoCargarPedidosPendientes", utilidades.ComponentsHTML.armarPedidosPendientes(itemsPendientes));
+        enviar("eventoCargarPedidosPendientes", ComponentsHTML.armarPedidosPendientes(itemsPendientes));
     }
 
     @Override
     public void cargarPedidosTomados(ArrayList<Item> itemsParaProcesar) {
-        enviar("eventoCargarPedidosTomados", utilidades.ComponentsHTML.armarPedidosTomados(itemsParaProcesar));
+        enviar("eventoCargarPedidosTomados", ComponentsHTML.armarPedidosTomados(itemsParaProcesar));
     }
 
 }

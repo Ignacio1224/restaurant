@@ -42,6 +42,7 @@ public class Gestor extends Usuario {
             throw new CustomException("El item no está ingresado!");
         }
         itemsParaProcesar.remove(item);
+        unidadProcesadora.avisarFinalizado();
     }
 
     public void logout() throws CustomException {

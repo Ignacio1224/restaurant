@@ -5,11 +5,14 @@ import java.util.Observable;
 import java.util.Observer;
 import logica.Cliente;
 import logica.Fachada;
+import logica.Gestor;
 import logica.Item;
 import logica.Mesa;
 import logica.Mozo;
+import logica.Producto;
 import logica.Servicio;
 import logica.Transferencia;
+import logica.UnidadProcesadora;
 import utilidades.CustomException;
 
 public class ControladorMozo implements Observer {
@@ -76,7 +79,9 @@ public class ControladorMozo implements Observer {
     public void aniadirItemAServicio(Mesa mesa, String codigoProducto, int cantidadProducto, String descripcionItem) {
         try {
             Servicio servicio = mesa.getServicio();
-            servicio.agregarItem(new Item(servicio, cantidadProducto, descripcionItem, Fachada.getInstancia().getProductoByCodigo(codigoProducto)));
+            Producto p = Fachada.getInstancia().getProductoByCodigo(codigoProducto);
+            p.getuProcesadora().addObserver(this);
+            servicio.agregarItem(new Item(servicio, cantidadProducto, descripcionItem, p));
             cargarMesas();
         } catch (CustomException ex) {
             vista.notificarError(ex.getMessage());
@@ -119,6 +124,15 @@ public class ControladorMozo implements Observer {
         if (evento.equals(Mozo.Eventos.transferenciaRechazada)) {
             vista.notificarResultadoTransferencia(false);
         }
+
+        if (evento.equals(UnidadProcesadora.Eventos.actualizarItem)) {
+            vista.cargarMesas(mesasDelMozo);
+            notificarCambioPedido();
+        }
+        
+        if (evento.equals(UnidadProcesadora.Eventos.actualizarListaPendientes)) {
+            vista.cargarMesas(mesasDelMozo);
+        }
     }
 
     public void terminarTransferencia(Mozo mozo, Mesa mesa, boolean aceptada) {
@@ -135,6 +149,44 @@ public class ControladorMozo implements Observer {
         } catch (CustomException ex) {
             vista.notificarError(ex.getMessage());
         }
+    }
+
+    private void notificarCambioPedido() {
+        Item item = null;
+
+        // Items del mozo
+        for (Mesa m : mesasDelMozo) {
+            if (m.getServicio() != null) {
+                for (Item i : m.getServicio().getItems()) {
+                    
+                    if (i.getProducto().getuProcesadora().getItemsPendientes().contains(i)) {
+                        // El item esta pendiente
+                        continue;
+                    }
+                    
+                    boolean flag = false;
+                    for (Gestor g : i.getProducto().getuProcesadora().getGestores()) {
+                        if (g.getItemsParaProcesar().contains(i)) {
+                            // El item esta siendo procesado
+                            flag = true;
+                        }
+                    }
+
+                    if (!flag) {
+                        item = i;
+                        break;
+                    }
+
+                }
+            }
+        }
+        
+        cargarMesas();
+        
+        if (item != null) {
+            vista.avisarItemFinalizado(item);        
+        }
+
     }
 
 }

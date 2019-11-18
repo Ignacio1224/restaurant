@@ -16,15 +16,20 @@ $(document).ready(() => {
     }, false);
 
     eventosSSE.addEventListener("eventoCargarPedidosPendientes", function ( {data}) {
-        $("#pedidosPendientes").append(data);
+        $("#pedidosPendientes").html(data);
+    }, false);
+    
+    eventosSSE.addEventListener("eventoCargarPedidosTomados", function ( {data}) {
+        $("#pedidosTomados").html(data);
     }, false);
 
-    function tomarPedido(indexItem) {
-        $.get(`gestor?accion=tomarPedido&indexItem=${indexItem}`);
-    }
-
-    function finalizarPedido(indexItem) {
-        $.get(`gestor?accion=finalizarPedido&indexItem=${indexItem}`);
-    }
 
 });
+
+function tomarPedido(indexItem) {
+    $.get(`gestor?accion=tomarPedido&indexItem=${indexItem}`);
+}
+
+function finalizarPedido(indexItem) {
+    $.get(`gestor?accion=finalizarPedido&indexItem=${indexItem}`);
+}

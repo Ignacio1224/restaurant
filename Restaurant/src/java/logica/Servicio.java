@@ -24,6 +24,7 @@ public class Servicio {
         }
         
         item.getProducto().disminuirStock(item.getCantidad());
+        item.avisarParaProcesar();
         items.add(item);
         
     }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Cliente;
 import logica.Fachada;
+import logica.Item;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
@@ -217,6 +218,11 @@ public class VistaMozoWeb implements VistaMozo {
     @Override
     public void notificarResultadoTransferencia(boolean resultado) {
         enviar("eventoResultadoTransferencia", ComponentsHTML.armarResultadoTransferencia(resultado));
+    }
+
+    @Override
+    public void avisarItemFinalizado(Item item) {
+        enviar("eventoItemFinalizado", ComponentsHTML.armarItem(item));
     }
 
 }

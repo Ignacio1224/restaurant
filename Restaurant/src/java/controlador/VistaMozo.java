@@ -1,6 +1,7 @@
 package controlador;
 
 import java.util.ArrayList;
+import logica.Item;
 import logica.Mesa;
 import logica.Mozo;
 import logica.Producto;
@@ -24,5 +25,7 @@ public interface VistaMozo {
     public void avisarNuevaTransferencia(Transferencia transferencia);
 
     public void notificarResultadoTransferencia(boolean resultado);
+
+    public void avisarItemFinalizado(Item item);
     
 }

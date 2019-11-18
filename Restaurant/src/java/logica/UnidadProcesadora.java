@@ -12,7 +12,8 @@ public class UnidadProcesadora extends Observable {
     private ArrayList<Gestor> gestores;
 
     public enum Eventos {
-        recargarPanelItemsPendientes
+        actualizarListaPendientes,
+        actualizarItem
     };
     //</editor-fold>
 
@@ -29,10 +30,13 @@ public class UnidadProcesadora extends Observable {
         setChanged();
         notifyObservers(evento);
     }
-
+    
+    public void avisarFinalizado() {
+        avisar(Eventos.actualizarItem);
+    }
     public void agregarItem(Item item) {
         itemsPendientes.add(item);
-        avisar(Eventos.recargarPanelItemsPendientes);
+        avisar(Eventos.actualizarListaPendientes);
     }
 
     public void addGestor(Gestor gestor) throws CustomException {
@@ -57,7 +61,7 @@ public class UnidadProcesadora extends Observable {
 
     protected void itemTomado(Item item) {
         itemsPendientes.remove(item);
-        avisar(Eventos.recargarPanelItemsPendientes);
+        avisar(Eventos.actualizarListaPendientes);
     }
 
     //</editor-fold>

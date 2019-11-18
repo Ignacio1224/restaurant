@@ -18,6 +18,9 @@ public class ControladorGestor implements Observer {
     }
 
     public void vistaLista() {
+        usuario.getUnidadProcesadora().addObserver(this);
+        usuario.addObserver(this);
+        
         vista.mostrarNombreUsuario(usuario.getNombreCompleto());
         vista.mostrarNombreUnidadProcesadora(usuario.getUnidadProcesadora().getNombre());
         vista.cargarPedidosPendientes(usuario.getUnidadProcesadora().getItemsPendientes());
@@ -44,14 +47,15 @@ public class ControladorGestor implements Observer {
             usuario.finalizar(item);
             vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
         } catch (CustomException ex) {
-            
+
         }
     }
 
     @Override
     public void update(Observable origen, Object evento) {
-        if (evento.equals(UnidadProcesadora.Eventos.recargarPanelItemsPendientes)) {
+        if (evento.equals(UnidadProcesadora.Eventos.actualizarListaPendientes)) {
             vista.cargarPedidosPendientes(usuario.getUnidadProcesadora().getItemsPendientes());
+            vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
         }
     }
 }

@@ -27,7 +27,7 @@ public class ComponentsHTML {
                     + "</button>"
                     + "<div class=\"collapse\" id=\"collapseMesa" + mesa.getNumero() + "\">\n"
                     + "     <div class=\"card card-body\">\n"
-                    +           armarServicio(mesa.getServicio())
+                    + armarServicio(mesa.getServicio())
                     + "     </div>\n"
                     + "</div>";
         }
@@ -53,13 +53,13 @@ public class ComponentsHTML {
         String serviciosStr = "";
         for (Item i : servicio.getItems()) {
             serviciosStr += "<div class=\"card card-body mb-2\">"
-                            + "<p>Producto: " + i.getProducto().getNombre() + "</p>"
-                            + "<p>Cantidad: " + i.getCantidad() + "</p>"
-                            + "<p>Precio unitario: " + i.getProducto().getPrecio() + "</p>"
-                            + "<p>Precio total: " + i.getMonto() + "</p>"
-                            + "<p>Descripción: " + i.getDescripcion() + "</p>"
-                            + "<p>Estado: " + i.getEstado().toString() + "</p>"
-                            + "</div>";
+                    + "<p>Producto: " + i.getProducto().getNombre() + "</p>"
+                    + "<p>Cantidad: " + i.getCantidad() + "</p>"
+                    + "<p>Precio unitario: " + i.getProducto().getPrecio() + "</p>"
+                    + "<p>Precio total: " + i.getMonto() + "</p>"
+                    + "<p>Descripción: " + i.getDescripcion() + "</p>"
+                    + "<p>Estado: " + Utilities.getEstadoItem(i) + "</p>"
+                    + "</div>";
         }
         return serviciosStr;
     }
@@ -119,7 +119,7 @@ public class ComponentsHTML {
                     + "<td>" + itemsPendientes.get(i).getDescripcion() + "</td>\n"
                     + "<td>" + itemsPendientes.get(i).getServicio().getMesaCorrespondiente().getNumero() + "</td>\n"
                     + "<td>" + itemsPendientes.get(i).getServicio().getMesaCorrespondiente().getResponsable().getNombreCompleto() + "</td>\n"
-                    + "<td> <input type='button' onclick='tomarPedido(" + i + ")' value='Tomar pedido' class='btn btn-alert' > </td>\n"
+                    + "<td> <input type=\"button\" onclick=\"tomarPedido(" + i + ");\" value=\"Tomar pedido\" class=\"btn btn-primary\" > </td>\n"
                     + "</tr>";
         }
         return s;
@@ -135,11 +135,16 @@ public class ComponentsHTML {
                     + "<td>" + itemsParaProcesar.get(i).getDescripcion() + "</td>\n"
                     + "<td>" + itemsParaProcesar.get(i).getServicio().getMesaCorrespondiente().getNumero() + "</td>\n"
                     + "<td>" + itemsParaProcesar.get(i).getServicio().getMesaCorrespondiente().getResponsable().getNombreCompleto() + "</td>\n"
-                    + "<td> <form method=\"POST\" action=\"\"></form></td>"
-                    + "<td> <input type='button' onclick='finalizarPedido(" + i + ")' value='Finalizar pedido' class='btn btn-success' > </td>\n"
+                    + "<td> <input type=\"button\" onclick=\"finalizarPedido(" + i + ");\" value=\"Finalizar pedido\" class=\"btn btn-success\"> </td>\n"
                     + "</tr>";
         }
         return s;
     }
 
+    public static String armarItem(Item i) {
+        return ""
+                + "<p>Producto: " + i.getProducto().getNombre() + "</p>"
+                + "<p>Cantidad: " + i.getCantidad()+ "</p>"
+                + "<p>Mesa: " + i.getServicio().getMesaCorrespondiente().getNumero()+ "</p>";
+    }
 }
