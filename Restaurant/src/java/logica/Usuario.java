@@ -12,6 +12,10 @@ public abstract class Usuario extends Observable {
     private int oid;
 
     // Constructor
+    public Usuario() {
+
+    }
+
     public Usuario(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
 
         if (nombreUsuario.trim().isEmpty() || contrasena.trim().isEmpty() || nombreCompleto.trim().isEmpty()) {
@@ -25,7 +29,7 @@ public abstract class Usuario extends Observable {
 
     // Login
     public abstract Usuario login(String nombreUsuario, String contrasena);
-    
+
     // Getters & Setters
     public int getOid() {
         return oid;
@@ -35,10 +39,14 @@ public abstract class Usuario extends Observable {
         this.oid = oid;
     }
 
-    public String getContrasena(){
+    public String getContrasena() {
         return this.contrasena;
     }
-    
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     public String getNombreUsuario() {
         return nombreusuario;
     }

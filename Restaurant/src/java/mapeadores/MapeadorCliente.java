@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import persistencia.Mapeador;
-import utilidades.CustomException;
 
 
 public class MapeadorCliente implements Mapeador {
@@ -51,12 +50,12 @@ public class MapeadorCliente implements Mapeador {
     }
 
     @Override
-    public void leerCompuesto(ResultSet rs) throws CustomException {
+    public void leerCompuesto(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void leerComponente(ResultSet rs) throws CustomException {
+    public void leerComponente(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

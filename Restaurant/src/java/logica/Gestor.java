@@ -11,9 +11,14 @@ public class Gestor extends Usuario {
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
+    public Gestor() {
+        super();
+        itemsParaProcesar = new ArrayList();
+    }
+    
     public Gestor(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
         super(nombreUsuario, contrasena, nombreCompleto);
-        this.itemsParaProcesar = new ArrayList();
+        itemsParaProcesar = new ArrayList();
     }
     //</editor-fold>
 

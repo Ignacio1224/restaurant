@@ -10,8 +10,13 @@ public class Producto {
     private int stock;
     private float precio;
     private UnidadProcesadora uProcesadora;
+    private int oid;
 
     /* Constructor */
+    
+    public Producto() {
+    }
+
     public Producto(int codigo, String nombre, int stock, float precio, UnidadProcesadora uProcesadora) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -67,6 +72,14 @@ public class Producto {
 
     public void setuProcesadora(UnidadProcesadora uProcesadora) {
         this.uProcesadora = uProcesadora;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
 
     @Override

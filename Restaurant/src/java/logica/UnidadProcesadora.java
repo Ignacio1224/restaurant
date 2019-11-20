@@ -15,9 +15,16 @@ public class UnidadProcesadora extends Observable {
         actualizarListaPendientes,
         actualizarItem
     };
+
+    private int oid;
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
+    public UnidadProcesadora() {
+        this.itemsPendientes = new ArrayList();
+        this.gestores = new ArrayList();
+    }
+
     public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
         this.itemsPendientes = new ArrayList();
@@ -30,10 +37,11 @@ public class UnidadProcesadora extends Observable {
         setChanged();
         notifyObservers(evento);
     }
-    
+
     public void avisarFinalizado() {
         avisar(Eventos.actualizarItem);
     }
+
     public void agregarItem(Item item) {
         itemsPendientes.add(item);
         avisar(Eventos.actualizarListaPendientes);
@@ -47,7 +55,7 @@ public class UnidadProcesadora extends Observable {
 
         gestor.setUnidadProcesadora(this);
         gestores.add(gestor);
-        
+
     }
 
     public void removeGestor(Gestor gestor) throws CustomException {
@@ -88,6 +96,14 @@ public class UnidadProcesadora extends Observable {
 
     public void setGestores(ArrayList<Gestor> gestores) {
         this.gestores = gestores;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
     //</editor-fold>
 

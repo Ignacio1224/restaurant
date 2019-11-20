@@ -11,6 +11,13 @@ public class Mozo extends Usuario {
     private ArrayList<Transferencia> transferenciasPendientes; // Transferencias por aceptar (Receptor)
 
     /* Constructores */
+    public Mozo() {
+        super();
+        mesasAsignadas = new ArrayList<>();
+        transferenciasActivas = new ArrayList<>();
+        transferenciasPendientes = new ArrayList<>();
+    }
+    
     public Mozo(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
         super(nombreUsuario, contrasena, nombreCompleto);
         mesasAsignadas = new ArrayList<>();

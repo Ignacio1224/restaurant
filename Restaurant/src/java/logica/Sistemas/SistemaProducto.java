@@ -2,6 +2,8 @@ package logica.Sistemas;
 
 import java.util.ArrayList;
 import logica.Producto;
+import mapeadores.MapeadorProducto;
+import persistencia.Persistencia;
 import utilidades.CustomException;
 
 public class SistemaProducto {
@@ -29,6 +31,10 @@ public class SistemaProducto {
             }
         }
         return null;
+    }
+    
+    public void cargarProductos() throws CustomException {
+        productos = Persistencia.getInstancia().obtenerTodos(new MapeadorProducto());
     }
     
     /* Getters & Setters */

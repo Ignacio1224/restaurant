@@ -3,33 +3,39 @@ package mapeadores;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import logica.UnidadProcesadora;
+import logica.Mesa;
+import logica.Mozo;
 import persistencia.Mapeador;
 
-public class MapeadorUnidadProcesadora implements Mapeador {
+public class MapeadorMozo implements Mapeador {
 
-    private UnidadProcesadora unidadProcesadora;
+    private Mozo mozo;
 
-    public MapeadorUnidadProcesadora() {
+    public MapeadorMozo() {
     }
 
-    public MapeadorUnidadProcesadora(UnidadProcesadora unidadProcesadora) {
-        this.unidadProcesadora = unidadProcesadora;
+    public MapeadorMozo(Mozo m) {
+        mozo = m;
+    }
+
+    public void setUsuario(Mozo m) {
+        mozo = m;
     }
 
     @Override
     public int getOid() {
-        return unidadProcesadora.getOid();
+        return mozo.getOid();
     }
 
     @Override
     public void setOid(int oid) {
-        unidadProcesadora.setOid(oid);
+        mozo.setOid(oid);
     }
 
     @Override
     public ArrayList<String> getSqlInsertar() {
         throw new UnsupportedOperationException("Not supported yet.");
+
     }
 
     @Override
@@ -44,28 +50,29 @@ public class MapeadorUnidadProcesadora implements Mapeador {
 
     @Override
     public String getSqlSeleccionar() {
-        
-        return "SELECT * FROM unidadprocesadora;";
+        return "select u.*, m.* from usuario u, mesa m where m.oidMozo=u.oid and u.tipo='mozo';";
     }
 
     @Override
     public void crearNuevo() {
-        unidadProcesadora = new UnidadProcesadora();
-    }
-
-    @Override
-    public Object getObjeto() {
-        return unidadProcesadora;
+        mozo = new Mozo();
     }
 
     @Override
     public void leerCompuesto(ResultSet rs) throws SQLException {
-        unidadProcesadora.setNombre(rs.getString("nombre"));
+        mozo.setNombreUsuario(rs.getString("usuario"));
+        mozo.setNombreCompleto(rs.getString("nombreCompleto"));
+        mozo.setContrasena(rs.getString("clave"));
+    }
+
+    @Override
+    public Object getObjeto() {
+        return mozo;
     }
 
     @Override
     public void leerComponente(ResultSet rs) throws SQLException {
-
+        mozo.getMesasAsignadas().add(new Mesa(rs.getInt("nroMesa"), mozo));
     }
 
 }

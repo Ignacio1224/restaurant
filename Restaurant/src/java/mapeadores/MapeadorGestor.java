@@ -3,33 +3,38 @@ package mapeadores;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import logica.UnidadProcesadora;
+import logica.Gestor;
 import persistencia.Mapeador;
 
-public class MapeadorUnidadProcesadora implements Mapeador {
+public class MapeadorGestor implements Mapeador {
 
-    private UnidadProcesadora unidadProcesadora;
+    private Gestor gestor;
 
-    public MapeadorUnidadProcesadora() {
+    public MapeadorGestor() {
     }
 
-    public MapeadorUnidadProcesadora(UnidadProcesadora unidadProcesadora) {
-        this.unidadProcesadora = unidadProcesadora;
+    public MapeadorGestor(Gestor g) {
+        gestor = g;
+    }
+
+    public void setUsuario(Gestor g) {
+        gestor = g;
     }
 
     @Override
     public int getOid() {
-        return unidadProcesadora.getOid();
+        return gestor.getOid();
     }
 
     @Override
     public void setOid(int oid) {
-        unidadProcesadora.setOid(oid);
+        gestor.setOid(oid);
     }
 
     @Override
     public ArrayList<String> getSqlInsertar() {
         throw new UnsupportedOperationException("Not supported yet.");
+
     }
 
     @Override
@@ -44,28 +49,28 @@ public class MapeadorUnidadProcesadora implements Mapeador {
 
     @Override
     public String getSqlSeleccionar() {
-        
-        return "SELECT * FROM unidadprocesadora;";
+        return "select * from usuario where tipo='gestor';";
     }
 
     @Override
     public void crearNuevo() {
-        unidadProcesadora = new UnidadProcesadora();
-    }
-
-    @Override
-    public Object getObjeto() {
-        return unidadProcesadora;
+        gestor = new Gestor();
     }
 
     @Override
     public void leerCompuesto(ResultSet rs) throws SQLException {
-        unidadProcesadora.setNombre(rs.getString("nombre"));
+        gestor.setNombreUsuario(rs.getString("usuario"));
+        gestor.setNombreCompleto(rs.getString("nombreCompleto"));
+        gestor.setContrasena(rs.getString("clave"));
+    }
+
+    @Override
+    public Object getObjeto() {
+        return gestor;
     }
 
     @Override
     public void leerComponente(ResultSet rs) throws SQLException {
-
     }
 
 }

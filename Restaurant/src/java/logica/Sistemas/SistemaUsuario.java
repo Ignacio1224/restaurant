@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import logica.Gestor;
 import logica.Mesa;
 import logica.Mozo;
+import mapeadores.MapeadorGestor;
+import mapeadores.MapeadorMozo;
+import persistencia.Persistencia;
 import utilidades.CustomException;
 
 public class SistemaUsuario {
@@ -97,6 +100,11 @@ public class SistemaUsuario {
             }
         }
         return null;
+    }
+    
+    public void cargarUsuarios() throws CustomException {
+        mozosTodos = Persistencia.getInstancia().obtenerTodos(new MapeadorMozo());
+        gestoresTodos = Persistencia.getInstancia().obtenerTodos(new MapeadorGestor());
     }
 
     // Getters & Setters

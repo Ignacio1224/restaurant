@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginServlet extends HttpServlet {
 
     public LoginServlet() {
-        DatosPrueba.cargarMozos();
-        DatosPrueba.cargarGestores();
+        DatosPrueba.cargarDatos();
 
         /* Debe funcionar tanto para Mozos como para Gestores */
-        DatosPrueba.cargarMesas();
+//        DatosPrueba.cargarMesas();
         DatosPrueba.cargarProductos();
     }
 
