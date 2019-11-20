@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
 
         /* Debe funcionar tanto para Mozos como para Gestores */
 //        DatosPrueba.cargarMesas();
-        DatosPrueba.cargarProductos();
+//        DatosPrueba.cargarProductos();
     }
 
     /**

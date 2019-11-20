@@ -1,22 +1,26 @@
-
 package mapeadores;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import logica.Cliente;
+import logica.beneficio.Comun;
+import logica.beneficio.DeLaCasa;
+import logica.beneficio.Preferencial;
 import persistencia.Mapeador;
-
 
 public class MapeadorCliente implements Mapeador {
 
+    private Cliente cliente;
+
     @Override
     public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cliente.getOid();
     }
 
     @Override
     public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cliente.setOid(oid);
     }
 
     @Override
@@ -36,27 +40,45 @@ public class MapeadorCliente implements Mapeador {
 
     @Override
     public String getSqlSeleccionar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "SELECT c.*, b.* FROM cliente c, beneficio b where c.oidBeneficio = b.oid;";
     }
 
     @Override
     public void crearNuevo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cliente = new Cliente();
     }
 
     @Override
     public Object getObjeto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return cliente;
     }
 
     @Override
     public void leerCompuesto(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cliente.setId(rs.getInt("id"));
+        cliente.setNombre(rs.getString("nombre"));
+        cliente.setEmail(rs.getString("email"));
+
     }
 
     @Override
     public void leerComponente(ResultSet rs) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String descripcion = rs.getString("descripcion");
+        String className = descripcion.toLowerCase().replaceAll("\\s+", "");
+
+        switch (className) {
+            case "delacasa":
+                cliente.setBeneficio(new DeLaCasa(descripcion));
+                break;
+
+            case "preferencial":
+                cliente.setBeneficio(new Preferencial(descripcion));
+                break;
+
+            case "comun":
+                cliente.setBeneficio(new Comun(descripcion));
+                break;
+        }
     }
-    
+
 }

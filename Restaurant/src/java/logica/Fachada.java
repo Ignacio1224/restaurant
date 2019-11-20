@@ -33,10 +33,10 @@ public class Fachada {
     }
 
     // Delegaciones
-    public void cargarUsuarios() throws CustomException{
+    public void cargarUsuarios() throws CustomException {
         sistemaUsuario.cargarUsuarios();
     }
-    
+
     public Mozo loginMozo(String nombreUsuario, String contrasena) {
         return sistemaUsuario.loginMozo(nombreUsuario, contrasena);
     }
@@ -104,7 +104,7 @@ public class Fachada {
     public Producto getProductoByCodigo(int code) {
         return sistemaProdutcto.getProductoByCodigo(code);
     }
-    
+
     public void cargarProductos() throws CustomException {
         sistemaProdutcto.cargarProductos();
     }
@@ -125,6 +125,10 @@ public class Fachada {
         sistemaCliente.setClientes(clientes);
     }
 
+    public void cargarClientes() throws CustomException {
+        sistemaCliente.cargar();
+    }
+
     public ArrayList<UnidadProcesadora> getUnidadesProcesadoras() {
         return sistemaUnidadProcesadora.getUnidadesProcesadoras();
     }
@@ -132,7 +136,7 @@ public class Fachada {
     public void setUnidadesProcesadoras(ArrayList<UnidadProcesadora> uProcesadoras) {
         sistemaUnidadProcesadora.setUnidadesProcesadoras(uProcesadoras);
     }
-    
+
     public UnidadProcesadora getUnidadProcesadoraByName(String name) {
         return sistemaUnidadProcesadora.getUnidadProcesadoraByName(name);
     }

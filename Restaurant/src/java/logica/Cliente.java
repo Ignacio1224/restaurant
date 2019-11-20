@@ -10,8 +10,12 @@ public class Cliente {
     private String nombre;
     private Beneficio beneficio;
     private Servicio servicio;
+    private int oid;
 
     /* Constructor */
+    public Cliente() {
+    }
+
     public Cliente(int id, String email, String nombre) {
         this.id = id;
         this.email = email;
@@ -68,6 +72,14 @@ public class Cliente {
 
     public void setServicio(Servicio servicio) {
         this.servicio = servicio;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
 
 }

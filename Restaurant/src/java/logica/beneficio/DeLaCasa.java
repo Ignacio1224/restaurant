@@ -10,7 +10,7 @@ public class DeLaCasa extends Beneficio {
 
     @Override
     public float calcularMonto(Servicio servicio) {
-        float total = Math.round(servicio.calcularTotal() - 500);
+        float total = Math.abs(servicio.calcularTotal() - 500);
         return total;
     }
 

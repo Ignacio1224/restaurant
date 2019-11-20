@@ -2,6 +2,8 @@ package logica.Sistemas;
 
 import java.util.ArrayList;
 import logica.Cliente;
+import mapeadores.MapeadorCliente;
+import persistencia.Persistencia;
 import utilidades.CustomException;
 
 public class SistemaCliente {
@@ -29,6 +31,10 @@ public class SistemaCliente {
             }
         }
         return null;
+    }
+    
+    public void cargar() throws CustomException {
+        clientes = Persistencia.getInstancia().obtenerTodos(new MapeadorCliente());
     }
     
     /* Getters & Setters */
