@@ -76,7 +76,7 @@ public class ControladorMozo implements Observer {
         vista.mostrarProductos(Fachada.getInstancia().getProductosConStock());
     }
 
-    public void aniadirItemAServicio(Mesa mesa, String codigoProducto, int cantidadProducto, String descripcionItem) {
+    public void aniadirItemAServicio(Mesa mesa, int codigoProducto, int cantidadProducto, String descripcionItem) {
         try {
             Servicio servicio = mesa.getServicio();
             Producto p = Fachada.getInstancia().getProductoByCodigo(codigoProducto);

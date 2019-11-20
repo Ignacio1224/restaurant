@@ -97,7 +97,7 @@ public class Fachada {
         sistemaProdutcto.setProductos(productos);
     }
 
-    public Producto getProductoByCodigo(String code) {
+    public Producto getProductoByCodigo(int code) {
         return sistemaProdutcto.getProductoByCodigo(code);
     }
 

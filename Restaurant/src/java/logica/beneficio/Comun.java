@@ -13,7 +13,7 @@ public class Comun extends Beneficio {
         float descuento = 0;
         
         for (Item i : servicio.getItems()) {
-            if (i.getProducto().getCodigo().equals("cafe")) {
+            if (i.getProducto().getCodigo() == 9) {
                 descuento += i.getProducto().getPrecio() * i.getCantidad();
             }
         }

@@ -3,6 +3,7 @@ package persistencia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import utilidades.CustomException;
 
 
 public class Persistencia {
@@ -66,11 +67,11 @@ public class Persistencia {
         }
     }
     
-    public ArrayList obtenerTodos(Mapeador map){
+    public ArrayList obtenerTodos(Mapeador map) throws CustomException{
         return buscar(map,null);
     }
     
-    public ArrayList buscar(Mapeador map,String filtro){ //el filtro es el where
+    public ArrayList buscar(Mapeador map,String filtro) throws CustomException{ //el filtro es el where
         
         String sql = map.getSqlSeleccionar(); 
         if(filtro!=null){

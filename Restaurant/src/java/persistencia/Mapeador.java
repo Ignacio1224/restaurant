@@ -6,8 +6,8 @@
 package persistencia;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import utilidades.CustomException;
 
 /**
  *
@@ -30,9 +30,9 @@ public interface Mapeador {
 
     public Object getObjeto();
 
-    public void leerCompuesto(ResultSet rs) throws SQLException;
+    public void leerCompuesto(ResultSet rs) throws CustomException;
 
-    public void leerComponente(ResultSet rs) throws SQLException;
+    public void leerComponente(ResultSet rs) throws CustomException;
 
     
     

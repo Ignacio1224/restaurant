@@ -85,15 +85,15 @@ public class DatosPrueba {
         uProcesadoras.add(postres);
         uProcesadoras.add(bebidas);
         
-        productos.add(new Producto("a1", "Pan", 46, 20f, bar));
-        productos.add(new Producto("a2", "Papas fritas", 46, 20f, bar));
-        productos.add(new Producto("a3", "Milanesa", 46, 20f, bar));
-        productos.add(new Producto("a4", "Pure", 46, 20f, bar));
-        productos.add(new Producto("a5", "Omelette", 46, 20f, bar));
-        productos.add(new Producto("a6", "Helado", 46, 20f, postres));
-        productos.add(new Producto("a7", "Vino", 46, 20f, bebidas));
-        productos.add(new Producto("agua", "Agua", 46, 20f, bebidas));
-        productos.add(new Producto("cafe", "Cafe", 46, 20f, bar));
+        productos.add(new Producto(1, "Pan", 46, 20f, bar));
+        productos.add(new Producto(2, "Papas fritas", 46, 20f, bar));
+        productos.add(new Producto(3, "Milanesa", 46, 20f, bar));
+        productos.add(new Producto(4, "Pure", 46, 20f, bar));
+        productos.add(new Producto(5, "Omelette", 46, 20f, bar));
+        productos.add(new Producto(6, "Helado", 46, 20f, postres));
+        productos.add(new Producto(7, "Vino", 46, 20f, bebidas));
+        productos.add(new Producto(8, "Agua", 46, 20f, bebidas));
+        productos.add(new Producto(9, "Cafe", 46, 20f, bar));
         
         Fachada.getInstancia().setProductos(productos);
         cargarUnidadesProcesadoras(uProcesadoras);

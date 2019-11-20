@@ -15,7 +15,7 @@ public class Preferencial extends Beneficio {
         float descuento = 0;
         float totalServicio = servicio.calcularTotal();
         for (Item i : servicio.getItems()) {
-            if (i.getProducto().getCodigo().equals("agua")) {
+            if ( i.getProducto().getCodigo() == 8 ) {
                 descuento += i.getProducto().getPrecio() * i.getCantidad();
             }
         }

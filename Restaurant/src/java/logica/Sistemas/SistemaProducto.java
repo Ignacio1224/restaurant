@@ -22,9 +22,9 @@ public class SistemaProducto {
         productos.add(producto);
     }
     
-    public Producto getProductoByCodigo(String code) {
+    public Producto getProductoByCodigo(int code) {
         for (Producto p : productos) {
-            if (p.getCodigo().equals(code)) {
+            if (p.getCodigo() == code) {
                 return p;
             }
         }

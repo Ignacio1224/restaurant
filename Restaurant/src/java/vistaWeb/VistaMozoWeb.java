@@ -4,6 +4,7 @@ import controlador.ControladorMozo;
 import controlador.VistaMozo;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
@@ -125,7 +126,7 @@ public class VistaMozoWeb implements VistaMozo {
                     break;
                 }
 
-                String codigoProducto = request.getParameter("codigoProducto");
+                int codigoProducto = parseInt(request.getParameter("codigoProducto"));
                 int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
                 String descripcionItem = request.getParameter("descripcionItem");
 

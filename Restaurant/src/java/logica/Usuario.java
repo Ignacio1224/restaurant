@@ -9,6 +9,7 @@ public abstract class Usuario extends Observable {
     protected String nombreusuario;
     protected String contrasena;
     protected String nombreCompleto;
+    private int oid;
 
     // Constructor
     public Usuario(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
@@ -24,8 +25,20 @@ public abstract class Usuario extends Observable {
 
     // Login
     public abstract Usuario login(String nombreUsuario, String contrasena);
-
+    
     // Getters & Setters
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
+    public String getContrasena(){
+        return this.contrasena;
+    }
+    
     public String getNombreUsuario() {
         return nombreusuario;
     }
