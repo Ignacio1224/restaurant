@@ -27,27 +27,21 @@ public class ControladorGestor implements Observer {
         vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
     }
 
-    public void tomarPedido(String indexItemS) {
+    public void tomarPedido(Item item) {
         try {
-
-            int indexItem = Integer.parseInt(indexItemS);
-            Item item = usuario.getUnidadProcesadora().getItemsPendientes().get(indexItem);
             usuario.tomarItem(item);
-
             vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
         } catch (CustomException ex) {
-
+            vista.notificarError(ex.getMessage());
         }
     }
 
-    public void finalizarPedido(String indexItemS) {
+    public void finalizarPedido(Item item) {
         try {
-            int indexItem = Integer.parseInt(indexItemS);
-            Item item = usuario.getItemsParaProcesar().get(indexItem);
             usuario.finalizar(item);
             vista.cargarPedidosTomados(usuario.getItemsParaProcesar());
         } catch (CustomException ex) {
-
+            vista.notificarError(ex.getMessage());
         }
     }
 

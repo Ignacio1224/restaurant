@@ -3,7 +3,6 @@ package vistaWeb;
 import controlador.ControladorLogin;
 import controlador.VistaLogin;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,20 +10,19 @@ import logica.Gestor;
 import logica.Mozo;
 import logica.Usuario;
 
-public class VistaLoginWeb implements VistaLogin {
+public class VistaLoginWeb extends GenericViewWeb implements VistaLogin {
 
     private ControladorLogin controlador;
     private String destino;
     private HttpServletRequest request;
-    private PrintWriter out;
 
     public VistaLoginWeb() {
+        super();
         controlador = new ControladorLogin(this);
     }
 
+    @Override
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        out = response.getWriter();
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");

@@ -13,4 +13,5 @@ public interface VistaGestor {
 
     public void cargarPedidosTomados(ArrayList<Item> itemsParaProcesar);
 
+    public void notificarError(String message);
 }

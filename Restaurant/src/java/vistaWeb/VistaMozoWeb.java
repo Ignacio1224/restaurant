@@ -3,10 +3,8 @@ package vistaWeb;
 import controlador.ControladorMozo;
 import controlador.VistaMozo;
 import java.io.IOException;
-import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
-import javax.servlet.AsyncContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logica.Cliente;
@@ -19,17 +17,18 @@ import logica.Servicio;
 import logica.Transferencia;
 import utilidades.ComponentsHTML;
 
-public class VistaMozoWeb implements VistaMozo {
+public class VistaMozoWeb extends GenericViewWeb implements VistaMozo {
 
     private ControladorMozo controlador;
     private String destino;
     private HttpServletRequest request;
-    private PrintWriter out;
 
     public VistaMozoWeb(Mozo m) {
+        super();
         controlador = new ControladorMozo(this, m);
     }
 
+    @Override
     public void procesarRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Mozo mozo = (Mozo) request.getSession().getAttribute("Usuario");
@@ -141,25 +140,6 @@ public class VistaMozoWeb implements VistaMozo {
 
     }
 
-    private void conectarSSE(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setAttribute("org.apache.catalina.ASYNC_SUPPORTED", true);
-        AsyncContext contexto = request.startAsync();
-        contexto.getResponse().setContentType("text/event-stream");
-        contexto.getResponse().setCharacterEncoding("UTF-8");
-        contexto.setTimeout(0);
-        out = contexto.getResponse().getWriter();
-
-    }
-
-    private void enviar(String evento, String dato) {
-        out.write("event: " + evento + "\n");
-        dato = dato.replace("\n", "");
-        out.write("data: " + dato + "\n\n");
-        if (out.checkError()) {
-            System.out.println("Error");
-        }
-    }
-
     @Override
     public void cargarMesas(ArrayList<Mesa> mesas) {
         String mesasString = "";
@@ -186,7 +166,7 @@ public class VistaMozoWeb implements VistaMozo {
         String productosString = "";
 
         for (Producto p : productos) {
-            productosString += ComponentsHTML.armarProductos(p);
+            productosString += ComponentsHTML.armarProducto(p);
         }
 
         enviar("eventoCargarProductos", productosString);

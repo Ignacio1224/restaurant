@@ -40,7 +40,7 @@ public class ComponentsHTML {
         return s;
     }
 
-    public static String armarProductos(Producto producto) {
+    public static String armarProducto(Producto producto) {
         return "<option value=\"" + producto.getCodigo() + "\">" + producto.getNombre() + "</option>";
     }
 
@@ -85,12 +85,12 @@ public class ComponentsHTML {
         return "<option value=\"" + mozo.getNombreUsuario() + "\">" + mozo.getNombreCompleto() + "</option>";
     }
 
-    public static String armarTransferencia(Transferencia t) {
+    public static String armarTransferencia(Transferencia transferencia) {
         return ""
                 + "<div class=\"card card-body\">"
-                + "    <p>Mesa Nº: " + t.getMesa().getNumero() + "</p>"
-                + "    <p>Estado: " + (t.getMesa().isAbierta() ? "abierta" : "cerrada") + "</p>"
-                + "    <p>Mozo emisor: " + t.getMesa().getResponsable().getNombreCompleto() + "</p>"
+                + "    <p>Mesa Nº: " + transferencia.getMesa().getNumero() + "</p>"
+                + "    <p>Estado: " + (transferencia.getMesa().isAbierta() ? "abierta" : "cerrada") + "</p>"
+                + "    <p>Mozo emisor: " + transferencia.getMesa().getResponsable().getNombreCompleto() + "</p>"
                 + "</div>";
     }
 
@@ -141,10 +141,10 @@ public class ComponentsHTML {
         return s;
     }
 
-    public static String armarItem(Item i) {
+    public static String armarItem(Item item) {
         return ""
-                + "<p>Producto: " + i.getProducto().getNombre() + "</p>"
-                + "<p>Cantidad: " + i.getCantidad()+ "</p>"
-                + "<p>Mesa: " + i.getServicio().getMesaCorrespondiente().getNumero()+ "</p>";
+                + "<p>Producto: " + item.getProducto().getNombre() + "</p>"
+                + "<p>Cantidad: " + item.getCantidad()+ "</p>"
+                + "<p>Mesa: " + item.getServicio().getMesaCorrespondiente().getNumero()+ "</p>";
     }
 }
