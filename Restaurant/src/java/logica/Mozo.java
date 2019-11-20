@@ -5,42 +5,30 @@ import utilidades.CustomException;
 
 public class Mozo extends Usuario {
 
-    /* Atributos */
+    //<editor-fold desc="Atributos">
     private ArrayList<Mesa> mesasAsignadas;
     private ArrayList<Transferencia> transferenciasActivas; // Transferencias enviadas (Emisor)
     private ArrayList<Transferencia> transferenciasPendientes; // Transferencias por aceptar (Receptor)
 
-    /* Constructores */
+    public enum Eventos {
+        nuevaTransferencia, transferenciaRechazada, transferenciaAceptada
+    };
+    //</editor-fold>
+
+    //<editor-fold desc="Constructor">
     public Mozo() {
         super();
         mesasAsignadas = new ArrayList<>();
         transferenciasActivas = new ArrayList<>();
         transferenciasPendientes = new ArrayList<>();
     }
-    
-    public Mozo(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
-        super(nombreUsuario, contrasena, nombreCompleto);
-        mesasAsignadas = new ArrayList<>();
-        transferenciasActivas = new ArrayList<>();
-        transferenciasPendientes = new ArrayList<>();
-    }
+    //</editor-fold>
 
-    public Mozo(ArrayList<Mesa> mesasAsignadas, String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
-        super(nombreUsuario, contrasena, nombreCompleto);
-        this.mesasAsignadas = mesasAsignadas;
-        transferenciasActivas = new ArrayList<>();
-        transferenciasPendientes = new ArrayList<>();
-    }
-
-    /* Comportamientos */
+    //<editor-fold desc="Comportamientos">
     private void avisar(Eventos evento) {
         setChanged();
         notifyObservers(evento);
     }
-
-    public enum Eventos {
-        nuevaTransferencia, transferenciaRechazada, transferenciaAceptada
-    };
 
     @Override
     public Mozo login(String nombreUsuario, String contrasena) {
@@ -48,6 +36,10 @@ public class Mozo extends Usuario {
             return this;
         }
         return null;
+    }
+
+    @Override
+    public void logout() {
     }
 
     public void agregarMesaAsignada(Mesa mesa) throws CustomException {
@@ -134,9 +126,9 @@ public class Mozo extends Usuario {
 
         return null;
     }
+    //</editor-fold>
 
-
-    /* Getters & Setters */
+    //<editor-fold desc="Getters & Setters">
     public ArrayList<Mesa> getMesasAsignadas() {
         return mesasAsignadas;
     }
@@ -148,5 +140,6 @@ public class Mozo extends Usuario {
     public ArrayList<Transferencia> getTransferenciasPendientes() {
         return transferenciasPendientes;
     }
+    //</editor-fold>
 
 }

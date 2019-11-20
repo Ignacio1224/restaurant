@@ -13,12 +13,15 @@ public class Comun extends Beneficio {
         float descuento = 0;
         
         for (Item i : servicio.getItems()) {
-            if (i.getProducto().getCodigo() == 9) {
+            if (i.getProducto().getCodigo() == 8) {
                 descuento += i.getProducto().getPrecio() * i.getCantidad();
             }
         }
         
-        return servicio.calcularTotal() - descuento;
+        // Ahora es el total
+        descuento = servicio.calcularTotal() - descuento;
+        
+        return descuento < 0 ? 0 : descuento;
     }
     
 }

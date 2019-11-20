@@ -15,11 +15,6 @@ public class Gestor extends Usuario {
         super();
         itemsParaProcesar = new ArrayList();
     }
-    
-    public Gestor(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
-        super(nombreUsuario, contrasena, nombreCompleto);
-        itemsParaProcesar = new ArrayList();
-    }
     //</editor-fold>
 
     //<editor-fold desc="Comportamientos">
@@ -29,6 +24,16 @@ public class Gestor extends Usuario {
             return this;
         }
         return null;
+    }
+
+    @Override
+    public void logout() throws CustomException {
+        if (!itemsParaProcesar.isEmpty()) {
+            throw new CustomException("El gestor tiene pedidos tomados!");
+        }
+
+        unidadProcesadora.removeGestor(this);
+
     }
 
     public void tomarItem(Item item) throws CustomException {
@@ -49,17 +54,8 @@ public class Gestor extends Usuario {
         itemsParaProcesar.remove(item);
         unidadProcesadora.avisarFinalizado();
     }
-
-    public void logout() throws CustomException {
-        if (!itemsParaProcesar.isEmpty()) {
-            throw new CustomException("El gestor tiene pedidos tomados!");
-        }
-
-        unidadProcesadora.removeGestor(this);
-
-    }
-
     //</editor-fold>
+
     //<editor-fold desc="Getters & Setters">
     public UnidadProcesadora getUnidadProcesadora() {
         return unidadProcesadora;

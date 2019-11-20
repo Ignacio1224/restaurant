@@ -38,15 +38,15 @@ public class Item {
         if (gestor == null) {
             return Estados.Pendiente;
         }
-        
+
         if (gestor.getItemsParaProcesar().contains(this)) {
             return Estados.Procesando;
         }
-        
+
         return Estados.Finalizado;
     }
-
     //</editor-fold>
+
     //<editor-fold desc="Getters & Setters">
     public Servicio getServicio() {
         return servicio;

@@ -4,27 +4,22 @@ import utilidades.CustomException;
 
 public class Mesa {
 
-    /* Atributos */
+    //<editor-fold desc="Atributos">
     private int numero;
     private boolean abierta;
     private Mozo responsable;
     private Servicio servicio;
+    //</editor-fold>
 
-    /* Constructores */
-    public Mesa(int numero, boolean abierta, Mozo responsable) {
-        this.numero = numero;
-        this.abierta = abierta;
-        this.responsable = responsable;
-    }
-
+    //<editor-fold desc="Constructor">
     public Mesa(int numero, Mozo responsable) {
         this.numero = numero;
         this.abierta = false;
         this.responsable = responsable;
     }
-    
+    //</editor-fold>
 
-    /* Comportamiento */
+    //<editor-fold desc="Comportamientos">
     public void abrir() throws CustomException {
         if (abierta) {
             throw new CustomException("La mesa ya está abierta!");
@@ -42,8 +37,9 @@ public class Mesa {
             servicio = null;
         }
     }
+    //</editor-fold>
 
-    /* Getters & Setters */
+    //<editor-fold desc="Getters & Setters">
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -67,16 +63,21 @@ public class Mesa {
     public Servicio getServicio() {
         return servicio;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Equals">
     @Override
     public boolean equals(Object obj) {
         Mesa other = (Mesa) obj;
         return numero == other.getNumero();
     }
+    //</editor-fold>
 
+    //<editor-fold desc="To String">
     @Override
     public String toString() {
         return "Mesa " + numero + (abierta ? " Abierta" : " Cerrada");
     }
+    //</editor-fold>
 
 }

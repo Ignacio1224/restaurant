@@ -4,36 +4,30 @@ import utilidades.CustomException;
 
 public class Producto {
 
-    /* Atributos */
+    //<editor-fold desc="Atributos">
     private int codigo;
     private String nombre;
     private int stock;
     private float precio;
     private UnidadProcesadora uProcesadora;
     private int oid;
+    //</editor-fold>
 
-    /* Constructor */
-    
+    //<editor-fold desc="Constructor">
     public Producto() {
     }
+    //</editor-fold>
 
-    public Producto(int codigo, String nombre, int stock, float precio, UnidadProcesadora uProcesadora) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.stock = stock;
-        this.precio = precio;
-        this.uProcesadora = uProcesadora;
-    }
-
-    /* Comportamientos */
+    //<editor-fold desc="Comportamientos">
     public void disminuirStock(int cantidad) throws CustomException {
         if (cantidad > stock) {
             throw new CustomException("No puedes ordenar una cantidad más grande que el stock");
         }
         stock -= cantidad;
     }
+    //</editor-fold>
 
-    /* Getters & Setters */
+    //<editor-fold desc="Getters & Setters">
     public int getCodigo() {
         return codigo;
     }
@@ -81,16 +75,21 @@ public class Producto {
     public void setOid(int oid) {
         this.oid = oid;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Equals">
     @Override
     public boolean equals(Object obj) {
         Producto other = (Producto) obj;
         return codigo == other.getCodigo();
     }
+    //</editor-fold>
 
+    //<editor-fold desc="To String">
     @Override
     public String toString() {
         return "Producto: " + nombre + " (" + codigo + ") $" + precio + " (" + uProcesadora.getNombre() + ")";
     }
+    //</editor-fold>
 
 }

@@ -24,12 +24,6 @@ public class UnidadProcesadora extends Observable {
         this.itemsPendientes = new ArrayList();
         this.gestores = new ArrayList();
     }
-
-    public UnidadProcesadora(String nombre) {
-        this.nombre = nombre;
-        this.itemsPendientes = new ArrayList();
-        this.gestores = new ArrayList();
-    }
     //</editor-fold>
 
     //<editor-fold desc="Comportamientos">

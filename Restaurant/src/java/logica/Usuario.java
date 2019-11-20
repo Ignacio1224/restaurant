@@ -5,32 +5,26 @@ import utilidades.CustomException;
 
 public abstract class Usuario extends Observable {
 
-    // Atributos
+    //<editor-fold desc="Atributos">
     protected String nombreusuario;
     protected String contrasena;
     protected String nombreCompleto;
     private int oid;
+    //</editor-fold>
 
-    // Constructor
+    //<editor-fold desc="Constructor">
     public Usuario() {
 
     }
+    //</editor-fold>
 
-    public Usuario(String nombreUsuario, String contrasena, String nombreCompleto) throws CustomException {
-
-        if (nombreUsuario.trim().isEmpty() || contrasena.trim().isEmpty() || nombreCompleto.trim().isEmpty()) {
-            throw new CustomException("Usuario no válido");
-        }
-
-        this.nombreusuario = nombreUsuario;
-        this.contrasena = contrasena;
-        this.nombreCompleto = nombreCompleto;
-    }
-
-    // Login
+    //<editor-fold desc="Comportamientos">
     public abstract Usuario login(String nombreUsuario, String contrasena);
 
-    // Getters & Setters
+    public abstract void logout() throws CustomException;
+    //</editor-fold>
+
+    //<editor-fold desc="Getters & Setters">
     public int getOid() {
         return oid;
     }
@@ -62,14 +56,15 @@ public abstract class Usuario extends Observable {
     public void setNombreCompleto(String nombreCompleto) {
         this.nombreCompleto = nombreCompleto;
     }
+    //</editor-fold>
 
-    // To String
+    //<editor-fold desc="To String">
     @Override
     public String toString() {
         return "Usuario: " + nombreusuario + ", Nombre completo: " + nombreCompleto;
     }
 
-    // Equals
+    //<editor-fold desc="Equals">
     @Override
     public boolean equals(Object obj) {
         Usuario other = (Usuario) obj;
@@ -77,5 +72,6 @@ public abstract class Usuario extends Observable {
         return nombreusuario.equals(other.getNombreUsuario());
 
     }
+    //</editor-fold>
 
 }

@@ -26,7 +26,7 @@ public class Preferencial extends Beneficio {
             total -= totalServicio * 0.005;
         }
         
-        return total;
+        return total < 0 ? 0 : total;
     }
 
 }

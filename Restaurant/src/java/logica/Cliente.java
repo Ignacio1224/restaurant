@@ -4,34 +4,28 @@ import logica.beneficio.Beneficio;
 
 public class Cliente {
 
-    /* Atributos */
+    //<editor-fold desc="Atributos">
     private int id;
     private String email;
     private String nombre;
     private Beneficio beneficio;
     private Servicio servicio;
     private int oid;
+    //</editor-fold>
 
-    /* Constructor */
+    //<editor-fold desc="Constructor">
     public Cliente() {
     }
 
-    public Cliente(int id, String email, String nombre) {
-        this.id = id;
-        this.email = email;
-        this.nombre = nombre;
-    }
+    //</editor-fold>
 
-    public Cliente(int id, String email, String nombre, Beneficio beneficio) {
-        this.id = id;
-        this.email = email;
-        this.nombre = nombre;
-        this.beneficio = beneficio;
-    }
-
-    public float calcularBeneficio() {
+    //<editor-fold desc="Comportamientos">
+    public float calcularMonto() {
         return beneficio.calcularMonto(servicio);
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Getters & Setters">
 
     /* Getters & Setters */
     public int getId() {
@@ -81,5 +75,6 @@ public class Cliente {
     public void setOid(int oid) {
         this.oid = oid;
     }
+    //</editor-fold>
 
 }
