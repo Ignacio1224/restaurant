@@ -1,6 +1,8 @@
 package logica;
 
 import java.util.ArrayList;
+import mapeadores.MapeadorServicio;
+import persistencia.Persistencia;
 import utilidades.CustomException;
 
 public class Servicio {
@@ -12,6 +14,10 @@ public class Servicio {
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
+    public Servicio(){
+        
+    }
+    
     public Servicio(Mesa mesaCorrespondiente) {
         this.mesaCorrespondiente = mesaCorrespondiente;
         items = new ArrayList<>();
@@ -74,5 +80,17 @@ public class Servicio {
         return mesaCorrespondiente.equals(other.getMesaCorrespondiente()) && items.equals(other.getItems());
     }
     //</editor-fold>
+
+    public int getOid() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setOid(int oid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void guardar(){
+        Persistencia.getInstancia().guardar(new MapeadorServicio(this));
+    }
 
 }

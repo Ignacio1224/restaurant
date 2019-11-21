@@ -1,5 +1,6 @@
 package logica;
 
+import mapeadores.MapeadorServicio;
 import utilidades.CustomException;
 
 public class Mesa {
@@ -9,9 +10,14 @@ public class Mesa {
     private boolean abierta;
     private Mozo responsable;
     private Servicio servicio;
+    private int oid;
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
+    public Mesa(){
+        
+    }
+    
     public Mesa(int numero, Mozo responsable) {
         this.numero = numero;
         this.abierta = false;
@@ -33,6 +39,7 @@ public class Mesa {
         if (!abierta) {
             throw new CustomException("La mesa ya está cerrada!");
         } else {
+            servicio.guardar();
             abierta = false;
             servicio = null;
         }
@@ -51,7 +58,15 @@ public class Mesa {
     public boolean isAbierta() {
         return abierta;
     }
-
+    
+    public void setOid(int oid){
+        this.oid = oid;
+    }
+    
+    public int getOid(){
+        return this.oid;
+    }
+    
     public void setResponsable(Mozo responsable) {
         this.responsable = responsable;
     }

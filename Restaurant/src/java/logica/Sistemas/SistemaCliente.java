@@ -19,7 +19,7 @@ public class SistemaCliente {
     /* Comportamiento */
     public void agregarCliente(Cliente cliente) throws CustomException {
         if (clientes.contains(cliente)) {
-            throw new CustomException("Producto ya registrado");
+            throw new CustomException("Cliente ya registrado");
         }
         clientes.add(cliente);
     }

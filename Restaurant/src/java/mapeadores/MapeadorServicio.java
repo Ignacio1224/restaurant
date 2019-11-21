@@ -3,23 +3,42 @@ package mapeadores;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import logica.Item;
+import logica.Servicio;
 import persistencia.Mapeador;
+import persistencia.Persistencia;
 
 public class MapeadorServicio implements Mapeador {
 
+    private Servicio servicio;
+
+    public MapeadorServicio() {
+
+    }
+
+    public MapeadorServicio(Servicio s) {
+        servicio = s;
+    }
+
     @Override
     public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return servicio.getOid();
     }
 
     @Override
     public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        servicio.setOid(oid);
     }
 
     @Override
     public ArrayList<String> getSqlInsertar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> sqls = new ArrayList();
+        sqls.add("insert into servicio values(" + servicio.getMesaCorrespondiente().getOid() + "," + servicio.getCliente().getOid() 
+                        +","+ servicio.getMesaCorrespondiente().getResponsable().getOid()+","+ servicio.calcularTotal()+""
+                        + ","+Persistencia.getInstancia().proximoOid()+");");
+        
+        generarItems(sqls);
+        return sqls;
     }
 
     @Override
@@ -39,7 +58,7 @@ public class MapeadorServicio implements Mapeador {
 
     @Override
     public void crearNuevo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        servicio = new Servicio();
     }
 
     @Override
@@ -56,5 +75,17 @@ public class MapeadorServicio implements Mapeador {
     public void leerComponente(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    private void generarItems(ArrayList<String> sqls) {
+        ArrayList<Item> items = servicio.getItems();
+        for (Item item : items) {
+            sqls.add(
+                    "insert into itemServicio values(" + Persistencia.getInstancia().proximoOid() + ","
+                    + item.getServicio().getMesaCorrespondiente().getOid() + "," + item.getServicio().getOid() + ","
+                    + item.getProducto().getOid() + ",'" + item.getDescripcion() + "'," + item.getCantidad() + ")"
+            );
+        }
+
+    }
+
 }
