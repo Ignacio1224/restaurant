@@ -34,7 +34,6 @@ public class MapeadorGestor implements Mapeador {
     @Override
     public ArrayList<String> getSqlInsertar() {
         throw new UnsupportedOperationException("Not supported yet.");
-
     }
 
     @Override
@@ -62,6 +61,7 @@ public class MapeadorGestor implements Mapeador {
         gestor.setNombreUsuario(rs.getString("usuario"));
         gestor.setNombreCompleto(rs.getString("nombreCompleto"));
         gestor.setContrasena(rs.getString("clave"));
+        gestor.setOid(rs.getInt("oid"));
     }
 
     @Override

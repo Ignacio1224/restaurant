@@ -11,13 +11,14 @@ public class Servicio {
     private Mesa mesaCorrespondiente;
     private ArrayList<Item> items;
     private Cliente cliente;
+    private int oid;
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
-    public Servicio(){
-        
+    public Servicio() {
+
     }
-    
+
     public Servicio(Mesa mesaCorrespondiente) {
         this.mesaCorrespondiente = mesaCorrespondiente;
         items = new ArrayList<>();
@@ -71,6 +72,18 @@ public class Servicio {
             this.cliente.setServicio(this);
         }
     }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
+    public void guardar() {
+        Persistencia.getInstancia().guardar(new MapeadorServicio(this));
+    }
     //</editor-fold>
 
     //<editor-fold desc="Equals">
@@ -80,17 +93,5 @@ public class Servicio {
         return mesaCorrespondiente.equals(other.getMesaCorrespondiente()) && items.equals(other.getItems());
     }
     //</editor-fold>
-
-    public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void guardar(){
-        Persistencia.getInstancia().guardar(new MapeadorServicio(this));
-    }
 
 }

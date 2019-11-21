@@ -3,6 +3,7 @@ package mapeadores;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import logica.Cliente;
 import logica.Item;
 import logica.Servicio;
 import persistencia.Mapeador;
@@ -11,10 +12,6 @@ import persistencia.Persistencia;
 public class MapeadorServicio implements Mapeador {
 
     private Servicio servicio;
-
-    public MapeadorServicio() {
-
-    }
 
     public MapeadorServicio(Servicio s) {
         servicio = s;
@@ -33,10 +30,15 @@ public class MapeadorServicio implements Mapeador {
     @Override
     public ArrayList<String> getSqlInsertar() {
         ArrayList<String> sqls = new ArrayList();
-        sqls.add("insert into servicio values(" + servicio.getMesaCorrespondiente().getOid() + "," + servicio.getCliente().getOid() 
-                        +","+ servicio.getMesaCorrespondiente().getResponsable().getOid()+","+ servicio.calcularTotal()+""
-                        + ","+Persistencia.getInstancia().proximoOid()+");");
-        
+        Cliente c = servicio.getCliente();
+        sqls.add("insert into servicio (oidMesa, oidCliente, oidMozo, costo, oid) values("
+                + servicio.getMesaCorrespondiente().getOid() + ","
+                + ((c == null) ? "NULL" : c.getOid()) + ","
+                + servicio.getMesaCorrespondiente().getResponsable().getOid() + ","
+                + servicio.calcularTotal() + ","
+                + Persistencia.getInstancia().proximoOid()
+                + ");");
+
         generarItems(sqls);
         return sqls;
     }
@@ -63,7 +65,7 @@ public class MapeadorServicio implements Mapeador {
 
     @Override
     public Object getObjeto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return servicio;
     }
 
     @Override
@@ -79,10 +81,16 @@ public class MapeadorServicio implements Mapeador {
     private void generarItems(ArrayList<String> sqls) {
         ArrayList<Item> items = servicio.getItems();
         for (Item item : items) {
+            String desc = item.getDescripcion();
             sqls.add(
-                    "insert into itemServicio values(" + Persistencia.getInstancia().proximoOid() + ","
-                    + item.getServicio().getMesaCorrespondiente().getOid() + "," + item.getServicio().getOid() + ","
-                    + item.getProducto().getOid() + ",'" + item.getDescripcion() + "'," + item.getCantidad() + ")"
+                    "insert into item (oid, oidServicio, oidProducto, descripcion, cantidad, oidGestor) values("
+                    + Persistencia.getInstancia().proximoOid() + ","
+                    + servicio.getOid() + ","
+                    + item.getProducto().getOid() + ","
+                    + ((desc.isEmpty()) ? "NULL" : "'" + desc + "'") + ","
+                    + item.getCantidad() + ","
+                    + item.getGestor().getOid()
+                    + ");"
             );
         }
 

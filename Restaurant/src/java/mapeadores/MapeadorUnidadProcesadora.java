@@ -61,6 +61,7 @@ public class MapeadorUnidadProcesadora implements Mapeador {
     @Override
     public void leerCompuesto(ResultSet rs) throws SQLException {
         unidadProcesadora.setNombre(rs.getString("nombre"));
+        unidadProcesadora.setOid(rs.getInt("oid"));
     }
 
     @Override

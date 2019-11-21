@@ -58,7 +58,7 @@ public class MapeadorCliente implements Mapeador {
         cliente.setId(rs.getInt("id"));
         cliente.setNombre(rs.getString("nombre"));
         cliente.setEmail(rs.getString("email"));
-
+        cliente.setOid(rs.getInt("oid"));
     }
 
     @Override

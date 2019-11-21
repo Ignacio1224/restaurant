@@ -3,6 +3,7 @@ package utilidades;
 import logica.Item;
 
 public class Utilities {
+
     public static String getEstadoItem(Item i) {
         if (i.getEstado().equals(Item.Estados.Finalizado)) {
             return "Finalizado";

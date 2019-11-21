@@ -1,6 +1,5 @@
 package logica;
 
-import mapeadores.MapeadorServicio;
 import utilidades.CustomException;
 
 public class Mesa {
@@ -18,10 +17,11 @@ public class Mesa {
         
     }
     
-    public Mesa(int numero, Mozo responsable) {
+    public Mesa(int numero, Mozo responsable, int oid) {
         this.numero = numero;
         this.abierta = false;
         this.responsable = responsable;
+        this.oid = oid;
     }
     //</editor-fold>
 

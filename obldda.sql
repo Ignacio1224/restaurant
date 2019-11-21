@@ -34,13 +34,13 @@ INSERT INTO `cliente` (`oid`, `id`, `nombre`, `email`, `oidBeneficio`) VALUES
 (9, 2, 'Titina', 'c2@gmail.con', 6),
 (10, 3, 'Pepe', 'c3@gmail.con', 7);
 
-CREATE TABLE `itemservicio` (
+CREATE TABLE `item` (
   `oid` int(11) NOT NULL,
-  `mesa` int(11) NOT NULL,
   `oidServicio` int(11) NOT NULL,
   `oidProducto` int(11) NOT NULL,
   `descripcion` varchar(50) DEFAULT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `oidGestor` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `mesa` (
@@ -96,7 +96,7 @@ INSERT INTO `producto` (`oid`, `codigo`, `nombre`, `precio`, `stock`, `oidUnidad
 (39, 8, 'Cafe', 20, 40, 30);
 
 CREATE TABLE `servicio` (
-  `mesa` int(11) NOT NULL,
+  `oidMesa` int(11) NOT NULL,
   `oidCliente` int(11) DEFAULT NULL,
   `oidMozo` int(11) NOT NULL,
   `costo` float NOT NULL,

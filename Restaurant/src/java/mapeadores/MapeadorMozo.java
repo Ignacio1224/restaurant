@@ -60,9 +60,10 @@ public class MapeadorMozo implements Mapeador {
 
     @Override
     public void leerCompuesto(ResultSet rs) throws SQLException {
-        mozo.setNombreUsuario(rs.getString("usuario"));
-        mozo.setNombreCompleto(rs.getString("nombreCompleto"));
-        mozo.setContrasena(rs.getString("clave"));
+        mozo.setNombreUsuario(rs.getString("u.usuario"));
+        mozo.setNombreCompleto(rs.getString("u.nombreCompleto"));
+        mozo.setContrasena(rs.getString("u.clave"));
+        mozo.setOid(rs.getInt("u.oid"));
     }
 
     @Override
@@ -72,7 +73,8 @@ public class MapeadorMozo implements Mapeador {
 
     @Override
     public void leerComponente(ResultSet rs) throws SQLException {
-        mozo.getMesasAsignadas().add(new Mesa(rs.getInt("nroMesa"), mozo));
+        mozo.getMesasAsignadas().add(new Mesa(rs.getInt("m.nroMesa"), mozo, rs.getInt("m.oid")));
+        
     }
 
 }

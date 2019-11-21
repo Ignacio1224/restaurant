@@ -57,6 +57,7 @@ public class MapeadorProducto implements Mapeador {
         p.setNombre(rs.getString("nombre"));
         p.setPrecio(rs.getFloat("precio"));
         p.setStock(rs.getInt("stock"));
+        p.setOid(rs.getInt("oid"));
     }
 
     @Override

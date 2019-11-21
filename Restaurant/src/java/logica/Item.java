@@ -14,6 +14,8 @@ public class Item {
         Procesando,
         Finalizado
     }
+
+    private int oid;
     //</editor-fold>
 
     //<editor-fold desc="Constructor">
@@ -78,6 +80,14 @@ public class Item {
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
     }
     //</editor-fold>
 
